@@ -1,0 +1,8 @@
+#files to be ignored
+
+#compile java classes
+*.class
+
+#vpp lck files
+**/UML Class diagram/*.vpp.lck
+
