@@ -2,10 +2,16 @@ package boundary;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import static boundary.AdminMenu.*;
+import static boundary.CustomerMenu.*;
 
 public class MainMenu {
 
 	public static void main(String[] args) {
+		run();
+	}
+	
+	public static void run() {
 		int choice;
 		boolean toggle = true;
 		Scanner sc = new Scanner(System.in);
@@ -32,12 +38,12 @@ public class MainMenu {
 			
 				switch (choice) {
 					case 1:
-						AdminMenu.main(args);
+						adminMenu();
 						toggle = false;
 						sc.close();
 						break;
 					case 2:
-						CustomerMenu.main(args);
+						customerMenu();
 						toggle = false;
 						sc.close();
 						break;

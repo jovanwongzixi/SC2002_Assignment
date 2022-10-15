@@ -2,9 +2,11 @@ package boundary;
 
 public class CustomerMenu {
 	
-	public static void main(String[] args) {
+	public static void customerMenu() {
+	
 		if(true) {
-			MainMenu.main(args);
+			System.out.println("It works +2");
+			MainMenu.run();
 		}
 	}
 }
