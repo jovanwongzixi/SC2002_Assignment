@@ -6,3 +6,7 @@
 #vpp lck files
 **/UML Class diagram/*.vpp.lck
 
+**/.idea
+**/.out
+*.iml
+
