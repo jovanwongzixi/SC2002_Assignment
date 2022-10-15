@@ -1,3 +1,3 @@
-public class CinemaStaff extends User{
+public class CinemaStaff implements User{
     public void start(){}
 }

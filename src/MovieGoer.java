@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class MovieGoer extends User{
+public class MovieGoer implements User{
     private String name;
     private int mobileNumber;
     private String emailAddress;
@@ -48,4 +48,13 @@ public class MovieGoer extends User{
     private void viewMovieDetails(){
 
     }
+    private void viewMovieTimeslots(){}
+    private void selectSeats(){
+
+    }
+    private void bookTickets(){
+
+    }
+    private void viewBookingHistory(){}
+    private void enterReview(){}
 }
