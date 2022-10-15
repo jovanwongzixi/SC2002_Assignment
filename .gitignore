@@ -4,9 +4,8 @@
 *.class
 
 #vpp lck files
-**/UML Class diagram/*.vpp.lck
-**/UML Class diagram/*.vpp.bak*
-
+**/UML Class diagram/
+!**/UML Class diagram/UML_diagram.vpp
 **/.idea
 **/.out
 *.iml
