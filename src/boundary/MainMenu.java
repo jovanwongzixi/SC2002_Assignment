@@ -11,10 +11,13 @@ public class MainMenu {
 		run();
 	}
 	
+	static Scanner sc;
+	
 	public static void run() {
 		int choice;
 		boolean toggle = true;
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
+		
 		
 		System.out.println("===================================================");
 		System.out.println("  __  __  ____  ____  _      _____ __  __          ");
@@ -38,14 +41,12 @@ public class MainMenu {
 			
 				switch (choice) {
 					case 1:
-						adminMenu();
 						toggle = false;
-						sc.close();
+						adminMenu();					
 						break;
 					case 2:
-						customerMenu();
 						toggle = false;
-						sc.close();
+						customerMenu();
 						break;
 					case 3:
 						System.out.println("App terminated!");

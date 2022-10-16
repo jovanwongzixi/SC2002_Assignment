@@ -2,14 +2,16 @@ package boundary;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import static control.AdminCommands.*;
 
-public class AdminMenu {
-	
+public class AdminMenu {	
+	static boolean loggedIn = false;
+	static Scanner sc;
+		
 	public static void adminMenu() {
 		int choice;
-		boolean loggedIn = false;
 		boolean toggle = true;
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		
 		do {
 			try {
@@ -28,18 +30,50 @@ public class AdminMenu {
 			
 				switch (choice) {
 					case 1:
+						if(!loggedIn) {
+							System.out.println("Enter user ID: ");
+							String userid = sc.next();
+							System.out.println("Enter password: ");
+							String password = sc.next();
+						
+							loggedIn = login(userid, password);
+						} else {
+							System.out.println("Successfully logged out! Returning to main menu...");
+							loggedIn = false;
+							toggle = false;
+							MainMenu.run();
+						}
+						break;
 					case 2:
-						authenticate(loggedIn);
-						sc.close();
-						editMovieList();
+						if(!loggedIn) {
+							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
+							toggle = false;
+							MainMenu.run();
+						} else {
+							toggle = false;
+							editMovieList();
+						}
+						break;
 					case 3:
-						authenticate(loggedIn);
-						sc.close();
-						editCinemaMovie();
+						if(!loggedIn) {
+							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
+							toggle = false;
+							MainMenu.run();
+						} else {
+							toggle = false;
+							editCinemaMovie();
+						}
+						break;
 					case 4:
-						authenticate(loggedIn);
-						sc.close();
-						systemConfig();
+						if(!loggedIn) {
+							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
+							toggle = false;
+							MainMenu.run();
+						} else {
+							toggle = false;
+							systemConfig();
+						}
+						break;
 					default:
 						System.out.println("Option does not exist. Please key in a valid option!");
 				}
@@ -49,24 +83,5 @@ public class AdminMenu {
 			}
 			
 		} while(toggle);	
-	}
-	
-	private static void authenticate(boolean loggedIn) {
-		if(!loggedIn) {
-			System.out.println("Unauthorised access detected! Exiting admin menu...\n");
-			MainMenu.run();
-		}
-	}
-	
-	private static void editMovieList() {
-		
-	}
-	
-	private static void editCinemaMovie() {
-		
-	}
-	
-	private static void systemConfig() {
-	
 	}
 }
