@@ -3,6 +3,7 @@ public class MovieGoer implements User{
     private String name;
     private int mobileNumber;
     private String emailAddress;
+    private AgeType ageType;
     @Override
     public void start(){
         getDetails();
@@ -41,20 +42,41 @@ public class MovieGoer implements User{
         sc.nextLine();
         System.out.println("Enter email address:");
         emailAddress = sc.nextLine();
+        System.out.println("Enter age:");
+        int age = sc.nextInt();
+        if (age<21) ageType = AgeType.CHILD;
+        else if(age>=60) ageType = AgeType.SENIOR_CITIZEN;
+        else ageType = AgeType.ADULT;
     }
     private void listMovies(){
-
+        //MovieListing.display()
     }
     private void viewMovieDetails(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Movie ID:");
+        int movieID = sc.nextInt();
+        //Movie movie = new Movie(movieID);
+        //movie.display();
+    }
+    private void viewMovieTimeslots(){
 
     }
-    private void viewMovieTimeslots(){}
     private void selectSeats(){
-
     }
     private void bookTickets(){
-
     }
     private void viewBookingHistory(){}
     private void enterReview(){}
+    public String getName(){
+        return this.name;
+    }
+    public int getMobileNumber(){
+        return this.mobileNumber;
+    }
+    public String getEmailAddress(){
+        return this.emailAddress;
+    }
+    public AgeType getAgeType(){
+        return this.ageType;
+    }
 }
