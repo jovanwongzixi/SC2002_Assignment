@@ -1,8 +1,8 @@
 package control;
 
 import java.util.ArrayList;
-
-import entity.Admin;
+import boundary.MovieListingMenu;
+import entity.user.Admin;
 
 public class AdminCommands {
 
@@ -40,8 +40,8 @@ public class AdminCommands {
 		}
 	}
 	
-	public static void editMovieList() {
-		
+	public static void movieListMenu() {
+		MovieListingMenu.movieListMenu();
 	}
 	
 	public static void editCinemaMovie() {

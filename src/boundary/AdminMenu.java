@@ -54,7 +54,7 @@ public class AdminMenu {
 							MainMenu.run();
 						} else {
 							toggle = false;
-							editMovieList();
+							movieListMenu();
 						}
 						break;
 					case 3:
