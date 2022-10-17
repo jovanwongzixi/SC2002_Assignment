@@ -1,3 +1,6 @@
+import Movies.MovieListing;
+import interfaces.Displayable;
+
 import java.util.Scanner;
 public class MovieGoer implements User{
     private String name;
@@ -49,7 +52,8 @@ public class MovieGoer implements User{
         else ageType = AgeType.ADULT;
     }
     private void listMovies(){
-        //MovieListing.display()
+        Displayable movieListing = new MovieListing();
+        movieListing.display();
     }
     private void viewMovieDetails(){
         Scanner sc = new Scanner(System.in);
