@@ -1,26 +1,30 @@
 package Movies;
-import java.io.*;
-import java.util.ArrayList;
 
-public class MovieListingReader {
-    protected ArrayList<Movie> readFile() throws IOException{
-        ArrayList<Movie> movieArrayList = new ArrayList<>();
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Objects;
+
+public class MovieDataReader {
+    protected Movie read(String ID){
         try{
             FileReader frStream = new FileReader("src/data/MovieData.csv");
             BufferedReader brStream = new BufferedReader(frStream);
-            String inputLine;
+            String inputLine=null;
             while((inputLine = brStream.readLine())!=null){
                 String[] values = inputLine.split(",");
                 Movie movie = new Movie(values);
-                movieArrayList.add(movie);
+                if(Objects.equals(movie.getID(), ID)){
+                    brStream.close();
+                    return movie;
+                }
             }
             brStream.close();
-        }
-        catch(FileNotFoundException e){
+        } catch(IOException e){
             System.out.println( "Error opening the input file!"
                     + e.getMessage() );
         }
-        return movieArrayList;
+        return null;
     }
-
 }
