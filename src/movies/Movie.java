@@ -1,9 +1,6 @@
-package Movies;
+package movies;
 
 import interfaces.Displayable;
-
-import java.awt.*;
-import java.util.Scanner;
 
 //import com.opencsv.CSVReader;
 public class Movie implements Displayable {
@@ -16,7 +13,20 @@ public class Movie implements Displayable {
     private String reviewerRating;
     private String filmRating;
     private MovieType movieType;
-    public Movie(){}
+    public Movie(){
+    }
+    public Movie(String ID){
+        MovieDataReader movieDataReader = new MovieDataReader();
+        String[] values = movieDataReader.readFile(ID);
+        this.ID = values[0];
+        this.title = values[1];
+        setShowingStatus(values[2]);
+        this.synopsis = values[3];
+        this.director = values[4];
+        this.cast = values[5];
+        this.reviewerRating = values[6];
+        this.filmRating = values[7];
+    }
     public Movie(String[] values){
         this.ID = values[0];
         this.title = values[1];
@@ -64,19 +74,14 @@ public class Movie implements Displayable {
     public String getReviewerRating() {
         return reviewerRating;
     }
-
     public void display(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter movie ID: ");
-        MovieDataReader movieDataReader = new MovieDataReader();
-        Movie movie = movieDataReader.read(sc.nextLine());
-        System.out.println("ID: " + movie.getID());
-        System.out.println("Title: "+ movie.getTitle());
-        System.out.println("Showing Status: " + movie.getShowingStatus().toString());
-        System.out.println("Synopsis: "+ movie.getSynopsis());
-        System.out.println("Director: "+ movie.getDirector());
-        System.out.println("Cast: "+ movie.getCast());
-        System.out.println("Film Rating: "+ movie.getFilmRating());
-        System.out.println("Reviewer Rating: "+movie.getReviewerRating());
+        System.out.println("ID: " + this.getID());
+        System.out.println("Title: "+ this.getTitle());
+        System.out.println("Showing Status: " + this.getShowingStatus().toString());
+        System.out.println("Synopsis: "+ this.getSynopsis());
+        System.out.println("Director: "+ this.getDirector());
+        System.out.println("Cast: "+ this.getCast());
+        System.out.println("Film Rating: "+ this.getFilmRating());
+        System.out.println("Reviewer Rating: "+this.getReviewerRating());
     }
 }

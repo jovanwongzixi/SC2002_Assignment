@@ -1,16 +1,17 @@
-import Movies.Movie;
-import Movies.MovieListing;
+import movies.Movie;
+import movies.MovieListing;
 import interfaces.Displayable;
 
 import java.util.Scanner;
 public class MovieGoer implements User{
-    private Scanner sc = new Scanner(System.in);
+
     private String name;
     private int mobileNumber;
     private String emailAddress;
     private AgeType ageType;
     @Override
     public void start(){
+        Scanner sc = new Scanner(System.in);
         getDetails();
         System.out.println("""
                 MovieGoer options menu
@@ -37,6 +38,7 @@ public class MovieGoer implements User{
 
     }
     private void getDetails(){
+        Scanner sc = new Scanner(System.in);
         System.out.println("MovieGoer Details\n"+
                 "-------------------------");
         System.out.println("Enter name:");
@@ -58,10 +60,10 @@ public class MovieGoer implements User{
         movieListing.display();
     }
     private void viewMovieDetails(){
-        Displayable movie = new Movie();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter movie ID: ");
+        Displayable movie = new Movie(sc.nextLine());
         movie.display();
-        //Movie movie = new Movie(movieID);
-        //movie.display();
     }
     private void viewMovieTimeslots(){
 

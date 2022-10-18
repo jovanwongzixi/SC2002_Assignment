@@ -1,4 +1,4 @@
-package Cine;
+package cinemas;
 
 public class CinemaLayout {
 }

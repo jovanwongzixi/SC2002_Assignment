@@ -1,4 +1,4 @@
-package Cine;
+package cinemas;
 enum SeatState{
     AVAILABLE,
     SELECTED,

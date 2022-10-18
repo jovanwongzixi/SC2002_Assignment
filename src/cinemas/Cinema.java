@@ -1,4 +1,4 @@
-package Cine;
+package cinemas;
 import java.util.ArrayList;
 public class Cinema{
     private int theatreNumber;
