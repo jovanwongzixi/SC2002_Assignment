@@ -1,7 +1,9 @@
 import interfaces.User;
 import movies.Movie;
+import movies.MovieDetailsDisplayer;
 import movies.MovieListing;
 import interfaces.Displayable;
+import movies.MovieTimeSlotList;
 
 import java.util.Scanner;
 public class MovieGoer implements User {
@@ -61,13 +63,12 @@ public class MovieGoer implements User {
         movieListing.display();
     }
     private void viewMovieDetails(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter movie ID: ");
-        Displayable movie = new Movie(sc.nextLine());
-        movie.display();
+        Displayable movieDetails = new MovieDetailsDisplayer();
+        movieDetails.display();
     }
     private void viewMovieTimeslots(){
-
+        Displayable movieTimeSlots = new MovieTimeSlotList();
+        movieTimeSlots.display();
     }
     private void selectSeats(){
     }

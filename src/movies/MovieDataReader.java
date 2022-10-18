@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class MovieDataReader {
     //read single movie
+    /*
     protected String[] readFile(String ID){
         try{
             FileReader frStream = new FileReader("src/data/MovieData.csv");
@@ -26,7 +27,7 @@ public class MovieDataReader {
                     + e.getMessage() );
         }
         return null;
-    }
+    }*/
     //read all movies
     protected ArrayList<Movie> readFile(){
         ArrayList<Movie> movieArrayList = new ArrayList<>();

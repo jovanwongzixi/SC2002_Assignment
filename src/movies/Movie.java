@@ -3,7 +3,7 @@ package movies;
 import interfaces.Displayable;
 
 //import com.opencsv.CSVReader;
-public class Movie implements Displayable {
+public class Movie {
     private String ID;
     private String title;
     private ShowingStatus showingStatus;
@@ -15,7 +15,7 @@ public class Movie implements Displayable {
     private MovieType movieType;
     public Movie(){
     }
-    public Movie(String ID){
+    /*public Movie(String ID){
         MovieDataReader movieDataReader = new MovieDataReader();
         String[] values = movieDataReader.readFile(ID);
         this.ID = values[0];
@@ -26,7 +26,7 @@ public class Movie implements Displayable {
         this.cast = values[5];
         this.reviewerRating = values[6];
         this.filmRating = values[7];
-    }
+    }*/
     public Movie(String[] values){
         this.ID = values[0];
         this.title = values[1];
@@ -74,7 +74,7 @@ public class Movie implements Displayable {
     public String getReviewerRating() {
         return reviewerRating;
     }
-    public void display(){
+    public void printInfo(){
         System.out.println("ID: " + this.getID());
         System.out.println("Title: "+ this.getTitle());
         System.out.println("Showing Status: " + this.getShowingStatus().toString());
