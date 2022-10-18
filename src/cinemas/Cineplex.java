@@ -1,13 +1,14 @@
 package cinemas;
 import java.util.ArrayList;
 public class Cineplex {
-    private String location;
+    private String name;
     private ArrayList<Cinema> cinemaArray; //use ArrayList for array with dynamic size
-    public Cineplex(String location){
-        this.location = location;
-        this.cinemaArray = new ArrayList<Cinema>();
+    //Let Cinema be Cinema 1, 2, 3 etc.
+    public Cineplex(String[] values){
+        this.name = values[0];
+        this.cinemaArray = new ArrayList<Cinema>(Integer.parseInt(values[1]));
     }
-    public String getLocation(){
-        return this.location;
+    public String getName(){
+        return this.name;
     }
 }

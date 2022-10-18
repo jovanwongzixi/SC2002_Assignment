@@ -1,9 +1,10 @@
+import interfaces.User;
 import movies.Movie;
 import movies.MovieListing;
 import interfaces.Displayable;
 
 import java.util.Scanner;
-public class MovieGoer implements User{
+public class MovieGoer implements User {
 
     private String name;
     private int mobileNumber;
