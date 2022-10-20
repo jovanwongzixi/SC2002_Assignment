@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class MovieDetailsDisplayer implements Displayable {
     public void display(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter movie ID: ");
+        System.out.println("Enter movie title: ");
         MovieListing listing= new MovieListing();
         listing.getMovie(sc.nextLine()).printInfo();
     }

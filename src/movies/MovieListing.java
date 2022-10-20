@@ -35,7 +35,7 @@ public class MovieListing implements Displayable{
     }
     protected Movie getMovie(String info){
         for(Movie movie: movieArrayList){
-            if(Objects.equals(info, movie.getID())){
+            if(Objects.equals(info, movie.getTitle())){
                 return movie;
             }
         }

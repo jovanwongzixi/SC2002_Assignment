@@ -35,6 +35,7 @@ public class MovieGoer implements User {
             switch(option){
                 case 1 -> listMovies();
                 case 2 -> viewMovieDetails();
+                case 3 -> viewMovieTimeslots();
             }
         } while(option<7);
 

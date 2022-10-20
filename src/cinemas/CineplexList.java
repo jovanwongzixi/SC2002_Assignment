@@ -23,4 +23,7 @@ public class CineplexList {
         }
         return null; //consider throwing exception here
     }
+    public ArrayList<Cineplex> getCineplexArray(){
+        return cineplexArray;
+    }
 }
