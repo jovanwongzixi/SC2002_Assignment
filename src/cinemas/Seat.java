@@ -1,21 +1,18 @@
 package cinemas;
-enum SeatState{
-    AVAILABLE,
-    SELECTED,
-    TAKEN
-}
 public class Seat {
-    private int seatID;
+    //private int seatID;
     private char row;
     private int column;
     private SeatState seatState;
 
-    public Seat(){
-
+    public Seat(char row, int column){
+        this.row = row;
+        this.column = column;
+        this.seatState = SeatState.AVAILABLE;
     }
-    public int getSeatID() {
+    /*public int getSeatID() {
         return this.seatID;
-    }
+    }*/
 
     public char getRow() {
         return row;
@@ -27,6 +24,10 @@ public class Seat {
 
     public SeatState getSeatState() {
         return seatState;
+    }
+
+    public void setSeatState(SeatState seatState) {
+        this.seatState = seatState;
     }
 }
 

@@ -22,8 +22,11 @@ public class MovieTimeSlotList implements Displayable {
         String title = sc.nextLine();
         System.out.println("Enter date :");
         String date = sc.nextLine();
-        for(Cineplex cineplex : cineplexList.getCineplexArray()){
-            String cineplexName = cineplex.getName();
+        System.out.println("Enter cineplex name: ");
+        String cineplexName = sc.nextLine();
+        //Checking for matching title, date for each cineplex (Could think of a way to sort for faster access time)
+        //for(Cineplex cineplex : cineplexList.getCineplexArray()){
+           // String cineplexName = cineplex.getName();
             System.out.println(cineplexName);
             for(MovieTimeSlot slot : slots){
                 if(Objects.equals(slot.getCineplex().getName(), cineplexName)&& Objects.equals(slot.getMovie().getTitle(), title) && Objects.equals(slot.getDate(), date)) {
@@ -31,6 +34,23 @@ public class MovieTimeSlotList implements Displayable {
                 }
             }
             System.out.println();
+        //}
+    }
+    public MovieTimeSlot selectTimeSlot(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter cineplex name: ");
+        String cineplexName = sc.nextLine();
+        System.out.println("Enter movie title: ");
+        String title = sc.nextLine();
+        System.out.println("Enter date :");
+        String date = sc.nextLine();
+        System.out.println("Enter time :");
+        String time = sc.nextLine();
+        for(MovieTimeSlot slot : slots){
+            if(Objects.equals(slot.getCineplex().getName(), cineplexName)&& Objects.equals(slot.getMovie().getTitle(), title) && Objects.equals(slot.getDate(), date) && Objects.equals(slot.getTime(), time)) {
+                return slot;
+            }
         }
+        return null; //implement null exception handler here
     }
 }

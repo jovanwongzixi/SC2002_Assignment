@@ -1,7 +1,5 @@
 package movies;
-import cinemas.Cinema;
-import cinemas.Cineplex;
-import cinemas.CineplexList;
+import cinemas.*;
 
 public class MovieTimeSlot {
     private String slotID;
@@ -10,7 +8,7 @@ public class MovieTimeSlot {
     private Movie movie;
     private Cineplex cineplex;
     private Cinema cinema;
-    //private CinemaLayout layout //each movietimeslot should have its own layout(what seats are taken)
+    private CinemaLayout layout; //each movietimeslot should have its own layout(what seats are taken)
     public MovieTimeSlot(String[] values){
         this.slotID = values[0];
         this.date = values[1];
@@ -18,6 +16,7 @@ public class MovieTimeSlot {
         setMovie(values[3]);
         setCineplex(values[4]);
         //setCinema();
+        this.layout = new CinemaLayout();
     }
     private void setMovie(String movieTitle){
         MovieListing listing = new MovieListing();
@@ -46,5 +45,11 @@ public class MovieTimeSlot {
 
     public void print(){
 
+    }
+    public void showCinemaLayout(){
+        layout.printLayout();
+    }
+    public CinemaLayout getLayout() {
+        return layout;
     }
 }

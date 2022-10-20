@@ -1,9 +1,11 @@
 package cinemas;
 
+import interfaces.Displayable;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class CineplexList {
+public class CineplexList implements Displayable {
     ArrayList<Cineplex> cineplexArray;
     public CineplexList(){
         CineplexReader cineplexReader = new CineplexReader();
@@ -25,5 +27,14 @@ public class CineplexList {
     }
     public ArrayList<Cineplex> getCineplexArray(){
         return cineplexArray;
+    }
+    public int listSize(){
+        return cineplexArray.size();
+    }
+    public void display(){
+        System.out.println("Cineplex list:");
+        for(int i=0; i< cineplexArray.size(); i++){
+            System.out.println((i+1) + ") "+cineplexArray.get(i));
+        }
     }
 }

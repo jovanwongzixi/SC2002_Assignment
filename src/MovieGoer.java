@@ -1,5 +1,6 @@
+//currently trying MovieGoer use MovieGoerApp not sure what im doing
+
 import interfaces.User;
-import movies.Movie;
 import movies.MovieDetailsDisplayer;
 import movies.MovieListing;
 import interfaces.Displayable;
@@ -7,15 +8,18 @@ import movies.MovieTimeSlotList;
 
 import java.util.Scanner;
 public class MovieGoer implements User {
-
     private String name;
     private int mobileNumber;
     private String emailAddress;
     private AgeType ageType;
+    //private BookingHistory history;
     @Override
     public void start(){
         Scanner sc = new Scanner(System.in);
         getDetails();
+        MovieGoerApp app = new MovieGoerApp(this);
+        app.use();
+        /*
         System.out.println("""
                 MovieGoer options menu
                 1) List movies
@@ -36,10 +40,12 @@ public class MovieGoer implements User {
                 case 1 -> listMovies();
                 case 2 -> viewMovieDetails();
                 case 3 -> viewMovieTimeslots();
+                case 4 -> selectSeats();
+                case 5 -> bookTickets();
+                case 6 -> viewBookingHistory();
+                case 7 -> enterReview();
             }
-        } while(option<7);
-
-
+        } while(option<7);*/
     }
     private void getDetails(){
         Scanner sc = new Scanner(System.in);
@@ -54,11 +60,10 @@ public class MovieGoer implements User {
         emailAddress = sc.nextLine();
         System.out.println("Enter age:");
         int age = sc.nextInt();
-        sc.nextLine();
         if (age<21) ageType = AgeType.CHILD;
         else if(age>=60) ageType = AgeType.SENIOR_CITIZEN;
         else ageType = AgeType.ADULT;
-    }
+    }/*
     private void listMovies(){
         Displayable movieListing = new MovieListing();
         movieListing.display();
@@ -72,14 +77,18 @@ public class MovieGoer implements User {
         movieTimeSlots.display();
     }
     private void selectSeats(){
+
     }
     private void bookTickets(){
     }
-    private void viewBookingHistory(){}
+    private void viewBookingHistory(){
+        Displayable bookingHistory = new BookingHistory();
+        bookingHistory.display();
+    }
     private void enterReview(){}
     public String getName(){
         return this.name;
-    }
+    }*/
     public int getMobileNumber(){
         return this.mobileNumber;
     }

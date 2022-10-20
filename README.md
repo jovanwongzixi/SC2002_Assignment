@@ -5,6 +5,8 @@
   - View movie listing
   - View movie details
   - View movie timeslot for selected movie
+  - View seats (in words, 5 seats generated per cinema for now)
+  - Select seat (select 1 seat at a time, yet to tag selected seat to user)
 - Admin
 
 Considering using OpenCSV library to parse csv data and retrieve value through @BindByName to minimise impact of any structural changes to file
