@@ -27,6 +27,7 @@ public class MovieTimeSlotList implements Displayable {
         //Checking for matching title, date for each cineplex (Could think of a way to sort for faster access time)
         //for(Cineplex cineplex : cineplexList.getCineplexArray()){
            // String cineplexName = cineplex.getName();
+        System.out.println(title);
             System.out.println(cineplexName);
             for(MovieTimeSlot slot : slots){
                 if(Objects.equals(slot.getCineplex().getName(), cineplexName)&& Objects.equals(slot.getMovie().getTitle(), title) && Objects.equals(slot.getDate(), date)) {

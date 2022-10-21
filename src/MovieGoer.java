@@ -1,22 +1,30 @@
 //currently trying MovieGoer use MovieGoerApp not sure what im doing
 
+
 import interfaces.User;
 import movies.MovieDetailsDisplayer;
 import movies.MovieListing;
 import interfaces.Displayable;
+import movies.MovieTicket;
 import movies.MovieTimeSlotList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 public class MovieGoer implements User {
     private String name;
     private int mobileNumber;
     private String emailAddress;
     private AgeType ageType;
+    private ArrayList<MovieTicket> purchasedTickets;
     //private BookingHistory history;
+
+    public MovieGoer(){
+        //getDetails(); Commented out for easier testing
+        purchasedTickets = new ArrayList<>();
+    }
     @Override
     public void start(){
         Scanner sc = new Scanner(System.in);
-        getDetails();
         MovieGoerApp app = new MovieGoerApp(this);
         app.use();
         /*

@@ -3,7 +3,9 @@ import interfaces.Displayable;
 import java.util.Scanner;
 public class MovieDetailsDisplayer implements Displayable {
     MovieListing listing;
-    public MovieDetailsDisplayer(){}
+    public MovieDetailsDisplayer(Displayable movieListing){
+        if(movieListing instanceof MovieListing) this.listing = (MovieListing) movieListing;
+    }
     public MovieDetailsDisplayer(MovieListing movieListing){
         this.listing = movieListing;
     }

@@ -3,7 +3,6 @@
 import interfaces.Displayable;
 import movies.MovieDetailsDisplayer;
 import movies.MovieListing;
-import movies.MovieTimeSlot;
 import movies.MovieTimeSlotList;
 
 import java.util.Scanner;
@@ -18,9 +17,9 @@ public class MovieGoerApp {
     public MovieGoerApp(MovieGoer user){
         this.currentUser = user;
         this.movieListing = new MovieListing();
-        this.movieDetailsDisplayer = new MovieDetailsDisplayer((MovieListing) this.movieListing);
+        this.movieDetailsDisplayer = new MovieDetailsDisplayer(this.movieListing);
         this.movieTimeSlotList = new MovieTimeSlotList();
-        this.seatSelector = new SeatSelector((MovieTimeSlotList) this.movieTimeSlotList);
+        this.seatSelector = new SeatSelector(this.movieTimeSlotList);
         this.bookingHistory = new BookingHistory();
     }
     public void use(){
