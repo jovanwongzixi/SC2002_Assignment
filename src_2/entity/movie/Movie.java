@@ -1,5 +1,5 @@
 package entity.movie;
-
+//copying over functions and adapting attribute types
 import java.io.Serializable;
 import java.util.*;
 

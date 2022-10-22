@@ -1,5 +1,5 @@
 package entity.cinema;
-
+//copying everything other than layout part
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

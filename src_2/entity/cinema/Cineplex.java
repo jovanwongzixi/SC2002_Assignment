@@ -1,5 +1,5 @@
 package entity.cinema;
-
+//copying everything in this to my cineplex.java
 import java.util.*;
 import java.io.Serializable;
 
