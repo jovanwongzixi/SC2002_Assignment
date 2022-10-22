@@ -20,7 +20,7 @@ public class MovieListEditor implements Writable{
 		
 		List<Movie> movieData = SerializeDB.getMovieList("src/data/movie.dat");		
 		
-		System.out.println("Enter movie title: ");
+		System.out.printf("\nEnter movie title: ");
 		String movieName = sc.nextLine();
 		do {
 			try {
@@ -31,7 +31,7 @@ public class MovieListEditor implements Writable{
 				System.out.println("(4) ------ NC16");
 				System.out.println("(5) ------ M18");
 				System.out.println("(6) ------ R21");
-				System.out.println("Option:");
+				System.out.printf("Option: ");
 						
 				choice = sc.nextInt();
 				
@@ -69,15 +69,14 @@ public class MovieListEditor implements Writable{
 			}
 		} while (toggle);
 		
-		toggle = true;
-		
+		toggle = true;		
 		do {
 			try {
 				System.out.println("Enter movie type: ");
 				System.out.println("(1) ------ 3D");
 				System.out.println("(2) ------ Blockbuster");
 				System.out.println("(3) ------ Regular");
-				System.out.println("Option:");
+				System.out.printf("Option: ");
 				
 				choice = sc.nextInt();
 				
@@ -104,11 +103,11 @@ public class MovieListEditor implements Writable{
 		} while(toggle);
 		sc.nextLine();
 						
-		System.out.println("Enter movie genre: ");
+		System.out.printf("Enter movie genre: ");
 		String movieGenre = sc.nextLine();
-		System.out.println("Enter synopsis: ");
+		System.out.printf("Enter synopsis: ");
 		String synopsis = sc.nextLine();
-		System.out.println("Enter movie director: ");
+		System.out.printf("Enter movie director: ");
 		String director = sc.nextLine();
 
 		System.out.println("Enter cast members (key X to terminate): ");
@@ -116,7 +115,7 @@ public class MovieListEditor implements Writable{
 		String castMember = ""; 
 		
 		do {
-			System.out.println("Cast member " + (counter+1) + ":");
+			System.out.printf("Cast member " + (counter+1) + ":");
 			castMember =  sc.nextLine();
 			
 			if (castMember.equals("X") && counter < 2) {
@@ -136,7 +135,7 @@ public class MovieListEditor implements Writable{
 				System.out.println("(1) ------ Coming Soon");
 				System.out.println("(2) ------ Preview");
 				System.out.println("(3) ------ Now showing");
-				System.out.println("Option:");
+				System.out.printf("Option: ");
 				
 				choice = sc.nextInt();
 				
@@ -162,9 +161,9 @@ public class MovieListEditor implements Writable{
 			}
 		} while(toggle);
 		
-		Movie m =  new Movie(movieName, filmRating, movieType, movieGenre, synopsis, director, movieCast, null, null, showingStatus);
-		
+		Movie m =  new Movie(movieName, filmRating, movieType, movieGenre, synopsis, director, movieCast, null, null, showingStatus);		
 		movieData.add(m);
+		
 		SerializeDB.writeToMovieList(movieData);
 		System.out.println("Movie added to list! Returning to admin menu...");
 		AdminUI.run();
@@ -173,9 +172,7 @@ public class MovieListEditor implements Writable{
 	@SuppressWarnings("resource")
 	public void update() {
 		int choice;
-		boolean toggle_flag1 = true;
-		boolean toggle_flag2 = true;
-		boolean toggle_flag3 = true;
+		boolean toggle_flag1 = true, toggle_flag2 = true, toggle_flag3 = true;
 		Scanner sc = new Scanner(System.in);
 		List<Movie> movieData = SerializeDB.getMovieList("src/data/movie.dat");
 		List<String> movieNames = new ArrayList<String>();

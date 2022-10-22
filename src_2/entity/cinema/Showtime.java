@@ -1,5 +1,5 @@
 package entity.cinema;
-//copying over and will try to resolve different attribute types
+
 import java.time.*;
 import java.io.Serializable;
 

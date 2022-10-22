@@ -47,7 +47,7 @@ public class AdminCommands {
 		MovieListEditor movieListEditor = new MovieListEditor();
 		
 		try {
-			System.out.println("(1) ----------------      Create movie listing");
+			System.out.println("\n(1) ----------------      Create movie listing");
 			System.out.println("(2) ----------------      Update movie listing");
 			System.out.println("(3) ----------------      Remove movie listing");
 			System.out.printf("\nOption: ");
@@ -80,7 +80,7 @@ public class AdminCommands {
 		CinemaShowtimeEditor cinemaShowtimeEditor = new CinemaShowtimeEditor();
 		
 		try {
-			System.out.println("(1) ----------------      Create movie showtime");
+			System.out.println("\n(1) ----------------      Create movie showtime");
 			System.out.println("(2) ----------------      Update movie showtime");
 			System.out.println("(3) ----------------      Remove movie showtime");
 			System.out.printf("\nOption: ");

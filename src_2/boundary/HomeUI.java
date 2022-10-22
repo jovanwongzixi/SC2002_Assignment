@@ -38,7 +38,7 @@ public class HomeUI {
 						break;
 					case 2:
 						toggle = false;
-						//go to customerPage
+						CustomerUI.run();
 						break;
 					case 3:
 						toggle = false;
