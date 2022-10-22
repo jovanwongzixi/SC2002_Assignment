@@ -9,7 +9,7 @@ public class Cinema{
     public Cinema(int theatreNumber){
         this.theatreNumber = theatreNumber;
         this.seatsArray = new ArrayList<Seat>();
-        this.layout = new CinemaLayout();
+        //this.layout = new CinemaLayout();
     }
     public int getTheatreNumber(){
         return this.theatreNumber;

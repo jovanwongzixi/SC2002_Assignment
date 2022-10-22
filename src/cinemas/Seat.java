@@ -1,5 +1,9 @@
 package cinemas;
-public class Seat {
+
+
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     //private int seatID;
     private char row;
     private int column;
