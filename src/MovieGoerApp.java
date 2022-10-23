@@ -3,6 +3,7 @@
 import interfaces.Displayable;
 import movies.MovieDetailsDisplayer;
 import movies.MovieListing;
+import movies.MovieTicket;
 import movies.MovieTimeSlotList;
 
 import java.util.Scanner;
@@ -71,6 +72,8 @@ public class MovieGoerApp {
         seatSelector.selectSeat();
     }
     private void bookTickets(){
+        //currentUser.addTicket(new MovieTicket());
+        //currentUser.getTicket();
     }
     private void viewBookingHistory(){
         //Displayable bookingHistory = new BookingHistory();

@@ -17,7 +17,7 @@ public class SeatSelector {
         this.selectedTimeSlot = null;
     }
     public SeatSelector(Displayable movieTimeSlotList){
-        this.movieTimeSlotList = (MovieTimeSlotList) movieTimeSlotList;
+        if(movieTimeSlotList instanceof MovieTimeSlotList) this.movieTimeSlotList = (MovieTimeSlotList) movieTimeSlotList;
         this.selectedSeats = new ArrayList<>();
     }
     /*public SeatSelector(){
@@ -44,7 +44,7 @@ public class SeatSelector {
             sc.nextLine();
             for(Seat seat : seats){
                 if(seat.getRow()==row && seat.getColumn()==column && seat.getSeatState()==SeatState.AVAILABLE){
-                    seat.setSeatState(SeatState.SELECTED);
+                    timeSlot.updateLayout(seat,SeatState.SELECTED);
                     selectedSeats.add(seat);
                     selectedTimeSlot = timeSlot;
                     selected = true;
