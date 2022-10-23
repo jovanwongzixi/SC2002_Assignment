@@ -1,51 +1,81 @@
 package movies;
 import cinemas.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class MovieTimeSlot {
     private String slotID;
-    private String date;
-    private String time;
+    private LocalDate showDate;
+    private LocalTime showTime;
     private Movie movie;
     private Cineplex cineplex;
     private Cinema cinema;
     private CinemaLayout layout; //each movietimeslot should have its own layout(what seats are taken)
     public MovieTimeSlot(String[] values){
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         this.slotID = values[0];
-        this.date = values[1];
-        this.time = values[2];
+        this.showDate = LocalDate.parse(values[1],dateFormatter);
+        this.showTime = LocalTime.parse(values[2]);
         setMovie(values[3]);
-        setCineplex(values[4]);
+        setCineplex1(values[4]);
         //setCinema();
         this.layout = new CinemaLayout();
+    }
+    public MovieTimeSlot(String title, Cineplex cineplex, Cinema cinema, LocalDate showDate, LocalTime showTime) {
+        //this.title = title;
+        this.cineplex = cineplex;
+        this.cinema = cinema;
+        this.showDate = showDate;
+        this.showTime = showTime;
     }
     private void setMovie(String movieTitle){
         MovieListing listing = new MovieListing();
         this.movie = listing.getMovie(movieTitle);
     }
-
-    public Movie getMovie() {
-        return movie;
+    public void setCinema(Cinema cinema) {
+        this.cinema = cinema;
     }
-    public String getDate() {
-        return date;
+    public void setCineplex(Cineplex cineplex) {
+        this.cineplex = cineplex;
     }
-
-    public String getTime() {
-        return time;
-    }
-
-    private void setCineplex(String cineplexName){
+    private void setCineplex1(String cineplexName){
         CineplexList cineplexList= new CineplexList();
         this.cineplex = cineplexList.getCineplex(cineplexName);
     }
+    public void setShowDate(LocalDate showDate) {
+        this.showDate = showDate;
+    }
 
+    public void setShowTime(LocalTime showTime) {
+        this.showTime = showTime;
+    }
+    public Movie getMovie() {
+        return movie;
+    }
+    public String getTitle(){return movie.getTitle();}
+    public String getDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM");
+        return showDate.format(formatter);
+    }
+
+    public String getTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return showTime.format(formatter);
+    }
+    public LocalDate getShowDate() {
+        return this.showDate;
+    }
+
+    public LocalTime getShowTime() {
+        return this.showTime;
+    }
     public Cineplex getCineplex() {
         return cineplex;
     }
-
-    public void print(){
-
+    public Cinema getCinema() {
+        return this.cinema;
     }
+
     public void showCinemaLayout(){
         layout.printLayout();
     }

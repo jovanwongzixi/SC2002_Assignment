@@ -27,9 +27,10 @@ public class MovieListing implements Displayable{
             case 3 -> status = ShowingStatus.PREVIEW;
             default -> status = ShowingStatus.NOW_SHOWING; //if troll input just show Now_Showing
         }
+        int i=0;
         for(Movie movie: movieArrayList){
             if(Objects.equals(status, movie.getShowingStatus())){
-                System.out.println(movie.getID() + ") " + movie.getTitle());
+                System.out.println(++i + ") " + movie.getTitle());
             }
         }
     }

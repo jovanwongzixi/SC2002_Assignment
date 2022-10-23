@@ -1,54 +1,117 @@
 package control;
 
-import java.io.IOException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 import entity.user.Admin;
+import cinemas.*;
+import movies.*;
 
 public class SerializeDB {
-	
+
 	public static void createNewFile(String filename) {
 		try {
 			File file = new File(filename);
 			file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 	}
 	
-	public static ArrayList<Admin> getAdminList(String filename) {
-		ArrayList<Admin> data = null;
+	@SuppressWarnings("unchecked")
+	public static List<Admin> getAdminList(String filename) {
+		List<Admin> data = new ArrayList<Admin>();
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
 			fis = new FileInputStream(filename);
 			in = new ObjectInputStream(fis);
-			data = (ArrayList<Admin>)in.readObject();
+			data = (List<Admin>)in.readObject();
 			in.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
-
 		return data;
 	}
-
-	/*public static void writeSerializedObject(String filename, List list) {
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
+	
+	@SuppressWarnings("unchecked")
+	public static List<Movie> getMovieList(String filename) {
+		List<Movie> data = new ArrayList<Movie>();
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
 		try {
-			fos = new FileOutputStream(filename);
-			out = new ObjectOutputStream(fos);
-			out.writeObject(list);
-			out.close();
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			data = (List<Movie>)in.readObject();
+			in.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
 		}
-	}*/
+		return data;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Cineplex> getCineplexList(String filename) {
+		List<Cineplex> data = new ArrayList<Cineplex>();
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			data = (List<Cineplex>)in.readObject();
+			in.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return data;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<MovieTimeSlot> getMovieTimeSlotList(String filename) {
+		List<MovieTimeSlot> data = new ArrayList<MovieTimeSlot>();
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(filename);
+			in = new ObjectInputStream(fis);
+			data = (List<MovieTimeSlot>)in.readObject();
+			in.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return data;
+	}
+	
+	public static void writeToMovieList(List<Movie> movieList) {
+		try {
+			FileOutputStream fos = new FileOutputStream("src/data/movie.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(movieList);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeToMovieTimeSlotList(List<MovieTimeSlot> showtimeList) {
+		try {
+			FileOutputStream fos = new FileOutputStream("src/data/cinema_showtime.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(showtimeList);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
