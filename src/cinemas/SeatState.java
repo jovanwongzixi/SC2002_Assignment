@@ -1,5 +1,9 @@
 package cinemas;
-public enum SeatState{
+
+
+import java.io.Serializable;
+
+public enum SeatState implements Serializable {
     AVAILABLE,
     SELECTED,
     TAKEN

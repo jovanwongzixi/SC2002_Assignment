@@ -16,7 +16,7 @@ public class MovieTimeSlot {
         setMovie(values[3]);
         setCineplex(values[4]);
         //setCinema();
-        this.layout = new CinemaLayout();
+        this.layout = new CinemaLayout(slotID);
     }
     private void setMovie(String movieTitle){
         MovieListing listing = new MovieListing();
@@ -51,5 +51,8 @@ public class MovieTimeSlot {
     }
     public CinemaLayout getLayout() {
         return layout;
+    }
+    public void updateLayout(Seat seat, SeatState seatState){
+        layout.update(seat, seatState, this.slotID);
     }
 }

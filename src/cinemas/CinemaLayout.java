@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 public class CinemaLayout {
     private ArrayList<Seat> seats;
-    public CinemaLayout(){
+    private CinemaLayoutUpdater updater;
+    public CinemaLayout(String slotID){
+        updater = new CinemaLayoutUpdater();
         //let each cinema have 5 seats for now;
-        this.seats = new ArrayList<>();
-        for(int i=0; i<5; i++){
+        this.seats = updater.getLayoutData(slotID);
+        /*for(int i=0; i<5; i++){
             Seat seat = new Seat('A', i+1);
             seats.add(seat);
-        }
+        }*/
     }
     public void printLayout(){
         //printing seat info for now
@@ -21,5 +23,9 @@ public class CinemaLayout {
     }
     public ArrayList<Seat> getSeats() {
         return seats;
+    }
+    public void update(Seat seat, SeatState seatState, String slotID){
+        seat.setSeatState(seatState);
+        updater.updateLayoutData(this.seats, slotID);
     }
 }

@@ -106,4 +106,10 @@ public class MovieGoer implements User {
     public AgeType getAgeType(){
         return this.ageType;
     }
+    public void addTicket(MovieTicket ticket){
+        purchasedTickets.add(ticket);
+    }
+    public void getTicket(){
+        System.out.println(purchasedTickets.get(0));
+    }
 }
