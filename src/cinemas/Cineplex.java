@@ -22,14 +22,17 @@ public class Cineplex implements Serializable {
     private String name;
     private List<Cinema> cinemaArray;
 
-    /*public Cineplex(String name, List<Cinema> cinema) {
+    public Cineplex(String name, List<Cinema> cinema) {
         this.name = name;
         this.cinemaArray = cinema;
-    }*/
+    }
     public Cineplex(String[] values){
         this.name = values[0];
         this.cinemaArray = new ArrayList<Cinema>(Integer.parseInt(values[1]));
     }
+
+
+
     public String getName() {
         return this.name;
     }

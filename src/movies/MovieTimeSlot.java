@@ -1,9 +1,12 @@
 package movies;
 import cinemas.*;
+
+import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class MovieTimeSlot {
+public class MovieTimeSlot implements Serializable {
+    private static final long serialVersionUID = -8242226099133439559L;
     private String slotID;
     private LocalDate showDate;
     private LocalTime showTime;
@@ -22,7 +25,7 @@ public class MovieTimeSlot {
         this.layout = new CinemaLayout(slotID);
     }
     public MovieTimeSlot(String title, Cineplex cineplex, Cinema cinema, LocalDate showDate, LocalTime showTime) {
-        //this.title = title;
+        setMovie(title);
         this.cineplex = cineplex;
         this.cinema = cinema;
         this.showDate = showDate;

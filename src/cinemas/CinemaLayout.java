@@ -1,8 +1,9 @@
 package cinemas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CinemaLayout {
+public class CinemaLayout implements Serializable {
     private ArrayList<Seat> seats;
     private CinemaLayoutUpdater updater;
     public CinemaLayout(String slotID){
