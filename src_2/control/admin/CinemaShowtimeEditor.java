@@ -23,9 +23,9 @@ public class CinemaShowtimeEditor implements Writable{
 		LocalTime showTime = null;
 		boolean toggle = true;
 		
-		List<Showtime> showtimeData = SerializeDB.getShowtimeList("src/data/cinema_showtime.dat");
-		List<Movie> movieData = SerializeDB.getMovieList("src/data/movie.dat");
-		List<Cineplex> cineplexData = SerializeDB.getCineplexList("src/data/cineplex.dat");
+		List<Showtime> showtimeData = SerializeDB.getShowtimeList();
+		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
 		List<String> movieNames = new ArrayList<String>();
 		List<String> cineplexNames = new ArrayList<String>();
 		
@@ -141,8 +141,8 @@ public class CinemaShowtimeEditor implements Writable{
 		int choice;
 		boolean toggle_flag1 = true, toggle_flag2 = true;
 		
-		List<Showtime> showtimeData = SerializeDB.getShowtimeList("src/data/cinema_showtime.dat");
-		List<Cineplex> cineplexData = SerializeDB.getCineplexList("src/data/cineplex.dat");
+		List<Showtime> showtimeData = SerializeDB.getShowtimeList();
+		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
 		List<String> cineplexNames = new ArrayList<String>();
 		
 		for (Cineplex cp :cineplexData) {
@@ -219,7 +219,7 @@ public class CinemaShowtimeEditor implements Writable{
 		int choice;
 		boolean toggle = true;
 		
-		List<Showtime> showtimeData = SerializeDB.getShowtimeList("src/data/cinema_showtime.dat");
+		List<Showtime> showtimeData = SerializeDB.getShowtimeList();
 		
 		if (showtimeData.size() == 0) {
 			System.out.println("There are no movie timeslots to remove!");
@@ -259,8 +259,8 @@ public class CinemaShowtimeEditor implements Writable{
 	@SuppressWarnings("resource")
 	public List<Showtime> updateLocation(int index) {
 		Scanner sc = new Scanner(System.in);
-		List<Showtime> showtimeData = SerializeDB.getShowtimeList("src/data/cinema_showtime.dat");
-		List<Cineplex> cineplexData = SerializeDB.getCineplexList("src/data/cineplex.dat");
+		List<Showtime> showtimeData = SerializeDB.getShowtimeList();
+		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
 		List<String> cineplexNames = new ArrayList<String>();
 		boolean toggle_flag1 = true, toggle_flag2 = true;
 		
@@ -309,7 +309,7 @@ public class CinemaShowtimeEditor implements Writable{
 	
 	@SuppressWarnings("resource")
 	public List<Showtime> updateTimeslot(int index) {
-		List<Showtime> showtimeData = SerializeDB.getShowtimeList("src/data/cinema_showtime.dat");
+		List<Showtime> showtimeData = SerializeDB.getShowtimeList();
 		boolean toggle_flag1 = true, toggle_flag2 = true;
 		
 		do {

@@ -10,7 +10,7 @@ public class AdminCommands {
 		boolean flag_1 = false, flag_2 = false;
 		int index;
 		 	
-		List<Admin> adminData = SerializeDB.getAdminList("src/data/admin.dat");
+		List<Admin> adminData = SerializeDB.getAdminList();
 		List<String> userids = new ArrayList<String>();
 		List<String> passwords = new ArrayList<String>();
 			

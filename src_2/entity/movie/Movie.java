@@ -13,8 +13,8 @@ public class Movie implements Serializable{
 	private String synopsis;
 	private String director;
 	private List<String> cast;
-	private Double overallRating;
-	private List<MovieReview> reviews;
+	private double overallRating;
+	private List<Review> reviews;
 	private ShowingStatus showingStatus;
 	
 	public Movie(String title,  
@@ -24,8 +24,8 @@ public class Movie implements Serializable{
 				String synopsis,
 				String director,
 				List<String> cast,
-				Double overallRating,
-				List<MovieReview> reviews,
+				double overallRating,
+				List<Review> reviews,
 				ShowingStatus showingStatus) {
 		
 		this.title = title;
@@ -50,6 +50,14 @@ public class Movie implements Serializable{
 	
 	public void setShowingStatus(ShowingStatus showingStatus) {
 		this.showingStatus = showingStatus;
+	}
+	
+	public void setReviews(List<Review> reviews){
+		this.reviews = reviews;
+	}
+	
+	public void setOverallRating(double overallRating) {
+		this.overallRating = overallRating;
 	}
 
 	public String getTitle() {
@@ -80,11 +88,11 @@ public class Movie implements Serializable{
 		return this.cast;
 	}
 	
-	public Double getOverallRating() {
+	public double getOverallRating() {
 		return this.overallRating;
 	}
 	
-	public List<MovieReview> getReviews(){
+	public List<Review> getReviews(){
 		return this.reviews;
 	}
 	

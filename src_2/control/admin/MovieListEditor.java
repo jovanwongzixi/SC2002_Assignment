@@ -18,7 +18,7 @@ public class MovieListEditor implements Writable{
 		MovieType movieType = null;
 		ShowingStatus showingStatus = null;
 		
-		List<Movie> movieData = SerializeDB.getMovieList("src/data/movie.dat");		
+		List<Movie> movieData = SerializeDB.getMovieList();		
 		
 		System.out.printf("\nEnter movie title: ");
 		String movieName = sc.nextLine();
@@ -161,7 +161,7 @@ public class MovieListEditor implements Writable{
 			}
 		} while(toggle);
 		
-		Movie m =  new Movie(movieName, filmRating, movieType, movieGenre, synopsis, director, movieCast, null, null, showingStatus);		
+		Movie m =  new Movie(movieName, filmRating, movieType, movieGenre, synopsis, director, movieCast, 0, null, showingStatus);		
 		movieData.add(m);
 		
 		SerializeDB.writeToMovieList(movieData);
@@ -174,7 +174,7 @@ public class MovieListEditor implements Writable{
 		int choice;
 		boolean toggle_flag1 = true, toggle_flag2 = true, toggle_flag3 = true;
 		Scanner sc = new Scanner(System.in);
-		List<Movie> movieData = SerializeDB.getMovieList("src/data/movie.dat");
+		List<Movie> movieData = SerializeDB.getMovieList();
 		List<String> movieNames = new ArrayList<String>();
 		
 		for(Movie m : movieData) {
@@ -398,7 +398,7 @@ public class MovieListEditor implements Writable{
 		int choice;
 		boolean toggle = true;
 		Scanner sc = new Scanner(System.in);
-		List<Movie> movieData = SerializeDB.getMovieList("src/data/movie.dat");		
+		List<Movie> movieData = SerializeDB.getMovieList();		
 		List<String> movieNames = new ArrayList<String>();
 		
 		for(Movie m : movieData) {

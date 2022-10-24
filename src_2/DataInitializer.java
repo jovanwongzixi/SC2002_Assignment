@@ -39,20 +39,21 @@ public class DataInitializer {
 				"Bodhi Sabongui"));
 		List<String> mCast2 = new ArrayList<String>(Arrays.asList("Ikue Otani", "Kaori Nazuka", "Mayumi Tanaka", 
 				"Akemi Okamura", "Kappei Yamaguchi", "Hiroaki Hirata"));
+		List<Review> rList = new ArrayList<Review>();
 		
 		createNewFile("src/data/movie.dat");
 		
 		Movie m1 = new Movie("Black Adam", FilmRating.PG13, MovieType.BLOCKBUSTER, "Action, Adventure, Fantasy",
 				"Nearly 5,000 years after he was bestowed with the almighty powers of the Egyptian gods - "
 				+ "and imprisoned just as quickly - Black Adam is freed from his earthly tomb, ready to unleash "
-				+ "his unique form of justice on the modern world.", "Jaume Collet-Serra", mCast1, null, null, 
+				+ "his unique form of justice on the modern world.", "Jaume Collet-Serra", mCast1, 0, rList, 
 				ShowingStatus.NOW_SHOWING);
 		Movie m2 = new Movie("One Piece Film (RED)", FilmRating.PG13, MovieType.REGULAR, "Anime", "Uta - the most beloved "
 				+ "singer in the world.\r\n" + "Her voice, which she sings with while concealing her true identity,\r\n" 
 				+ "Has been described as “otherworldly.”\r\n" + "She will appear in public for the first time at a "
 				+ "live concert.\r\n" + "As the venue fills with all kinds of Uta fans - excited pirates, the Navy watching "
 				+ "closely, and the Straw Hats led by Luffy who simply came to enjoy her sonorous performance - the "
-				+ "voice that the whole world has been waiting for is about to resound.", "Goro Taniguchi", mCast2, null, null,
+				+ "voice that the whole world has been waiting for is about to resound.", "Goro Taniguchi", mCast2, 0, rList,
 				ShowingStatus.NOW_SHOWING);
 				
 		movieList.add(m1);
@@ -149,6 +150,6 @@ public class DataInitializer {
 		initializeAdminData();
         initializeCineplexData();
         initializeMovieData();
-        initializeCinemaShowtimeData();
+        //initializeCinemaShowtimeData();
     }
 }

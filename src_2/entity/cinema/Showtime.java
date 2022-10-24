@@ -1,6 +1,7 @@
 package entity.cinema;
 
 import java.time.*;
+
 import java.io.Serializable;
 
 public class Showtime implements Serializable{
@@ -53,5 +54,13 @@ public class Showtime implements Serializable{
 	
 	public LocalTime getShowTime() {
 		return this.showTime;
+	}
+	
+	public boolean equals(Object o) {
+		if (o instanceof Showtime) {
+			Showtime s = (Showtime)o;
+			return (getTitle().equals(s.getTitle()));
+		}
+		return false;
 	}
 }

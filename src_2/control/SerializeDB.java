@@ -18,12 +18,12 @@ public class SerializeDB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Admin> getAdminList(String filename) {
+	public static List<Admin> getAdminList() {
 		List<Admin> data = new ArrayList<Admin>();
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream(filename);
+			fis = new FileInputStream("src/data/admin.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Admin>)in.readObject();
 			in.close();
@@ -36,12 +36,12 @@ public class SerializeDB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Movie> getMovieList(String filename) {
+	public static List<Movie> getMovieList() {
 		List<Movie> data = new ArrayList<Movie>();
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream(filename);
+			fis = new FileInputStream("src/data/movie.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Movie>)in.readObject();
 			in.close();
@@ -54,12 +54,12 @@ public class SerializeDB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Cineplex> getCineplexList(String filename) {
+	public static List<Cineplex> getCineplexList() {
 		List<Cineplex> data = new ArrayList<Cineplex>();
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream(filename);
+			fis = new FileInputStream("src/data/cineplex.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Cineplex>)in.readObject();
 			in.close();
@@ -72,12 +72,12 @@ public class SerializeDB {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Showtime> getShowtimeList(String filename) {
+	public static List<Showtime> getShowtimeList() {
 		List<Showtime> data = new ArrayList<Showtime>();
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream(filename);
+			fis = new FileInputStream("src/data/cinema_showtime.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Showtime>)in.readObject();
 			in.close();
