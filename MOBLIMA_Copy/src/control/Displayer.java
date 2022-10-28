@@ -19,6 +19,20 @@ public class Displayer {
 		return index;
 	}
 	
+	public int displayBookingMovieList() {
+		List<Movie> movieData = SerializeDB.getMovieList();
+		int index = 0;
+		
+		System.out.println("-------------------- Movie List -------------------");
+		for(Movie m: movieData) {
+			if(m.getShowingStatus() == ShowingStatus.PREVIEW || m.getShowingStatus() == ShowingStatus.NOW_SHOWING) {
+				index++;
+				System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());
+			}
+		}
+		return index;
+	}
+	
 	public void displayMovieDetails(int index) {
 		List<Movie> movieData = SerializeDB.getMovieList();
 		List<String> castList = movieData.get(index).getCast();

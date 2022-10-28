@@ -3,7 +3,6 @@ package control.admin;
 import java.util.*;
 import control.SerializeDB;
 import java.time.*;
-import java.time.format.*;
 import entity.cinema.*;
 import entity.movie.Movie;
 
@@ -12,6 +11,7 @@ public class CinemaShowtimeEditor implements Writable{
 	@SuppressWarnings("resource")
 	public void create() {
 		Scanner sc = new Scanner(System.in);
+		DateTimeManipulator datetimeManip = new DateTimeManipulator();
 		int choice, index = 0;
 		Movie showMovie = null;
 		Cineplex showCineplex = null;
@@ -97,26 +97,8 @@ public class CinemaShowtimeEditor implements Writable{
 				
 			} while (toggle);				
 			
-			toggle = true;
-			do {
-				try {
-					showDate = addDate();
-					toggle = false;
-				} catch (DateTimeParseException ex) {
-					System.out.println("Invalid input. Please use the following format: dd.MM.yyyy!");
-				}
-			} while(toggle);
-			
-			toggle = true;
-			do {
-				try {
-					showTime = addTime();
-					toggle = false;
-				} catch (DateTimeParseException ex) {
-					System.out.println("Invalid input. Please use the following format: dd.MM.yyyy!");
-				}
-			} while (toggle);
-			
+			showDate = datetimeManip.addDate();		
+			showTime = datetimeManip.addTime();		
 															
 			Showtime st = new Showtime(showMovie, showCineplex, showCinema, showDate, showTime);
 			showtimeData.add(st);				
@@ -300,49 +282,16 @@ public class CinemaShowtimeEditor implements Writable{
 	}
 	
 	public List<Showtime> updateTimeslot(int index) {
+		DateTimeManipulator datetimeManip = new DateTimeManipulator();
 		List<Showtime> showtimeData = SerializeDB.getShowtimeList();
-		boolean toggle_flag1 = true, toggle_flag2 = true;
 		
-		do {
-			try {
-				LocalDate showDate = addDate();
-				toggle_flag1 = false;
-				
-				do {
-					try {
-						LocalTime showTime = addTime();
-						toggle_flag2 = false;
+
+		LocalDate showDate = datetimeManip.addDate();
+		LocalTime showTime = datetimeManip.addTime();
+					
+		showtimeData.get(index).setShowDate(showDate);
+		showtimeData.get(index).setShowTime(showTime);
 						
-						showtimeData.get(index).setShowDate(showDate);
-						showtimeData.get(index).setShowTime(showTime);
-						
-					} catch (DateTimeParseException ex) {
-						System.out.println("Invalid input. Please use the following format: dd.MM.yyyy!");
-					}
-				} while (toggle_flag2);					
-			} catch (DateTimeParseException ex) {
-				System.out.println("Invalid input. Please use the following format: dd.MM.yyyy!");
-			}
-		} while(toggle_flag1);
-		
 		return showtimeData;
-	}
-	
-	@SuppressWarnings("resource")
-	public LocalDate addDate() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Input show date (dd.MM.yyyy): ");
-		String dateInput = sc.nextLine();
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return LocalDate.parse(dateInput, dtf);
-	}
-	
-	@SuppressWarnings("resource")
-	public LocalTime addTime() {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Input show time (hh:mm): ");
-		String timeInput = sc.nextLine();
-		timeInput += ":00";
-		return LocalTime.parse(timeInput, DateTimeFormatter.ISO_TIME);
 	}
 }

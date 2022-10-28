@@ -183,4 +183,30 @@ public class SerializeDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void writeToHolidayList(List<LocalDate> holidays) {
+		try {
+			FileOutputStream fos = new FileOutputStream("data/holidays.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(holidays);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeToTicketPrices(List<TicketPrice> ticketPrices) {
+		try {
+			FileOutputStream fos = new FileOutputStream("data/ticket_prices.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(ticketPrices);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

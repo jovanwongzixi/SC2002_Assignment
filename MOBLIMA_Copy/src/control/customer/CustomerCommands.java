@@ -71,7 +71,7 @@ public class CustomerCommands {
 		
 		do {
 			try {
-				index = displayer.displayMovieList();
+				index = displayer.displayBookingMovieList();
 				System.out.println();
 				System.out.printf("Input option number to view available timeslots (-1 to return to customer menu): ");
 				

@@ -12,6 +12,10 @@ public class TicketPrice implements Serializable{
 		this.price = price;
 	}
 	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
 	public char getGroup() {
 		return this.group;
 	}

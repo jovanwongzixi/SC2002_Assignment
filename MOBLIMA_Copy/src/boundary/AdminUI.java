@@ -1,5 +1,4 @@
 package boundary;
-//CLEAN BUT MISSING CALL SYSTEMCONFIG()
 import java.util.*;
 import static control.admin.AdminCommands.*;
 
@@ -65,7 +64,7 @@ public class AdminUI {
 							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
 							return;
 						} else {
-							//go to system config
+							editSystemConfig();
 							break;
 						}
 					case 5:

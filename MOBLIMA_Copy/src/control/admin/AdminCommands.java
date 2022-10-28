@@ -40,9 +40,9 @@ public class AdminCommands {
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	public static void editMovieList() {
 		int choice;
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		MovieListEditor movieListEditor = new MovieListEditor();
 		
@@ -79,9 +79,9 @@ public class AdminCommands {
 		} while (true);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void editCinemaShowtime() {
 		int choice;
-		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		CinemaShowtimeEditor cinemaShowtimeEditor = new CinemaShowtimeEditor();
 		
@@ -116,5 +116,40 @@ public class AdminCommands {
 				System.out.println("Invalid input. Please choose a valid option!\n");
 			}
 		} while(true);
+	}
+	
+	@SuppressWarnings("resource")
+	public static void editSystemConfig() {
+		int choice;
+		Scanner sc = new Scanner(System.in);
+		SystemConfig systemConfig = new SystemConfig();
+		
+		do {
+			try {
+				System.out.println("\n(1) ----------------      Edit holidays");
+				System.out.println("(2) ----------------      Edit ticket prices");
+				System.out.println("(3) ----------------      Return to previous menu");
+				System.out.printf("\nOption: ");
+				
+				choice = sc.nextInt();
+				
+				switch(choice) {
+					case 1:
+						systemConfig.editHolidays();
+						return;
+					case 2:
+						systemConfig.editPrices();
+						return;
+					case 3:
+						System.out.println("Returning to previous menu...");
+						return;
+					default:
+						System.out.println("Option does not exist. Please key in a valid option!\n");	
+				}
+			} catch (InputMismatchException ex) {
+				sc.nextLine();
+				System.out.println("Invalid input. Please choose a valid option!\n");
+			}
+		} while (true);
 	}
 }

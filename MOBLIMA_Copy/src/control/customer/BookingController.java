@@ -175,7 +175,7 @@ public class BookingController {
 		}
 		
 		if(ticket.getIsBlockbuster() == true) {
-			ticketPrice += 0.5;
+			ticketPrice += ticketPrices.get(9).getPrice();
 		}
 		
 		if(ticket.getSeatType() == SeatType.DOUBLE) {

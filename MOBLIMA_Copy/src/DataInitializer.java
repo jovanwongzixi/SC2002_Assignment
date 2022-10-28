@@ -156,10 +156,9 @@ public class DataInitializer {
 		TicketPrice t7 = new TicketPrice('G',10);
 		TicketPrice t8 = new TicketPrice('H',12);
 		TicketPrice t9 = new TicketPrice('I',5);
-		TicketPrice t10 = new TicketPrice('J',2);
-		TicketPrice t11 = new TicketPrice('K',0.5);
+		TicketPrice t10 = new TicketPrice('J',0.5);
 		
-		List<TicketPrice> priceList = new ArrayList<TicketPrice>(Arrays.asList(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11));
+		List<TicketPrice> priceList = new ArrayList<TicketPrice>(Arrays.asList(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10));
 		
 		try {
 			FileOutputStream fos = new FileOutputStream("data/ticket_prices.dat");
