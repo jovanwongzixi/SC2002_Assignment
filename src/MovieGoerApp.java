@@ -11,15 +11,15 @@ import java.util.Scanner;
 public class MovieGoerApp {
     private MovieGoer currentUser;
     private Displayable movieListing;
-    private Displayable movieDetailsDisplayer;
+    //private Displayable movieDetailsDisplayer;
     private Displayable movieTimeSlotList;
     private SeatSelector seatSelector;
     private Displayable bookingHistory;
     public MovieGoerApp(MovieGoer user){
         this.currentUser = user;
         this.movieListing = new MovieListing();
-        this.movieDetailsDisplayer = new MovieDetailsDisplayer(this.movieListing);
-        this.movieTimeSlotList = new MovieTimeSlotList();
+        //this.movieDetailsDisplayer = new MovieDetailsDisplayer(this.movieListing);
+        this.movieTimeSlotList = new MovieTimeSlotList(this.movieListing);
         this.seatSelector = new SeatSelector(this.movieTimeSlotList);
         this.bookingHistory = new BookingHistory();
     }
@@ -28,14 +28,13 @@ public class MovieGoerApp {
         System.out.println("""
                 MovieGoer options menu
                 1) List movies
-                2) View movie details
-                3) View movie timeslots
-                4) View seats
-                5) Select seat
-                6) Book ticket
-                7) View booking history
-                8) Enter review
-                9) Quit
+                2) View movie timeslots
+                3) View seats
+                4) Select seat
+                5) Book ticket
+                6) View booking history
+                7) Enter review
+                8) Quit
                 """);
         int option;
         do{
@@ -43,24 +42,24 @@ public class MovieGoerApp {
             option = sc.nextInt();
             switch(option){
                 case 1 -> listMovies();
-                case 2 -> viewMovieDetails();
-                case 3 -> viewMovieTimeslots();
-                case 4 -> viewSeats();
-                case 5 -> selectSeats();
-                case 6 -> bookTickets();
-                case 7 -> viewBookingHistory();
-                case 8 -> enterReview();
+                //case 2 -> viewMovieDetails();
+                case 2 -> viewMovieTimeslots();
+                case 3 -> viewSeats();
+                case 4 -> selectSeats();
+                case 5 -> bookTickets();
+                case 6 -> viewBookingHistory();
+                case 7 -> enterReview();
             }
-        } while(option<9);
+        } while(option<8);
     }
     private void listMovies(){
         //Displayable movieListing = new MovieListing();
         movieListing.display();
     }
-    private void viewMovieDetails(){
+    /*private void viewMovieDetails(){
         //Displayable movieDetails = new MovieDetailsDisplayer();
         movieDetailsDisplayer.display();
-    }
+    }*/
     private void viewMovieTimeslots(){
         //Displayable movieTimeSlots = new MovieTimeSlotList();
         movieTimeSlotList.display();

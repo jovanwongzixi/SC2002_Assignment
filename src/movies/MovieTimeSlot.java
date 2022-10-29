@@ -1,11 +1,13 @@
 package movies;
 import cinemas.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class MovieTimeSlot implements Serializable {
+    @Serial
     private static final long serialVersionUID = -8242226099133439559L;
     private String slotID;
     private LocalDate showDate;

@@ -11,14 +11,15 @@ public class SeatSelector {
     private MovieTimeSlotList movieTimeSlotList;
     private ArrayList<Seat> selectedSeats;
     private MovieTimeSlot selectedTimeSlot;
-    public SeatSelector(MovieTimeSlotList movieTimeSlotList){
+    /*public SeatSelector(MovieTimeSlotList movieTimeSlotList){
         this.movieTimeSlotList = movieTimeSlotList;
         this.selectedSeats = new ArrayList<>();
         this.selectedTimeSlot = null;
-    }
+    }*/
     public SeatSelector(Displayable movieTimeSlotList){
         if(movieTimeSlotList instanceof MovieTimeSlotList) this.movieTimeSlotList = (MovieTimeSlotList) movieTimeSlotList;
         this.selectedSeats = new ArrayList<>();
+        this.selectedTimeSlot = null;
     }
     /*public SeatSelector(){
         this.movieTimeSlotList = new MovieTimeSlotList();
@@ -48,6 +49,7 @@ public class SeatSelector {
                     selectedSeats.add(seat);
                     selectedTimeSlot = timeSlot;
                     selected = true;
+                    System.out.println("Seat selected!");
                     break;
                 }
             }

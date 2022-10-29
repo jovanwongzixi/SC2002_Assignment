@@ -25,8 +25,12 @@ public class CineplexList implements Displayable {
         }
         return null; //consider throwing exception here
     }
-    public ArrayList<Cineplex> getCineplexArray(){
-        return cineplexArray;
+    public ArrayList<String> getCineplexNames(){
+        ArrayList<String> cineplexNames = new ArrayList<>();
+        for(Cineplex cineplex : cineplexArray){
+            cineplexNames.add(cineplex.getName());
+        }
+        return cineplexNames;
     }
     public int listSize(){
         return cineplexArray.size();
