@@ -1,8 +1,6 @@
 package movies;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MovieTimeSlotReader {
@@ -21,6 +19,21 @@ public class MovieTimeSlotReader {
         }
         catch(IOException e){
             throw new RuntimeException();
+        }
+        return slots;
+    }
+    protected ArrayList<MovieTimeSlot> readBin(){
+        ArrayList<MovieTimeSlot> slots = new ArrayList<>();
+        try{
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/movieTimeSlotCSV.dat"));
+            slots = (ArrayList<MovieTimeSlot>) in.readObject();
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return slots;
     }

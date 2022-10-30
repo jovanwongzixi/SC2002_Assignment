@@ -1,9 +1,10 @@
 package movies;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import cinemas.Seat;
+
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class MovieDataReader {
@@ -37,7 +38,7 @@ public class MovieDataReader {
             String inputLine;
             brStream.readLine();
             while ((inputLine = brStream.readLine()) != null) {
-                String[] values = inputLine.split(",");
+                String[] values = inputLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); // Reads csv input by splitting on commas outside quotes
                 Movie movie = new Movie(values);
                 movieArrayList.add(movie);
             }
@@ -45,6 +46,21 @@ public class MovieDataReader {
         }
         catch(IOException e){
             throw new RuntimeException();
+        }
+        return movieArrayList;
+    }
+    protected ArrayList<Movie> readBin(){
+        ArrayList<Movie> movieArrayList = new ArrayList<>();
+        try{
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/movieCSV.dat"));
+            movieArrayList = (ArrayList<Movie>) in.readObject();
+        }
+        catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return movieArrayList;
     }

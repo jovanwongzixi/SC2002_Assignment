@@ -19,7 +19,7 @@ public class MovieTimeSlotList implements Displayable {
     public MovieTimeSlotList(Displayable movieListing){
         if(movieListing instanceof MovieListing) this.movieListing = (MovieListing) movieListing;
         MovieTimeSlotReader reader = new MovieTimeSlotReader();
-        this.slots = reader.readFile();
+        this.slots = reader.readBin();
         this.cineplexList = new CineplexList();
         tempList = new ArrayList<>();
     }

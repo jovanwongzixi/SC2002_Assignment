@@ -17,7 +17,7 @@ public class MovieTimeSlot implements Serializable {
     private Cinema cinema;
     private CinemaLayout layout; //each movietimeslot should have its own layout(what seats are taken)
     public MovieTimeSlot(String[] values){
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.slotID = values[0];
         this.showDate = LocalDate.parse(values[1],dateFormatter);
         this.showTime = LocalTime.parse(values[2]);

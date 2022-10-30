@@ -9,7 +9,7 @@ public class MovieListing implements Displayable{
     private ArrayList<Movie> movieArrayList;
     public MovieListing(){
         MovieDataReader movieDataReader = new MovieDataReader();
-        this.movieArrayList = movieDataReader.readFile();
+        this.movieArrayList = movieDataReader.readBin();
     }
     public void display(){
         System.out.println("""

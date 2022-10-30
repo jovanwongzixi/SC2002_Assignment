@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class CinemaLayout implements Serializable {
     private ArrayList<Seat> seats;
-    private CinemaLayoutUpdater updater;
+    //private CinemaLayoutUpdater updater;
     public CinemaLayout(String slotID){
-        updater = new CinemaLayoutUpdater();
+        CinemaLayoutUpdater updater = new CinemaLayoutUpdater();
         //let each cinema have 5 seats for now;
         this.seats = updater.getLayoutData(slotID);
         /*for(int i=0; i<5; i++){
@@ -26,6 +26,7 @@ public class CinemaLayout implements Serializable {
         return seats;
     }
     public void update(Seat seat, SeatState seatState, String slotID){
+        CinemaLayoutUpdater updater = new CinemaLayoutUpdater();
         seat.setSeatState(seatState);
         updater.updateLayoutData(this.seats, slotID);
     }
