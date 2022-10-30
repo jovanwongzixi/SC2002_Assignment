@@ -14,14 +14,17 @@ public class MovieGoerApp {
     //private Displayable movieDetailsDisplayer;
     private Displayable movieTimeSlotList;
     private SeatSelector seatSelector;
-    private Displayable bookingHistory;
+    private TicketBooker ticketBooker;
+    private Displayable bookingHistoryList;
     public MovieGoerApp(MovieGoer user){
         this.currentUser = user;
         this.movieListing = new MovieListing();
         //this.movieDetailsDisplayer = new MovieDetailsDisplayer(this.movieListing);
         this.movieTimeSlotList = new MovieTimeSlotList(this.movieListing);
         this.seatSelector = new SeatSelector(this.movieTimeSlotList);
-        this.bookingHistory = new BookingHistory();
+        this.bookingHistoryList = new BookingHistoryList();
+        this.ticketBooker = new TicketBooker(bookingHistoryList);
+
     }
     public void use(){
         Scanner sc = new Scanner(System.in);
@@ -73,10 +76,11 @@ public class MovieGoerApp {
     private void bookTickets(){
         //currentUser.addTicket(new MovieTicket());
         //currentUser.getTicket();
+        ticketBooker.book(seatSelector.getSelectedSeats(),seatSelector.getSelectedTimeSlot());
     }
     private void viewBookingHistory(){
         //Displayable bookingHistory = new BookingHistory();
-        //bookingHistory.display();
+        bookingHistoryList.display();
     }
     private void enterReview(){}
 }

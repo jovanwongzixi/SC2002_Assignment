@@ -38,9 +38,9 @@ public class SeatSelector {
         }
         ArrayList<Seat> seats = timeSlot.getLayout().getSeats();
         while(!selected){
-            System.out.println("Select row: ");
-            char row = sc.nextLine().charAt(0);
-            System.out.println("Select column: ");
+            System.out.println("Select row (A-F):");
+            char row = Character.toUpperCase(sc.nextLine().charAt(0));
+            System.out.println("Select column (0-7):");
             int column = sc.nextInt();
             sc.nextLine();
             for(Seat seat : seats){
@@ -56,5 +56,13 @@ public class SeatSelector {
             //failed to select seat;
             if(!selected)System.out.println("Seat not available. Select new seat!");
         }
+    }
+
+    public ArrayList<Seat> getSelectedSeats() {
+        return selectedSeats;
+    }
+
+    public MovieTimeSlot getSelectedTimeSlot() {
+        return selectedTimeSlot;
     }
 }
