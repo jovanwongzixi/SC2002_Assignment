@@ -1,0 +1,40 @@
+package control.customer;
+
+import java.util.*;
+import java.util.regex.Pattern;
+import control.SerializeDB;
+import entity.Booking;
+import interfaces.Viewer;
+
+public class BookingHistoryViewer implements Viewer{
+
+	public void view() {
+		List<Booking> bookingData = SerializeDB.getBookingList();
+		Scanner sc = new Scanner(System.in);
+		String mobileNum;
+		int counter = 0;
+		
+		do {
+			System.out.println("Enter your mobile number: ");
+			mobileNum = sc.nextLine();
+			if (!mobileMatches(mobileNum)) {
+				System.out.println("Invalid mobile number. Please try again!");
+			}
+		} while (!mobileMatches(mobileNum));
+		
+		for (Booking b : bookingData) {
+			if(b.getMobileNum().equals(mobileNum)) {
+				counter++;
+				System.out.printf("Booking %s for ... ", b.getTID());
+			}
+		}
+		
+		if(counter == 0) {
+			System.out.println("No booking history found!");
+		}
+	}
+	
+	private boolean mobileMatches(String mobileNum) {
+		return Pattern.compile("[8-9][0-9]{7}").matcher(mobileNum).matches();
+	}
+}
