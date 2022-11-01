@@ -131,14 +131,14 @@ public class SerializeDB {
 		return data;
 	}
 	
-	public static boolean getFlags(){
-		boolean data = false;
+	public static List<Boolean> getFlags(){
+		List<Boolean> data = new ArrayList<Boolean>();
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
 			fis = new FileInputStream("data/flags.dat");
 			in = new ObjectInputStream(fis);
-			data = (boolean)in.readObject();
+			data = (List<Boolean>)in.readObject();
 			in.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -213,7 +213,7 @@ public class SerializeDB {
 		}
 	}
 	
-	public static void writeToFlag(boolean sortSwitch) {
+	public static void writeToFlag(List<Boolean> sortSwitch) {
 		try {
 			FileOutputStream fos = new FileOutputStream("data/flags.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);

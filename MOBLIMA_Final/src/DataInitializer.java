@@ -201,7 +201,10 @@ public class DataInitializer {
 	}
 	//flag data
 	private void initializeFlags() {
-		boolean sortSwitch = false;
+		List<Boolean> sortSwitch = new ArrayList<Boolean>();
+		
+		sortSwitch.add(true);
+		sortSwitch.add(true);
 		
 		try {
 			FileOutputStream fos = new FileOutputStream("data/flags.dat");

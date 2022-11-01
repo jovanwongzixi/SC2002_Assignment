@@ -1,7 +1,5 @@
 package control.admin;
-/*
- * No issues.
- */
+
 import java.time.LocalDate;
 import java.util.*;
 import control.SerializeDB;
@@ -95,13 +93,46 @@ public class SystemManager {
 	
 	public void configureTopFive() {
 		List<Movie> movieList = SerializeDB.getMovieList();
-		boolean sortFlag = SerializeDB.getFlags();
+		List<Movie> topRatingList = new ArrayList<Movie>();
+		List<Movie> topTicketSalesList = new ArrayList<Movie>();
+		List<Boolean> sortFlag = SerializeDB.getFlags();
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
+		Collections.sort(movieList, (m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
+		for (int i = 0; i < 5; i++) {
+			topRatingList.add(movieList.get(i));
+		}
+		
+		Collections.sort(movieList, (m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
+		for (int i = 0; i < 5; i++) {
+			topTicketSalesList.add(movieList.get(i));
+		}
+		System.out.println("--------------------- Current Top 5 Lists --------------------");
+		if (sortFlag.get(0)) {
+			System.out.println("\n-------------------- Top 5 Movies by Rating -------------------");
+			for (int index = 1; index <= 5; index++) {
+				System.out.printf("(%d) ----------------	%s (Rating: %.1f)\n", index, topRatingList.get(index-1).getTitle(), topRatingList.get(index-1).getOverallRating());			
+			}
+		}
+		if (sortFlag.get(1)) {
+			System.out.println("\n-------------------- Top 5 Movies by Ticket Sales -------------------");
+			for(int index = 1; index <= 5; index++) {
+				System.out.printf("(%d) ----------------	%s (Ticket sales: %d)\n", index, topTicketSalesList.get(index-1).getTitle(), topTicketSalesList.get(index-1).getTicketSales());	
+			}
+		}
+
 		do {
-			System.out.println("\n(1) ----------------      Sort top 5 movies by rating");
-			System.out.println("(2) ----------------      Sort top 5 movies by ticket sales");
+			if (sortFlag.get(0)) {
+				System.out.println("\n(1) ----------------      Hide top 5 movies by rating");
+			} else {
+				System.out.println("\n(1) ----------------      Show top 5 movies by rating");
+			}
+			if (sortFlag.get(1)) {
+				System.out.println("(2) ----------------      Hide top 5 movies by ticket sales");
+			} else {
+				System.out.println("(2) ----------------      Show top 5 movies by ticket sales");
+			}
 			System.out.println("(3) ----------------      Return to system config");
 			System.out.printf("\nOption: ");
 				
@@ -114,19 +145,15 @@ public class SystemManager {
 			
 			switch(choice) {
 				case 1:
-					sortRating(movieList);
-					sortFlag = false;
+					sortFlag.set(0, !sortFlag.get(0));
 					SerializeDB.writeToFlag(sortFlag);
-					SerializeDB.writeToMovieList(movieList);
-					System.out.println("Sorted! Returning to system config...");
-					return;
+					System.out.println("Configured!");
+					break;
 				case 2:
-					sortTicketSales(movieList);
-					sortFlag = true;
+					sortFlag.set(1, !sortFlag.get(1));
 					SerializeDB.writeToFlag(sortFlag);
-					SerializeDB.writeToMovieList(movieList);
-					System.out.println("Sorted! Returning to system config...");
-					return;
+					System.out.println("Configured!");
+					break;
 				case 3:
 					System.out.println("Returning to system config...");
 					return;
@@ -136,12 +163,4 @@ public class SystemManager {
 		} while (true);
 		
 	}
-	
-	private void sortRating(List<Movie> movieList) {
-        Collections.sort(movieList, (m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
-    }
-	
-	private void sortTicketSales(List<Movie> movieList) {
-        Collections.sort(movieList, (m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
-    }
 }

@@ -1,6 +1,8 @@
 package control.customer;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -11,12 +13,41 @@ import entity.movie.Review;
 
 public class TopFiveMovieViewer {
 	public void view() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Boolean> sortFlag = SerializeDB.getFlags();
+		List<Movie> movieData = new ArrayList<Movie>(); 
 		Scanner sc = new Scanner(System.in);
-		int choice;
-			
+		int choice, switcher = 0;
+		
+		if(sortFlag.get(0) && sortFlag.get(1)) {
+			do {
+				System.out.println("\n(1) ----------------      View top 5 movies by rating");
+				System.out.println("(2) ----------------      View top 5 movies by ticket sales");
+				System.out.println("(3) ----------------      Return to customer menu...");
+				System.out.printf("\nOption: ");
+				
+				while(!sc.hasNextInt()) {
+					System.out.println("Invalid input. Please enter an integer!");
+					System.out.printf("Option: ");
+					sc.next();
+				}
+						
+				switcher = sc.nextInt();
+				
+				if (switcher > 3) {
+					System.out.println("Option does not exist. Please key in a valid option!\n");
+				} else if (switcher == 3) {
+					System.out.println("Returning to customer menu...");
+					return;
+				}		
+			} while (switcher < 1 || switcher > 3);
+		} else if (sortFlag.get(0)) {
+			switcher = 1;
+		} else if (sortFlag.get(1)) {
+			switcher = 2;
+		}
+		
 		do {
-			displayTop5MovieList();
+			movieData = displayTop5MovieList(switcher);
 			System.out.printf("\nInput option number to view movie details (-1 to return to customer menu): ");
 			
 			while(!sc.hasNextInt()) {
@@ -27,39 +58,50 @@ public class TopFiveMovieViewer {
 					
 			choice = sc.nextInt();
 			
-			if(choice > movieData.size()) {
+			if(choice > 5) {
 				System.out.println("Option does not exist. Please key in a valid option!\n");
 			} else if (choice == -1) {
 				System.out.println("Returning to customer menu...");
 				return;
 			} else {
-				displayMovieDetails(choice-1);
-				System.out.println("\nPress Enter to return to movie list...");
+				displayMovieDetails(movieData, choice-1);
+				System.out.printf("\nPress Enter to return to movie list...");
 				if(sc.nextLine() != null)
 					sc.nextLine();
 			}			
 		} while (true);
 	}
 	
-	private void displayTop5MovieList() {
-		boolean sortFlag = SerializeDB.getFlags();
-		List<Movie> movieData = SerializeDB.getMovieList();
+	private List<Movie> displayTop5MovieList(int switcher) {	
+		List<Movie> movieList = SerializeDB.getMovieList(), topRatingList = new ArrayList<Movie>(), 
+				topTicketSalesList = new ArrayList<Movie>();
 		
-		if (!sortFlag) {
-			System.out.println("-------------------- Top 5 Movies by Rating -------------------");
+		Collections.sort(movieList, (m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
+		for (int i = 0; i < 5; i++) {
+			topRatingList.add(movieList.get(i));
+		}
+		
+		Collections.sort(movieList, (m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
+		for (int i = 0; i < 5; i++) {
+			topTicketSalesList.add(movieList.get(i));
+		}
+		
+		if (switcher == 1) {
+			System.out.println("\n-------------------- Top 5 Movies by Rating -------------------");
 			for(int index = 1; index <= 5; index++) {
-				System.out.printf("(%d) ----------------	%s (Rating: %.1f)\n", index, movieData.get(index-1).getTitle(), movieData.get(index-1).getOverallRating());			
+				System.out.printf("(%d) ----------------	%s (Rating: %.1f)\n", index, topRatingList.get(index-1).getTitle(), topRatingList.get(index-1).getOverallRating());			
 			}
+			return topRatingList;
 		} else {
-			System.out.println("-------------------- Top 5 Movies by Ticket Sales -------------------");
+			System.out.println("\n-------------------- Top 5 Movies by Ticket Sales -------------------");
 			for(int index = 1; index <= 5; index++) {
-				System.out.printf("(%d) ----------------	%s (Ticket sales: %d)\n", index, movieData.get(index-1).getTitle(), movieData.get(index-1).getTicketSales());	
+				System.out.printf("(%d) ----------------	%s (Ticket sales: %d)\n", index, topTicketSalesList.get(index-1).getTitle(), topTicketSalesList.get(index-1).getTicketSales());	
 			}
+			return topTicketSalesList;
 		}
 	}
 	
-	private void displayMovieDetails(int index) {
-		List<Movie> movieData = SerializeDB.getMovieList();
+	private void displayMovieDetails(List<Movie> movieData, int index) {
 		List<String> castList = movieData.get(index).getCast();
 		List<Review> movieReviews = movieData.get(index).getReviews();
 		String delimiter = ", ";
