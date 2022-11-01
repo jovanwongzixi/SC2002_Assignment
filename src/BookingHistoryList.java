@@ -12,6 +12,10 @@ public class BookingHistoryList implements Displayable {
         bookingList.add(bookingHistory);
     }
     public void display(){
+        if(bookingList.isEmpty()){
+            System.out.println("Booking History is empty!");
+            return;
+        }
         for(BookingHistory history : bookingList){
             history.display();
         }

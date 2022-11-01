@@ -46,10 +46,10 @@ public class MovieListing implements Displayable{
         }
         return null;
     }
-    protected ArrayList<String> getMovieTitles(){
+    protected ArrayList<String> getMovieTitles(){ // moviegoers not supposed to see timeslots for EndOfShowing and ComingSoon
         ArrayList<String> movieTitles = new ArrayList<>();
         for(Movie movie: movieArrayList){
-            if(movie.getShowingStatus() != ShowingStatus.END_OF_SHOWING) movieTitles.add(movie.getTitle());
+            if(movie.getShowingStatus() != ShowingStatus.END_OF_SHOWING && movie.getShowingStatus() != ShowingStatus.COMING_SOON) movieTitles.add(movie.getTitle());
         }
         return movieTitles;
     }

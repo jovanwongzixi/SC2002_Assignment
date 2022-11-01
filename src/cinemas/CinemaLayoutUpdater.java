@@ -16,6 +16,8 @@ public class CinemaLayoutUpdater {
             out.writeObject(layoutHashMap);
             out.close();
             fileOut.close();
+            //System.out.println("Layout serialised!");
+            //System.out.println(layoutHashMap.get("0").get(0).getSeatState());
         }
         catch(IOException e){
             throw new RuntimeException(e);
@@ -25,6 +27,16 @@ public class CinemaLayoutUpdater {
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/LayoutData.ser"));
             layoutHashMap = (HashMap<String, ArrayList<Seat>>) in.readObject();
+            //System.out.println("DESERIALISE LAYOUTTT");
+            //for(String i: layoutHashMap.keySet()) System.out.println(i);
+            in.close();
+            /*int count=0;
+            while(layoutHashMap!=null){
+                layoutHashMap = (HashMap<String, ArrayList<Seat>>) in.readObject();
+                count++;
+            }
+            System.out.println("Count: "+count);
+            if(count>1) throw new RuntimeException();*/
         }
         catch(EOFException e){
             layoutHashMap = new HashMap<>();
@@ -46,10 +58,14 @@ public class CinemaLayoutUpdater {
             }
         }
         layoutHashMap.put(slotID,seats);
+        SerialiseLayout();
         return layoutHashMap.get(slotID);
     }
     protected void updateLayoutData(ArrayList<Seat> seats, String slotID){
         layoutHashMap.replace(slotID,seats);
+        //System.out.println("SlotID: "+slotID);
+        //for(String i: layoutHashMap.keySet()) System.out.println(i);
+        //System.out.println(layoutHashMap.get(slotID).get(0).getSeatState());
         SerialiseLayout();
     }
 }

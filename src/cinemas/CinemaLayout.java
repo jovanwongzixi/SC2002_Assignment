@@ -1,11 +1,14 @@
 package cinemas;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CinemaLayout implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1742667721657803657L;
     private ArrayList<Seat> seats;
-    //private CinemaLayoutUpdater updater;
+    private CinemaLayoutUpdater updater;
     public CinemaLayout(String slotID){
         CinemaLayoutUpdater updater = new CinemaLayoutUpdater();
         //let each cinema have 5 seats for now;
@@ -29,5 +32,6 @@ public class CinemaLayout implements Serializable {
         CinemaLayoutUpdater updater = new CinemaLayoutUpdater();
         seat.setSeatState(seatState);
         updater.updateLayoutData(this.seats, slotID);
+        //System.out.println(slotID+" " + seats.get(0).getSeatState());
     }
 }

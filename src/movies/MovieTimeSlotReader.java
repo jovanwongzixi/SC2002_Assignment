@@ -27,6 +27,8 @@ public class MovieTimeSlotReader {
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/movieTimeSlotCSV.dat"));
             slots = (ArrayList<MovieTimeSlot>) in.readObject();
+            //System.out.println("Slot ID" + slots.get(0).getSlotID());
+            in.close();
         }
         catch (FileNotFoundException e) {
             throw new RuntimeException(e);

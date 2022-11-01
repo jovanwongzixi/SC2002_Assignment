@@ -7,7 +7,7 @@ public class MOBLIMA {
     public static void main(String[] args){
         //userTypes = {};
         selectUserDomain();
-        user.start();
+        //user.start();
     }
     private static void selectUserDomain(){
         Scanner sc = new Scanner(System.in);
@@ -22,7 +22,10 @@ public class MOBLIMA {
         }while(choice<1 | choice >2);
         switch(choice){
             case 1 -> user = new CinemaStaff();
-            case 2 -> user = new MovieGoer();
+            case 2 -> {
+                MovieGoerApp movieGoerApp = new MovieGoerApp();
+                movieGoerApp.use();
+            }
         }
     }
 }

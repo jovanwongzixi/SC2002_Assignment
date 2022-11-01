@@ -54,6 +54,7 @@ public class MovieDataReader {
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/movieCSV.dat"));
             movieArrayList = (ArrayList<Movie>) in.readObject();
+            in.close();
         }
         catch (FileNotFoundException e) {
             throw new RuntimeException(e);

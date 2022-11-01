@@ -1,12 +1,13 @@
 package movies;
 import cinemas.*;
+import interfaces.Displayable;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class MovieTimeSlot implements Serializable {
+public class MovieTimeSlot implements Serializable, Displayable {
     @Serial
     private static final long serialVersionUID = -8242226099133439559L;
     private String slotID;
@@ -15,7 +16,7 @@ public class MovieTimeSlot implements Serializable {
     private Movie movie;
     private Cineplex cineplex;
     private Cinema cinema;
-    private CinemaLayout layout; //each movietimeslot should have its own layout(what seats are taken)
+    transient private CinemaLayout layout; //each movietimeslot should have its own layout(what seats are taken)
     public MovieTimeSlot(String[] values){
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.slotID = values[0];
@@ -37,6 +38,10 @@ public class MovieTimeSlot implements Serializable {
         MovieListing listing = new MovieListing();
         this.movie = listing.getMovie(movieTitle);
     }
+
+    public void setLayout() {
+        this.layout = new CinemaLayout(slotID);
+    }
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
     }
@@ -54,6 +59,11 @@ public class MovieTimeSlot implements Serializable {
     public void setShowTime(LocalTime showTime) {
         this.showTime = showTime;
     }
+
+    public String getSlotID() {
+        return slotID;
+    }
+
     public Movie getMovie() {
         return movie;
     }
@@ -89,5 +99,13 @@ public class MovieTimeSlot implements Serializable {
     }
     public void updateLayout(Seat seat, SeatState seatState){
         layout.update(seat, seatState, this.slotID);
+    }
+    public void display(){
+        System.out.println("Movie: "+ this.getMovie().getTitle());
+        System.out.println("Cineplex: "+this.getCineplex().getName());
+        System.out.println("Cineplex: "+this.getCinema());
+        //System.out.println("Cinema: ");
+        System.out.println("Show date: " + this.getShowDate() + " " + this.getShowDate().getDayOfWeek());
+        System.out.println("Showtime: " + this.getShowTime());
     }
 }

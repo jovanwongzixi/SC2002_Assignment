@@ -16,31 +16,35 @@ public class MovieGoerApp {
     private SeatSelector seatSelector;
     private TicketBooker ticketBooker;
     private Displayable bookingHistoryList;
-    public MovieGoerApp(MovieGoer user){
-        this.currentUser = user;
+    private MovieGoerSession session;
+    public MovieGoerApp(){
+        //this.currentUser = user;
         this.movieListing = new MovieListing();
         //this.movieDetailsDisplayer = new MovieDetailsDisplayer(this.movieListing);
         this.movieTimeSlotList = new MovieTimeSlotList(this.movieListing);
         this.seatSelector = new SeatSelector(this.movieTimeSlotList);
         this.bookingHistoryList = new BookingHistoryList();
         this.ticketBooker = new TicketBooker(bookingHistoryList);
-
+        this.session = new MovieGoerSession();
     }
     public void use(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("""
+        int option;
+        do{
+            System.out.println("""
+                
                 MovieGoer options menu
+                -----------------------
                 1) List movies
                 2) View movie timeslots
                 3) View seats
                 4) Select seat
                 5) Book ticket
                 6) View booking history
-                7) Enter review
-                8) Quit
-                """);
-        int option;
-        do{
+                7) Enter review""");
+            if(currentUser==null) System.out.println("8) Login Menu");
+            else System.out.println("8) Logout");
+            System.out.println("9) End session");
             System.out.println("Enter option:");
             option = sc.nextInt();
             switch(option){
@@ -52,8 +56,13 @@ public class MovieGoerApp {
                 case 5 -> bookTickets();
                 case 6 -> viewBookingHistory();
                 case 7 -> enterReview();
+                case 8 -> {
+                    if(currentUser==null) accessAccount();
+                    else currentUser = null; //logout
+                }
+                case 9 -> seatSelector.resetSelectedSeats();
             }
-        } while(option<8);
+        } while(option<9);
     }
     private void listMovies(){
         //Displayable movieListing = new MovieListing();
@@ -73,13 +82,18 @@ public class MovieGoerApp {
     private void selectSeats(){
         seatSelector.selectSeat();
     }
+    private void accessAccount(){
+        currentUser = session.run();
+    }
     private void bookTickets(){
-        //currentUser.addTicket(new MovieTicket());
-        //currentUser.getTicket();
-        ticketBooker.book(seatSelector.getSelectedSeats(),seatSelector.getSelectedTimeSlot());
+        if(currentUser==null) accessAccount();
+        ticketBooker.book(seatSelector, currentUser);
     }
     private void viewBookingHistory(){
         //Displayable bookingHistory = new BookingHistory();
+        if(currentUser != null){
+            currentUser.display();
+        }
         bookingHistoryList.display();
     }
     private void enterReview(){}

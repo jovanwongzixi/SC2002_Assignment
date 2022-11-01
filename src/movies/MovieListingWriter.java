@@ -10,7 +10,7 @@ public class MovieListingWriter {
             BufferedWriter bwStream = new BufferedWriter(fwStream);
         }
         catch(FileNotFoundException e){
-
+            throw new RuntimeException(e);
         }
 
     }

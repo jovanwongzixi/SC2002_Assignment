@@ -57,12 +57,19 @@ public class SeatSelector {
             if(!selected)System.out.println("Seat not available. Select new seat!");
         }
     }
-
+    public void resetSelectedSeats(){ //end of program, reset seats selected by user but not purchased)
+        for(Seat seat : selectedSeats){
+            if(seat.getSeatState()==SeatState.SELECTED) selectedTimeSlot.updateLayout(seat, SeatState.AVAILABLE);
+        }
+    }
     public ArrayList<Seat> getSelectedSeats() {
         return selectedSeats;
     }
 
     public MovieTimeSlot getSelectedTimeSlot() {
         return selectedTimeSlot;
+    }
+    public void setSelectedTimeSlot(MovieTimeSlot slot){
+        selectedTimeSlot = slot;
     }
 }

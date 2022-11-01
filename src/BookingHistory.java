@@ -2,6 +2,7 @@ import cinemas.Cinema;
 import cinemas.Cineplex;
 import interfaces.Displayable;
 import movies.Movie;
+import movies.MovieTimeSlot;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,9 +12,8 @@ public class BookingHistory implements Displayable {
     private String transactionID;
     private int numOfTickets;
     private double totalCost;
-    /*private Cineplex cineplex;
-    private Cinema cinema;
-    private Movie movie;*/
+    //private MovieGoer movieGoer;
+    private Displayable timeSlot;
     public void setTransactionID(){ //need to add cinema code (not done yet)
         //LocalDate date = LocalDate.now();
         LocalDateTime dateTime = LocalDateTime.now();
@@ -26,8 +26,18 @@ public class BookingHistory implements Displayable {
         this.totalCost = totalCost;
     }
 
+    public void setNumOfTickets(int numOfTickets) {
+        this.numOfTickets = numOfTickets;
+    }
+
+    public void setTimeSlot(Displayable timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
     public void display(){
         System.out.println("Transaction ID: "+ transactionID);
         System.out.println("Total Cost: " + totalCost);
+        timeSlot.display();
+        System.out.println("---------------");
     }
 }

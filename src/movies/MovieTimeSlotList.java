@@ -20,6 +20,7 @@ public class MovieTimeSlotList implements Displayable {
         if(movieListing instanceof MovieListing) this.movieListing = (MovieListing) movieListing;
         MovieTimeSlotReader reader = new MovieTimeSlotReader();
         this.slots = reader.readBin();
+        for(MovieTimeSlot slot : slots) slot.setLayout();
         this.cineplexList = new CineplexList();
         tempList = new ArrayList<>();
     }
@@ -57,7 +58,7 @@ public class MovieTimeSlotList implements Displayable {
             LocalDate date = slot.getShowDate();
             if(!datesSet.contains(date)){
                 datesSet.add(date);
-                System.out.println(++i + ") " + date);
+                System.out.println(++i + ") " + date + " "+date.getDayOfWeek());
                 datesList.add(date);
             }
         }
