@@ -13,12 +13,13 @@ public class MovieTicketBooker {
 
 	public void start() {
 		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> bookingList = new ArrayList<Movie>();
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
 		do {
-			displayMovieList();				
-			System.out.printf("\nInput option number to view movie details (-1 to return to customer menu): ");
+			bookingList = displayMovieList(movieData);				
+			System.out.printf("\nInput option number to view book movie ticket (-1 to return to customer menu): ");
 			
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");
@@ -28,23 +29,24 @@ public class MovieTicketBooker {
 					
 			choice = sc.nextInt();
 			
-			if(choice > movieData.size()) {
+			if(choice > bookingList.size()) {
 				System.out.println("Option does not exist. Please key in a valid option!\n");
 			} else if (choice == -1) {
 				System.out.println("Returning to customer menu...");
 				return;
 			} else {
-				selectTimeslot(choice-1);
+				selectTimeslot(bookingList, choice-1);
+				return;
 			}	
 		} while (true);
 	}
 
-	private void selectTimeslot(int index) {
+	private void selectTimeslot(List<Movie> bookingList,int index) {
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
 		do {
-			int ts_size = displayMovieTimeslots(index);
+			int ts_size = displayMovieTimeslots(bookingList, index);
 			if (ts_size == 0) {
 				System.out.println("There are no timeslots for the movie!");
 				return;
@@ -64,20 +66,20 @@ public class MovieTicketBooker {
 				System.out.println("Returning to previous menu...");
 				return;
 			} else {
-				selectSeats(index, choice-1);
+				selectSeats(bookingList, index, choice-1);
+				return;
 			}
 		} while (true);	
 	}
 	
-	private void selectSeats(int movieIndex, int showIndex) {
+	private void selectSeats(List<Movie> bookingList, int movieIndex, int showIndex) {
 		Scanner sc = new Scanner(System.in);
 		int choice, selection = 0, ts_index;
-		List<Movie> movieData = SerializeDB.getMovieList();
 		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
 		List<Timeslot> bufferArr = new ArrayList<Timeslot>();
-		Seat selectedSeat = null;
+		List<Seat> selectedSeats = new ArrayList<Seat>();
 		Timeslot timeslot = null;		
-		Movie movie = movieData.get(movieIndex);
+		Movie movie = bookingList.get(movieIndex);
 		
 		for (Timeslot ts : movieTimeslots) {
 			if(ts.getMovieTitle().equals(movie.getTitle())) {
@@ -98,6 +100,7 @@ public class MovieTicketBooker {
 			
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");
+				System.out.printf("Option: ");
 				sc.next();
 			}
 			
@@ -105,36 +108,34 @@ public class MovieTicketBooker {
 						
 			switch (choice) {
 				case 1: 
-		            if (selection >= 1) {
-		            	System.out.println("You can only select one seat!");
-		            	break;
-		            } else {
-		            	System.out.printf("Enter row (A-%c): ", (char)(timeslot.getCinema().getNumOfRows()-1 + 'A'));
-		            	char addRow = sc.next().charAt(0);
-		            	System.out.printf("Enter column (1-%d): ", timeslot.getCinema().getNumOfCols());
-		            	int addCol = sc.nextInt();
+		            System.out.printf("Enter row (A-%c): ", (char)(timeslot.getCinema().getNumOfRows()-1 + 'A'));
+		            char addRow = sc.next().charAt(0);
+		            System.out.printf("Enter column (1-%d): ", timeslot.getCinema().getNumOfCols());
+		            int addCol = sc.nextInt();
 		            	
-		            	if(addRow+2-'A' < timeslot.getCinema().getNumOfRows()) {
-		            		if (timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).getSeatState() == SeatState.AVAILABLE) {
-		            			timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).setSeatState(SeatState.SELECTED);
-		            			selection++;
-		            			selectedSeat = new Seat(addRow+1-'A',addCol,false,SeatState.SELECTED);
-		            			System.out.println("Successfully selected seat.");
-		            		} else { 
-		            			System.out.println("Seat has already been taken, please choose another seat."); 
-		            		}
-		            	} else {
-		            		addCol = (addCol + addCol%2)/2;
-		            		if (timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).getSeatState() == SeatState.AVAILABLE) {
-		            			timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).setSeatState(SeatState.SELECTED);
-		            			selection++;
-		            			System.out.println("Successfully selected seat.");
-		            			selectedSeat = new Seat(addRow+1-'A',addCol*2,true,SeatState.SELECTED);
-		            		} else { 
-		            			System.out.println("Seat has already been taken, please choose another seat."); 
-		            		}
+		            if(addRow+2-'A' < timeslot.getCinema().getNumOfRows()) {
+		            	if (timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).getSeatState() == SeatState.AVAILABLE) {
+		            		timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).setSeatState(SeatState.SELECTED);
+		            		selection++;
+		            		Seat s = new Seat(addRow+1-'A',addCol,false,SeatState.SELECTED);
+		            		selectedSeats.add(s); 
+		            		System.out.println("Successfully selected seat.");
+		            	} else { 
+		           			System.out.println("Seat has already been taken, please choose another seat."); 
+		           		}
+		           	} else {
+		           		addCol = (addCol + addCol%2)/2;
+		            	if (timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).getSeatState() == SeatState.AVAILABLE) {
+		           			timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).setSeatState(SeatState.SELECTED);
+		           			selection++;
+		           			Seat s = new Seat(addRow+1-'A',addCol*2,true,SeatState.SELECTED);
+		           			selectedSeats.add(s); 
+		           			System.out.println("Successfully selected seat.");
+		            	} else { 
+		           			System.out.println("Seat has already been taken, please choose another seat."); 
 		            	}
 		            }
+		            
 		            break;
 				case 2:
 		            System.out.printf("Enter row (A-%c): ", (char)(timeslot.getCinema().getNumOfRows()-1 + 'A'));
@@ -146,7 +147,11 @@ public class MovieTicketBooker {
 		            	if (timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).getSeatState() == SeatState.SELECTED) {
 		            		timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).setSeatState(SeatState.AVAILABLE);
 		            		selection--;
-		            		selectedSeat = null;
+		            		for (Seat s : selectedSeats) {
+		            			if (s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeCol) {
+		            				selectedSeats.remove(s);	
+		            			}
+		            		}
 		            		System.out.println("Successfully removed selected seat.");
 		            	} else { 
 		            		System.out.println("Seat is unable to be deselected, please choose the correct seat."); 
@@ -156,7 +161,11 @@ public class MovieTicketBooker {
 		            	if (timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).getSeatState() == SeatState.SELECTED) {
 		            		timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).setSeatState(SeatState.AVAILABLE);
 		            		selection--;
-		            		selectedSeat = null;	
+		            		for (Seat s : selectedSeats) {
+		            			if (s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeCol*2) {
+		            				selectedSeats.remove(s);	
+		            			}
+		            		}	
 		            		System.out.println("Successfully removed selected seat.");
 		            	} else { 
 		            		System.out.println("Seat is unable to be deselected, please choose the correct seat."); 
@@ -168,7 +177,7 @@ public class MovieTicketBooker {
 		            	System.out.println("There are no seats selected! Please select a seat before payment!");
 		            	break;
 		            } else {
-		            	ticketPayment(movie, ts_index, selectedSeat);
+		            	ticketPayment(movie, timeslot, ts_index, selectedSeats);
 		            	return;
 		            }
 				case 4:
@@ -180,18 +189,17 @@ public class MovieTicketBooker {
 		} while (true);
 	}
 	
-	private void ticketPayment(Movie movie, int showIndex, Seat selectedSeat) {
+	private void ticketPayment(Movie movie, Timeslot ts, int tsIndex, List<Seat> selectedSeats) {
 		Scanner sc = new Scanner(System.in);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddhhmm");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
 		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
 		List<LocalDate> holidays = SerializeDB.getHolidays();
 		List<Booking> bookingData = SerializeDB.getBookingList();
-		Timeslot ts = movieTimeslots.get(showIndex);
-		Ticket showTicket;
+		List<Ticket> ticketList = new ArrayList<Ticket>();
 		String name, emailAddress, mobileNum, cineplexCode = null;
-		AgeGroup ageGroup = null;
 		int choice;
+		double ticketPrice = 0;
 		boolean isSpecial = false;
 		
 		for(Cineplex c : cineplexData) {
@@ -222,35 +230,6 @@ public class MovieTicketBooker {
 			}
 		} while (!mobileMatches(mobileNum));
 		
-		do {
-			System.out.println("Enter your age group: ");
-			System.out.println("(1) ----------------      Child (age 18 and below");
-			System.out.println("(2) ----------------      Senior Citizen (age 55 and above)");
-			System.out.println("(3) ----------------      Adult");
-			
-			while(!sc.hasNextInt()) {
-				System.out.println("Invalid input. Please enter an integer!");
-				System.out.printf("Option: ");
-				sc.next();
-			}
-			
-			choice = sc.nextInt();
-				
-			switch(choice) {
-				case 1:
-					ageGroup = AgeGroup.CHILD;
-					break;
-				case 2:
-					ageGroup = AgeGroup.SENIOR_CITIZEN;
-					break;
-				case 3:
-					ageGroup = AgeGroup.ADULT;
-					break;
-				default:
-					System.out.println("Option does not exist. Please key in a valid option!\n");			
-			}
-		} while (choice < 1 || choice > 3);
-		
 		for (LocalDate d : holidays) {
 			if (ts.getShowDate().equals(d) || ts.getShowDate().getDayOfWeek() == DayOfWeek.FRIDAY || ts.getShowDate().getDayOfWeek() == DayOfWeek.SATURDAY ||
 					ts.getShowDate().getDayOfWeek() == DayOfWeek.SUNDAY ) {
@@ -258,15 +237,55 @@ public class MovieTicketBooker {
 			}
 		}
 		
-		showTicket = new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
-					ageGroup, selectedSeat.getIsDouble(), isSpecial);
+		
+		for (Seat s : selectedSeats) {
+			boolean toggle = true;
+			do {
+				System.out.printf("Enter age group for seat %c%d:\n", (char)(s.getSeatRow()-1+'A'), s.getSeatCol());
+				System.out.println("(1) ----------------      Child (age 18 and below)");
+				System.out.println("(2) ----------------      Senior Citizen (age 55 and above)");
+				System.out.println("(3) ----------------      Adult");
+				System.out.printf("Option: ");
 			
-		double ticketPrice = calculatePrice(showTicket);
+				while(!sc.hasNextInt()) {
+					System.out.println("Invalid input. Please enter an integer!");
+					System.out.printf("Option: ");
+					sc.next();
+				}
+			
+				choice = sc.nextInt();
+				
+				switch(choice) {
+					case 1:
+						ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
+								AgeGroup.CHILD, s.getIsDouble(), isSpecial));
+						toggle = false;
+						break;
+					case 2:
+						ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
+								AgeGroup.SENIOR_CITIZEN, s.getIsDouble(), isSpecial));
+						toggle = false;
+						break;
+					case 3:
+						ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
+								AgeGroup.ADULT, s.getIsDouble(), isSpecial));
+						toggle = false;
+						break;
+					default:
+						System.out.println("Option does not exist. Please key in a valid option!\n");			
+				}
+			} while (toggle);
+		}
+		
+		for (Ticket t : ticketList) {
+			ticketPrice += calculatePrice(t);
+		}
 		
 		do {
 			System.out.printf("The ticket price is: %.2f. Would you like to confirm booking?\n", ticketPrice);
 			System.out.println("(1) Yes");
 			System.out.println("(2) No");
+			System.out.printf("Option: ");
 			
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");
@@ -280,11 +299,13 @@ public class MovieTicketBooker {
 				case 1:
 					LocalDateTime timeOfPurchase = LocalDateTime.now();
 					String tID = cineplexCode + timeOfPurchase.format(formatter);
-					Booking b = new Booking(name, emailAddress, mobileNum, showTicket, timeOfPurchase, tID);
+					Booking b = new Booking(name, emailAddress, mobileNum, ticketPrice,
+							ts.getMovieTitle(), ts.getCineplex(), ts.getCinema().getID(), ts.getShowDate(),
+							ts.getShowTime(), timeOfPurchase, tID);
 					bookingData.add(b);
 						
-					confirmSeats(ts, selectedSeat);
-					movieTimeslots.set(showIndex, ts);
+					confirmSeats(ts, selectedSeats);
+					movieTimeslots.set(tsIndex, ts);
 					SerializeDB.writeToMovieTimeslots(movieTimeslots);
 					SerializeDB.writeToBookingData(bookingData);
 											
@@ -300,21 +321,24 @@ public class MovieTicketBooker {
 		} while (true);
 	}
 	
-	private void displayMovieList() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+	private List<Movie> displayMovieList(List<Movie> movieData) {
+		List<Movie> bookingList = new ArrayList<Movie>();
 		int index = 0;
 		
 		System.out.println("-------------------- Movie List -------------------");
 		for(Movie m: movieData) {
-			index++;
-			System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());			
+			if (m.getShowingStatus() == ShowingStatus.PREVIEW || m.getShowingStatus() == ShowingStatus.NOW_SHOWING) {
+				index++;
+				bookingList.add(m);
+				System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());			
+			}
 		}
+		return bookingList;
 	}
 	
-	private int displayMovieTimeslots(int index) {
-		List<Movie> movieData = SerializeDB.getMovieList();
+	private int displayMovieTimeslots(List<Movie> bookingList, int index) {
 		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
-		Movie movie = movieData.get(index);
+		Movie movie = bookingList.get(index);
 		int i = 0, count = 0;
 		
 		for (Timeslot ts : movieTimeslots) {
@@ -526,11 +550,14 @@ public class MovieTicketBooker {
 		return ticketPrice;
 	}
 	
-	public static void confirmSeats(Timeslot ts, Seat selectedSeat) {		
-		if(selectedSeat.getSeatRow()+1 < ts.getCinema().getNumOfRows()) {
-    		ts.getCinema().getCinemaLayout().get(selectedSeat.getSeatRow()-1).get(selectedSeat.getSeatCol()-1).setSeatState(SeatState.TAKEN);
-    	} else {
-    		ts.getCinema().getCinemaLayout().get(selectedSeat.getSeatRow()-1).get((selectedSeat.getSeatCol()/2)-1).setSeatState(SeatState.TAKEN);
-    	}
+	public static void confirmSeats(Timeslot ts, List<Seat> selectedSeats) {
+		for (Seat s : selectedSeats) {
+			if(s.getSeatRow()+1 < ts.getCinema().getNumOfRows()) {
+	    		ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get(s.getSeatCol()-1).setSeatState(SeatState.TAKEN);
+	    	} else {
+	    		ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get((s.getSeatCol()/2)-1).setSeatState(SeatState.TAKEN);
+	    	}
+		}
+		
 	}
 }

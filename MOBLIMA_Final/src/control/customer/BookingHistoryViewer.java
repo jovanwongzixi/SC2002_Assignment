@@ -22,10 +22,17 @@ public class BookingHistoryViewer implements Viewer{
 			}
 		} while (!mobileMatches(mobileNum));
 		
+		System.out.println("\n----------------- Booking History ----------------");
 		for (Booking b : bookingData) {
 			if(b.getMobileNum().equals(mobileNum)) {
-				counter++;
-				System.out.printf("Booking %s for ... ", b.getTID());
+				counter++;		
+				System.out.printf("Booking %s for %s:\n"
+						+ "Cineplex / Cinema: %s / %d\n"
+						+ "Movie timeslot: %td %<tb %<tY %tR\n"
+						+ "Price: %.2f\n"
+						+ "-------------------------------------\n",
+						b.getTID(), b.getMovieTitle(), b.getCineplex(), b.getCinemaID(),
+						b.getDateShow(), b.getTimeShow(), b.getTicketPrice());
 			}
 		}
 		

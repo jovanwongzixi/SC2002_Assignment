@@ -1,22 +1,42 @@
 package entity;
 
-import java.time.LocalDateTime;
-import entity.movie.Ticket;
+import java.time.*;
 import interfaces.SerializedData;
 
 public class Booking implements SerializedData{
 	private String name;
 	private String emailAddress;
 	private String mobileNum;
-	private Ticket ticket;
+	private double ticketPrice;
+	private String movieTitle;
+	private String cineplex;
+	private int cinemaID;
+	private LocalDate dateShow;
+	private LocalTime timeShow;
 	private LocalDateTime timeOfPurchase;
 	private String tID;
 	
-	public Booking(String name, String emailAddress, String mobileNum, Ticket ticket, LocalDateTime timeOfPurchase, String tID) {
+	public Booking(String name,
+				String emailAddress,
+				String mobileNum, 
+				double ticketPrice,
+				String movieTitle,
+				String cineplex,
+				int cinemaID,
+				LocalDate dateShow,
+				LocalTime timeShow,
+				LocalDateTime timeOfPurchase, 
+				String tID) {
+		
 		this.name = name;
 		this.emailAddress = emailAddress;
 		this.mobileNum = mobileNum;
-		this.ticket = ticket;
+		this.ticketPrice = ticketPrice;
+		this.movieTitle = movieTitle;
+		this.cineplex = cineplex;
+		this.cinemaID = cinemaID;
+		this.dateShow = dateShow;
+		this.timeShow = timeShow;
 		this.timeOfPurchase = timeOfPurchase;
 		this.tID = tID;
 	}
@@ -33,8 +53,28 @@ public class Booking implements SerializedData{
 		return this.mobileNum;
 	}
 	
-	public Ticket getTicket() {
-		return this.ticket;
+	public double getTicketPrice() {
+		return this.ticketPrice;
+	}
+	
+	public String getMovieTitle() {
+		return this.movieTitle;
+	}
+	
+	public String getCineplex() {
+		return this.cineplex;
+	}
+	
+	public int getCinemaID() {
+		return this.cinemaID;
+	}
+	
+	public LocalDate getDateShow() {
+		return this.dateShow;
+	}
+	
+	public LocalTime getTimeShow() {
+		return this.timeShow;
 	}
 	
 	public LocalDateTime getTimeOfPurchase() {

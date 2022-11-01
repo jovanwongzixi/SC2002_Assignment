@@ -23,7 +23,7 @@ public class MovieTimeslotManager{
 			System.out.println("\nThere are no movies available! Returning to admin menu...");
 			return;
 		} else {
-			System.out.println("\nChoose a movie to update showing status:");
+			System.out.println("\nChoose a movie to add timeslot:");
 			for (int i = 0; i < movieData.size(); i++) {
 				System.out.printf("(%d) ----------------	  %s\n", i+1, movieData.get(i).getTitle());
 			}

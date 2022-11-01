@@ -20,5 +20,4 @@ public class MOBLIMA {
   				O - Top 5 movie list full functionality
   				O - Enter movie review full functionality
   				X - displayMovieDetails can belong to a separate class
-  			
 */
