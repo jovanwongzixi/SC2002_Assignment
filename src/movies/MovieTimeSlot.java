@@ -103,7 +103,7 @@ public class MovieTimeSlot implements Serializable, Displayable {
     public void display(){
         System.out.println("Movie: "+ this.getMovie().getTitle());
         System.out.println("Cineplex: "+this.getCineplex().getName());
-        System.out.println("Cineplex: "+this.getCinema());
+        System.out.println("Cinema: "+this.getCinema());
         //System.out.println("Cinema: ");
         System.out.println("Show date: " + this.getShowDate() + " " + this.getShowDate().getDayOfWeek());
         System.out.println("Showtime: " + this.getShowTime());

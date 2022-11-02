@@ -33,6 +33,7 @@ public class Cineplex implements Serializable {
         this.cinemaArray = new ArrayList<Cinema>(Integer.parseInt(values[1]));
     }
     public String getCode() {
+        code = name.substring(0,3);
         return this.code;
     }
     public String getName() {
