@@ -13,12 +13,12 @@ public class BookingHistory implements Displayable {
     private int numOfTickets;
     private double totalCost;
     //private MovieGoer movieGoer;
-    private Displayable timeSlot;
+    private MovieTimeSlot timeSlot;
     public void setTransactionID(){ //need to add cinema code (not done yet)
         //LocalDate date = LocalDate.now();
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-        transactionID = dateTime.format(formatter);
+        transactionID = timeSlot.getCineplex().getCode() + dateTime.format(formatter);
         System.out.println(transactionID);
     }
 
@@ -30,7 +30,7 @@ public class BookingHistory implements Displayable {
         this.numOfTickets = numOfTickets;
     }
 
-    public void setTimeSlot(Displayable timeSlot) {
+    public void setTimeSlot(MovieTimeSlot timeSlot) {
         this.timeSlot = timeSlot;
     }
 

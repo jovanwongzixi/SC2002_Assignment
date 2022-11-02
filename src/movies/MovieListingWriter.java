@@ -12,6 +12,5 @@ public class MovieListingWriter {
         catch(FileNotFoundException e){
             throw new RuntimeException(e);
         }
-
     }
 }

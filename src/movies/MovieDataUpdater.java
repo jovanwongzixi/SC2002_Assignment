@@ -1,34 +1,13 @@
 package movies;
 
-import cinemas.Seat;
-
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
-public class MovieDataReader {
-    //read single movie
-    /*
-    protected String[] readFile(String ID){
-        try{
-            FileReader frStream = new FileReader("src/data/MovieData.csv");
-            BufferedReader brStream = new BufferedReader(frStream);
-            String inputLine=null;
-            while((inputLine = brStream.readLine())!=null){
-                String[] values = inputLine.split(",");
-                if(Objects.equals(values[0], ID)){
-                    brStream.close();
-                    return values;
-                }
-            }
-            brStream.close();
-        } catch(IOException e){
-            System.out.println( "Error opening the input file!"
-                    + e.getMessage() );
-        }
-        return null;
-    }*/
+public class MovieDataUpdater {
+    //private ArrayList<Movie> movieArrayList;
+    //public MovieDataUpdater(){
+      //   movieArrayList = new ArrayList<>();
+    //}
     //read all movies
     protected ArrayList<Movie> readFile(){
         ArrayList<Movie> movieArrayList = new ArrayList<>();
@@ -54,6 +33,7 @@ public class MovieDataReader {
         try{
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/movieCSV.dat"));
             movieArrayList = (ArrayList<Movie>) in.readObject();
+            System.out.println(movieArrayList.get(0).getTitle());
             in.close();
         }
         catch (FileNotFoundException e) {
@@ -64,5 +44,19 @@ public class MovieDataReader {
             throw new RuntimeException(e);
         }
         return movieArrayList;
+    }
+    protected void writeBin(ArrayList<Movie> movieArrayList){
+        try{
+            FileOutputStream fileOut = new FileOutputStream("src/data/movieCSV.dat");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(movieArrayList);
+            out.close();
+            fileOut.close();
+            //System.out.println("Layout serialised!");
+            //System.out.println(layoutHashMap.get("0").get(0).getSeatState());
+        }
+        catch(IOException e){
+            throw new RuntimeException(e);
+        }
     }
 }

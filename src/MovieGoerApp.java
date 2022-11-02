@@ -1,10 +1,7 @@
 //trying alternative implementation, not in use yet
 
 import interfaces.Displayable;
-import movies.MovieDetailsDisplayer;
-import movies.MovieListing;
-import movies.MovieTicket;
-import movies.MovieTimeSlotList;
+import movies.*;
 
 import java.util.Scanner;
 
@@ -17,6 +14,7 @@ public class MovieGoerApp {
     private TicketBooker ticketBooker;
     private Displayable bookingHistoryList;
     private MovieGoerSession session;
+    private MovieReviewer movieReviewer;
     public MovieGoerApp(){
         //this.currentUser = user;
         this.movieListing = new MovieListing();
@@ -26,6 +24,7 @@ public class MovieGoerApp {
         this.bookingHistoryList = new BookingHistoryList();
         this.ticketBooker = new TicketBooker(bookingHistoryList);
         this.session = new MovieGoerSession();
+        this.movieReviewer = new MovieReviewer(this.movieListing);
     }
     public void use(){
         Scanner sc = new Scanner(System.in);
@@ -96,5 +95,7 @@ public class MovieGoerApp {
         }
         bookingHistoryList.display();
     }
-    private void enterReview(){}
+    private void enterReview(){
+        movieReviewer.start();
+    }
 }

@@ -7,9 +7,10 @@ import java.util.Scanner;
 
 public class MovieListing implements Displayable{
     private ArrayList<Movie> movieArrayList;
+    MovieDataUpdater movieDataUpdater;
     public MovieListing(){
-        MovieDataReader movieDataReader = new MovieDataReader();
-        this.movieArrayList = movieDataReader.readBin();
+        movieDataUpdater = new MovieDataUpdater();
+        this.movieArrayList = movieDataUpdater.readBin();
     }
     public void display(){
         System.out.println("""
@@ -52,5 +53,11 @@ public class MovieListing implements Displayable{
             if(movie.getShowingStatus() != ShowingStatus.END_OF_SHOWING && movie.getShowingStatus() != ShowingStatus.COMING_SOON) movieTitles.add(movie.getTitle());
         }
         return movieTitles;
+    }
+    protected ArrayList<Movie> getMovieList(){
+        return movieArrayList;
+    }
+    protected void updateMovieList(){
+        movieDataUpdater.writeBin(movieArrayList);
     }
 }

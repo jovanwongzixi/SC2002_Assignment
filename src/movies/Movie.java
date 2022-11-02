@@ -1,10 +1,11 @@
 package movies;
 
-import interfaces.Displayable;
 //cast part converted from String to list of string,
 //potential problem to settle
 
 import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 //import com.opencsv.CSVReader;
@@ -20,7 +21,7 @@ public class Movie implements Serializable {
     private FilmRating filmRating;
     private MovieType movieType;
     private String movieGenre;
-    private List<MovieReview> reviews;
+    private List<Review> reviews;
     public Movie(String title,
                  FilmRating filmRating,
                  MovieType movieType,
@@ -29,7 +30,7 @@ public class Movie implements Serializable {
                  String director,
                  List<String> cast,
                  Double overallRating,
-                 List<MovieReview> reviews,
+                 List<Review> reviews,
                  ShowingStatus showingStatus) {
 
         this.title = title;
@@ -85,6 +86,12 @@ public class Movie implements Serializable {
     public void setShowingStatus(ShowingStatus showingStatus) {
         this.showingStatus = showingStatus;
     }
+    public void setReviews(List<Review> reviews){
+        this.reviews = reviews;
+    }
+    public void setOverallRating(Double overallRating) {
+        this.overallRating = overallRating;
+    }
 
     public ShowingStatus getShowingStatus() {
         return this.showingStatus;
@@ -120,7 +127,7 @@ public class Movie implements Serializable {
     public MovieType getMovieType() {
         return this.movieType;
     }
-    public List<MovieReview> getReviews(){
+    public List<Review> getReviews(){
         return this.reviews;
     }
     public String getMovieGenre() {
@@ -134,6 +141,29 @@ public class Movie implements Serializable {
         System.out.println("Director: "+ this.getDirector());
         System.out.println("Cast: "+ this.getCast());
         System.out.println("Film Rating: "+ this.getFilmRating());
-        System.out.println("Reviewer Rating: "+this.getOverallRating());
+        //System.out.println("Reviewer Rating: "+this.getOverallRating());
+        //TEMP CODE
+        if(reviews==null) reviews = new ArrayList<>();
+        if (reviews.size() <= 1) {
+            System.out.print("Rating:\t\t\tNA\n");
+        } else {
+            System.out.printf("Rating:\t\t\t%.1f\n", getOverallRating());
+        }
+        if (reviews.size() == 0) {
+            System.out.print("Reviews:\t\tNA\n");
+        } else {
+            System.out.print("Reviews: \t\t");
+            for (Review r : reviews) {
+                if (reviews.indexOf(r) == 0) {
+                    System.out.println(r.getNickname()+" ("+r.getRating()+") --------- (" +r.getDateTime().format(DateTimeFormatter.ofPattern("MMM dd uuuu HH:mm:ss"))+ ")");
+                } else {
+                    System.out.println("\t\t\t"+r.getNickname()+" ("+r.getRating()+") --------- (" +r.getDateTime().format(DateTimeFormatter.ofPattern("MMM dd uuuu HH:mm:ss"))+ ")");
+                }
+                String reviewString = r.getContent();
+                reviewString += "\n";
+                reviewString = reviewString.replaceAll("(.{1,50})\\s+", "$1\n\t\t\t");
+                System.out.printf("\t\t\t%s\n", reviewString);
+            }
+        }
     }
 }

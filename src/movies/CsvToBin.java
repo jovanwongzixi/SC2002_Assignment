@@ -25,7 +25,7 @@ public class CsvToBin {
         }
     }
     private static void movieConverter(){
-        MovieDataReader reader = new MovieDataReader();
+        MovieDataUpdater reader = new MovieDataUpdater();
         ArrayList<Movie> array = reader.readFile();
         try{
             FileOutputStream fileOut = new FileOutputStream("src/data/movieCSV.dat");
