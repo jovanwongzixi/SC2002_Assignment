@@ -9,7 +9,7 @@ import interfaces.Viewer;
 public class BookingHistoryViewer implements Viewer{
 
 	public void view() {
-		List<Booking> bookingData = SerializeDB.getBookingList();
+		List<Booking> bookingData = SerializeDB.getList("Booking");
 		Scanner sc = new Scanner(System.in);
 		String mobileNum;
 		int counter = 0;

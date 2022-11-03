@@ -9,7 +9,7 @@ import interfaces.Viewer;
 public class MovieTimeslotViewer implements Viewer{
 	
 	public void view() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
@@ -77,7 +77,7 @@ public class MovieTimeslotViewer implements Viewer{
 	}
 	
 	private void displayMovieList() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		int index = 0;
 		
 		System.out.println("-------------------- Movie List -------------------");
@@ -88,8 +88,8 @@ public class MovieTimeslotViewer implements Viewer{
 	}
 	
 	private int displayMovieTimeslots(int index) {
-		List<Movie> movieData = SerializeDB.getMovieList();
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Movie> movieData = SerializeDB.getList("Movie");
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Movie movie = movieData.get(index);
 		int i = 0, count = 0;
 		
@@ -115,8 +115,8 @@ public class MovieTimeslotViewer implements Viewer{
 	}
 	
 	private void displaySeatLayout(int movieIndex, int showIndex) {
-		List<Movie> movieData = SerializeDB.getMovieList();
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots(), bufferArr = new ArrayList<Timeslot>();
+		List<Movie> movieData = SerializeDB.getList("Movie");
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot"), bufferArr = new ArrayList<Timeslot>();
 		Movie movie = movieData.get(movieIndex);
 		
 		for (Timeslot ts : movieTimeslots) {

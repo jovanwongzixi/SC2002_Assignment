@@ -9,6 +9,8 @@ import entity.Admin;
 import entity.Booking;
 import entity.cinema.Cineplex;
 import entity.movie.*;
+import interfaces.Entity;
+import interfaces.SerializedData;
 
 public class SerializeDB {
 
@@ -17,7 +19,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/admin_accounts.dat");
+			fis = new FileInputStream("MOBLIMA_Final/bin/data/Admin.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Admin>)in.readObject();
 			in.close();
@@ -34,7 +36,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/movies.dat");
+			fis = new FileInputStream("MOBLIMA_Final/bin/data/Movie.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Movie>)in.readObject();
 			in.close();
@@ -51,7 +53,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/cineplex.dat");
+			fis = new FileInputStream("MOBLIMA_Final/bin/data/Cineplex.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Cineplex>)in.readObject();
 			in.close();
@@ -68,7 +70,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/movie_timeslots.dat");
+			fis = new FileInputStream("MOBLIMA_Final/bin/data/Timeslot.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Timeslot>)in.readObject();
 			in.close();
@@ -119,7 +121,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_FINAL/bin/data/booking.dat");
+			fis = new FileInputStream("MOBLIMA_FINAL/bin/data/Booking.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Booking>)in.readObject();
 			in.close();
@@ -150,7 +152,7 @@ public class SerializeDB {
 
 	public static void writeToMovieList(List<Movie> movieList) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/movies.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/Movie.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(movieList);
@@ -163,7 +165,7 @@ public class SerializeDB {
 
 	public static void writeToMovieTimeslots(List<Timeslot> movieTimeslots) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/movie_timeslots.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/Timeslot.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(movieTimeslots);
@@ -189,7 +191,7 @@ public class SerializeDB {
 
 	public static void writeToBookingData(List<Booking> bookingData) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/booking.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/Booking.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(bookingData);
@@ -225,29 +227,27 @@ public class SerializeDB {
 			e.printStackTrace();
 		}
 	}
-	public static <T> List<T> getList(String className){
+	public static <T extends SerializedData> List<T> getList(String className){
 		List<T> data = new ArrayList<>();
-		 //fis = null;
-		 //in = null;
 		try {
 			String fileName = "MOBLIMA_FINAL/bin/data/" + className + ".dat";
 			FileInputStream fis = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(fis);
 			data = (List<T>)in.readObject();
 			in.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {
+		} catch (IOException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
 		return data;
 	}
-	public static <T> void writeToFile(String className, List<T> inputList){
-		String fileName = "MOBLIMA_FINAL/bin/data" + className + ".dat";
+	public static <T extends SerializedData> void writeList(String className, List<T> inputList){
 		try {
+			String fileName = "MOBLIMA_FINAL/bin/data/" + className + ".dat";
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(inputList);
+			//System.out.println(inputList.get(0).getClass());
+			//System.out.println("Data index 0: " + inputList.get(0));
 			oos.close();
 			fos.close();
 		} catch (IOException e) {

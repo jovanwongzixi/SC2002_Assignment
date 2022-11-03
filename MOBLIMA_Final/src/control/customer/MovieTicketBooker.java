@@ -12,7 +12,7 @@ import entity.movie.*;
 public class MovieTicketBooker {
 
 	public void start() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<Movie> bookingList = new ArrayList<Movie>();
 		Scanner sc = new Scanner(System.in);
 		int choice;
@@ -75,7 +75,7 @@ public class MovieTicketBooker {
 	private void selectSeats(List<Movie> bookingList, int movieIndex, int showIndex) {
 		Scanner sc = new Scanner(System.in);
 		int choice, selection = 0, ts_index;
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		List<Timeslot> bufferArr = new ArrayList<Timeslot>();
 		List<Seat> selectedSeats = new ArrayList<Seat>();
 		Timeslot timeslot = null;		
@@ -192,10 +192,10 @@ public class MovieTicketBooker {
 	private void ticketPayment(Movie movie, Timeslot ts, int tsIndex, List<Seat> selectedSeats) {
 		Scanner sc = new Scanner(System.in);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
-		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Cineplex> cineplexData = SerializeDB.getList("Cineplex");
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		List<LocalDate> holidays = SerializeDB.getHolidays();
-		List<Booking> bookingData = SerializeDB.getBookingList();
+		List<Booking> bookingData = SerializeDB.getList("Booking");
 		List<Ticket> ticketList = new ArrayList<Ticket>();
 		String name, emailAddress, mobileNum, cineplexCode = null;
 		int choice;
@@ -313,8 +313,8 @@ public class MovieTicketBooker {
 						
 					confirmSeats(ts, selectedSeats);
 					movieTimeslots.set(tsIndex, ts);
-					SerializeDB.writeToMovieTimeslots(movieTimeslots);
-					SerializeDB.writeToBookingData(bookingData);
+					SerializeDB.writeList("Timeslot",movieTimeslots);
+					SerializeDB.writeList("Booking",bookingData);
 											
 					System.out.printf("The ticket has been successfully purchase. Your transaction ID is %s. Returning to previous menu...\n", tID);
 					return;
@@ -344,7 +344,7 @@ public class MovieTicketBooker {
 	}
 	
 	private int displayMovieTimeslots(List<Movie> bookingList, int index) {
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Movie movie = bookingList.get(index);
 		int i = 0, count = 0;
 		

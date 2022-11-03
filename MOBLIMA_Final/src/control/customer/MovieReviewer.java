@@ -8,7 +8,7 @@ import entity.movie.*;
 public class MovieReviewer {
 	
 	public void start() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
@@ -36,7 +36,7 @@ public class MovieReviewer {
 	}
 	
 	private void displayMovieList() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		int index = 0;
 		
 		System.out.println("-------------------- Movie List -------------------");
@@ -48,7 +48,7 @@ public class MovieReviewer {
 	
 	private void enterReview(int index) {
 		Scanner sc = new Scanner(System.in);
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<Review> movieReviews = new ArrayList<Review>();
 		String nickname, content;
 		double rating = 0;
@@ -90,8 +90,8 @@ public class MovieReviewer {
 			overallRating /= (double)movieReviews.size();
 			movieData.get(index).setOverallRating(overallRating);
 		}
-		
-		SerializeDB.writeToMovieList(movieData);
+		//SerializeDB.writeToMovieList(movieData);
+		SerializeDB.writeList("Movie",movieData);
 		System.out.println("Review added! Returning to customer menu...");
 		return;
 	}

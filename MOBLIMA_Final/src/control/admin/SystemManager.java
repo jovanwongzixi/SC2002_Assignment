@@ -92,7 +92,7 @@ public class SystemManager {
 	}
 	
 	public void configureTopFive() {
-		List<Movie> movieList = SerializeDB.getMovieList();
+		List<Movie> movieList = SerializeDB.getList("Movie");
 		List<Movie> topRatingList = new ArrayList<Movie>();
 		List<Movie> topTicketSalesList = new ArrayList<Movie>();
 		List<Boolean> sortFlag = SerializeDB.getFlags();

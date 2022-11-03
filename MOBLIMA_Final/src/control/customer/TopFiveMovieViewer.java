@@ -74,7 +74,7 @@ public class TopFiveMovieViewer implements Viewer {
 	}
 	
 	private List<Movie> displayTop5MovieList(int switcher) {	
-		List<Movie> movieList = SerializeDB.getMovieList(), topRatingList = new ArrayList<Movie>(), 
+		List<Movie> movieList = SerializeDB.getList("Movie"), topRatingList = new ArrayList<Movie>(),
 				topTicketSalesList = new ArrayList<Movie>();
 		
 		Collections.sort(movieList, (m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));

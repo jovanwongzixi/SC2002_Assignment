@@ -11,9 +11,9 @@ import entity.movie.*;
 public class MovieTimeslotManager{
 
 	public void add() {
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
-		List<Movie> movieData = SerializeDB.getMovieList();
-		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
+		List<Movie> movieData = SerializeDB.getList("Movie");
+		List<Cineplex> cineplexData = SerializeDB.getList("Cineplex");
 		DateTimeManager datetimeManager = new DateTimeManager();
 		Scanner sc = new Scanner(System.in);
 		int choice, index = 0, cinemaInput;
@@ -93,14 +93,14 @@ public class MovieTimeslotManager{
 		Timeslot ts = new Timeslot(movieTitle, cineplexShown, cinemaShown, dateOfShow, timeOfShow);
 		movieTimeslots.add(ts);
 		
-		SerializeDB.writeToMovieTimeslots(movieTimeslots);
+		SerializeDB.writeList("Timeslot",movieTimeslots);
 		System.out.println("Created showtime listing! Returning to admin menu...");
 		return;
 		
 	}
 	
 	public void edit() {
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Scanner sc = new Scanner(System.in);
 		int choice, index;
 		
@@ -161,13 +161,13 @@ public class MovieTimeslotManager{
 			}
 		} while (choice < 1 || choice > 2);
 			
-		SerializeDB.writeToMovieTimeslots(movieTimeslots);
+		SerializeDB.writeList("Timeslot",movieTimeslots);
 		System.out.println("Updated showtime listing! Returning to admin menu...");
 		return;
 	}
 	
 	public void remove() {
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Scanner sc = new Scanner(System.in);
 		int choice;
 			
@@ -201,14 +201,14 @@ public class MovieTimeslotManager{
 			} while (true);
 		}
 		
-		SerializeDB.writeToMovieTimeslots(movieTimeslots);
+		SerializeDB.writeList("Timeslot",movieTimeslots);
 		System.out.println("Removed showtime listing! Returning to admin menu...");
 		return;
 	}
 	
 	private List<Timeslot> updateLocation(int index) {
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
-		List<Cineplex> cineplexData = SerializeDB.getCineplexList();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
+		List<Cineplex> cineplexData = SerializeDB.getList("Cineplex");
 		Scanner sc = new Scanner(System.in);
 		int temp, cinemaInput;
 		boolean cineplexMatch = false;
@@ -258,7 +258,7 @@ public class MovieTimeslotManager{
 	
 	private List<Timeslot> updateTimeslot(int index) {
 		DateTimeManager datetimeManager = new DateTimeManager();
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		
 
 		LocalDate showDate = datetimeManager.addDate();

@@ -1,9 +1,14 @@
 package entity.cinema;
 
+import java.io.Serial;
 import java.util.List;
+
+import interfaces.Entity;
 import interfaces.SerializedData;
 
-public class Cineplex implements SerializedData{
+public class Cineplex implements SerializedData, Entity {
+	@Serial
+	private static final long serialVersionUID = -1270572564909922591L;
 	private String name;
 	private String code;
 	private List<Cinema> cinema;

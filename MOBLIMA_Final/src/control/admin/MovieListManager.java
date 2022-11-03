@@ -10,7 +10,7 @@ public class MovieListManager{
 	
 	public void add() {
 		Scanner sc = new Scanner(System.in);
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<Review> reviewList = new ArrayList<Review>();
 		int choice, counter = 0;
 		boolean isBlockbuster, is3D;
@@ -153,14 +153,14 @@ public class MovieListManager{
 		Movie m =  new Movie(movieName, filmRating, is3D, isBlockbuster, movieGenre, synopsis, director, movieCast, 0, reviewList, 0, showingStatus);		
 		movieData.add(m);
 		
-		SerializeDB.writeToMovieList(movieData);
+		SerializeDB.writeList("Movie",movieData);
 		System.out.println("Movie added to list! Returning to admin menu...");
 		return;
 	}
 	
 	public void edit() {
-		List<Movie> movieData = SerializeDB.getMovieList();
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Movie> movieData = SerializeDB.getList("Movie");
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Scanner sc = new Scanner(System.in);
 		int choice, index = 0;
 		
@@ -211,17 +211,17 @@ public class MovieListManager{
 			switch(choice) {
 				case 1: 
 					movieData.get(index).setShowingStatus(ShowingStatus.COMING_SOON);
-					SerializeDB.writeToMovieList(movieData);
+					SerializeDB.writeList("Movie",movieData);
 					System.out.println("Showing status updated. Returning to admin menu...");
 					return;
 				case 2: 
 					movieData.get(index).setShowingStatus(ShowingStatus.PREVIEW);
-					SerializeDB.writeToMovieList(movieData);
+					SerializeDB.writeList("Movie",movieData);
 					System.out.println("Showing status updated. Returning to admin menu...");
 					return;
 				case 3: 
 					movieData.get(index).setShowingStatus(ShowingStatus.NOW_SHOWING);
-					SerializeDB.writeToMovieList(movieData);
+					SerializeDB.writeList("Movie",movieData);
 					System.out.println("Showing status updated. Returning to admin menu...");
 					return;
 				case 4: 
@@ -235,8 +235,8 @@ public class MovieListManager{
 					}
 
 					movieData.remove(index);
-					SerializeDB.writeToMovieList(movieData);
-					SerializeDB.writeToMovieTimeslots(movieTimeslots);
+					SerializeDB.writeList("Movie",movieData);
+					SerializeDB.writeList("Timeslot",movieTimeslots);
 					System.out.println("Movie removed. Returning to admin menu...");
 					return;
 				default:
@@ -246,8 +246,8 @@ public class MovieListManager{
 	}
 	
 	public void remove() {
-		List<Movie> movieData = SerializeDB.getMovieList();	
-		List<Timeslot> movieTimeslots = SerializeDB.getMovieTimeslots();
+		List<Movie> movieData = SerializeDB.getList("Movie");
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Scanner sc = new Scanner(System.in);
 		int choice, index = 0;
 		
@@ -286,8 +286,8 @@ public class MovieListManager{
 		}
 		
 		movieData.remove(index);
-		SerializeDB.writeToMovieList(movieData);
-		SerializeDB.writeToMovieTimeslots(movieTimeslots);
+		SerializeDB.writeList("Movie",movieData);
+		SerializeDB.writeList("Timeslot",movieTimeslots);
 		System.out.printf("Movie removed! Returning to admin menu...\n");
 		return;	
 	}

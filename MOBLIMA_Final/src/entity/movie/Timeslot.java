@@ -1,11 +1,15 @@
 package entity.movie;
 
+import java.io.Serial;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import entity.cinema.Cinema;
+import interfaces.Entity;
 import interfaces.SerializedData;
 
-public class Timeslot implements SerializedData{
+public class Timeslot implements SerializedData, Entity {
+	@Serial
+	private static final long serialVersionUID =-6326284475932881679L;
 	private String movieTitle;
 	private String cineplex;
 	private Cinema cinema;

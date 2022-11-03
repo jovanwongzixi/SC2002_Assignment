@@ -1,10 +1,14 @@
 package entity.movie;
 
+import java.io.Serial;
 import java.util.List;
 
+import interfaces.Entity;
 import interfaces.SerializedData;
 
-public class Movie implements SerializedData{
+public class Movie implements SerializedData, Entity {
+	@Serial
+	private static final long serialVersionUID =-622362950391507260L;
 	private String title;
 	private FilmRating filmRating;
 	private boolean is3D;

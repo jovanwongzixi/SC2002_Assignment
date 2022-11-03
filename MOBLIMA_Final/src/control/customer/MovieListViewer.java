@@ -9,7 +9,7 @@ import interfaces.Viewer;
 public class MovieListViewer implements Viewer{
 	
 	public void view() {
-		List<Movie> movieData = SerializeDB.getList("movies");
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		Scanner sc = new Scanner(System.in);
 		int choice;
 			
@@ -40,7 +40,7 @@ public class MovieListViewer implements Viewer{
 	}
 	
 	private void displayMovieList() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		int index = 0;
 		
 		System.out.println("-------------------- Movie List -------------------");
@@ -51,7 +51,7 @@ public class MovieListViewer implements Viewer{
 	}
 	
 	private void displayMovieDetails(int index) {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<String> castList = movieData.get(index).getCast();
 		List<Review> movieReviews = movieData.get(index).getReviews();
 		String delimiter = ", ";

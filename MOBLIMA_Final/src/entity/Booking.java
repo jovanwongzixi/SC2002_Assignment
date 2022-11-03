@@ -1,9 +1,14 @@
 package entity;
 
+import java.io.Serial;
 import java.time.*;
+
+import interfaces.Entity;
 import interfaces.SerializedData;
 
-public class Booking implements SerializedData{
+public class Booking implements SerializedData, Entity {
+	@Serial
+	private static final long serialVersionUID =-137031443563589353L;
 	private String name;
 	private String emailAddress;
 	private String mobileNum;
