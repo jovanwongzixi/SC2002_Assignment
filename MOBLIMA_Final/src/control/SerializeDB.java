@@ -225,4 +225,31 @@ public class SerializeDB {
 			e.printStackTrace();
 		}
 	}
+	public static <T> List<T> getList(String className){
+		List<T> data = new ArrayList<>();
+		String fileName = "MOBLIMA_FINAL/bin/data" + className + ".dat";
+		try {
+			FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream in = new ObjectInputStream(fis);
+			data = (List<T>)in.readObject();
+			in.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return data;
+	}
+	public static <T> void writeToFile(String className, List<T> inputList){
+		String fileName = "MOBLIMA_FINAL/bin/data" + className + ".dat";
+		try {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(inputList);
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
