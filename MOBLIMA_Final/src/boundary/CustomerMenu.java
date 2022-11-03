@@ -35,34 +35,19 @@ public class CustomerMenu implements Menu{
 					movieListViewer.view();
 					break;
 				case 2:
-<<<<<<< Updated upstream
-					TopFiveMovieViewer top5MovieViewer = new TopFiveMovieViewer();
-					top5MovieViewer.view();
-					break;
-				case 3:
-					MovieTimeslotViewer movieTimeslotViewer = new MovieTimeslotViewer();
-=======
-					//searchMovie();
-				case 3:
 					Viewer top5MovieViewer = new TopFiveMovieViewer();
 					top5MovieViewer.view();
 					break;
-				case 4:
+				case 3:
 					Viewer movieTimeslotViewer = new MovieTimeslotViewer();
->>>>>>> Stashed changes
 					movieTimeslotViewer.view();
 					break;
 				case 4:
 					MovieTicketBooker movieTicketBooker = new MovieTicketBooker();
 					movieTicketBooker.start();
 					break;
-<<<<<<< Updated upstream
 				case 5:
-					BookingHistoryViewer bookingHistoryViewer = new BookingHistoryViewer();
-=======
-				case 6:
 					Viewer bookingHistoryViewer = new BookingHistoryViewer();
->>>>>>> Stashed changes
 					bookingHistoryViewer.view();
 					break;
 				case 6:
