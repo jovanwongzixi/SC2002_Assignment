@@ -9,7 +9,7 @@ import interfaces.Viewer;
 public class MovieListViewer implements Viewer{
 	
 	public void view() {
-		List<Movie> movieData = SerializeDB.getMovieList();
+		List<Movie> movieData = SerializeDB.getList("movies");
 		Scanner sc = new Scanner(System.in);
 		int choice;
 			

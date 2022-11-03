@@ -31,7 +31,7 @@ public class DataInitializer {
 		adminList.add(a1); adminList.add(a2); adminList.add(a3);
 					
 		try {
-			FileOutputStream fos = new FileOutputStream("data/admin_accounts.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/admin_accounts.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(adminList);
@@ -90,7 +90,7 @@ public class DataInitializer {
 		movieList.add(m1); movieList.add(m2); movieList.add(m3); movieList.add(m4); movieList.add(m5);
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("data/movies.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/movies.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(movieList);
@@ -125,7 +125,7 @@ public class DataInitializer {
 		cineplexData.add(cp1); cineplexData.add(cp2); cineplexData.add(cp3);
 				
 		try {
-			FileOutputStream fos = new FileOutputStream("data/cineplex.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/cineplex.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(cineplexData);
@@ -140,7 +140,7 @@ public class DataInitializer {
 		List<Timeslot> movieTimeslots = new ArrayList<Timeslot>();
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("data/movie_timeslots.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/movie_timeslots.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(movieTimeslots);
@@ -155,7 +155,7 @@ public class DataInitializer {
 		List<Double> priceList = new ArrayList<Double>(Arrays.asList(38.0, 14.5, 17.0, 28.0, 7.0, 9.0, 10.0, 12.0, 5.0, 0.5));
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("data/ticket_prices.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/ticket_prices.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(priceList);
@@ -174,7 +174,7 @@ public class DataInitializer {
 				LocalDate.parse("01.01.2022", formatDate)));
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("data/holidays.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/holidays.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(holidayList);
@@ -189,7 +189,7 @@ public class DataInitializer {
 		List<Booking> bookingData = new ArrayList<Booking>();
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("data/booking.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/booking.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(bookingData);
@@ -207,7 +207,7 @@ public class DataInitializer {
 		sortSwitch.add(true);
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("data/flags.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/flags.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(sortSwitch);

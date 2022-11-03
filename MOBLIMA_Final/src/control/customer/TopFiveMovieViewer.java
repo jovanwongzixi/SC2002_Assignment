@@ -10,8 +10,9 @@ import java.util.StringJoiner;
 import control.SerializeDB;
 import entity.movie.Movie;
 import entity.movie.Review;
+import interfaces.Viewer;
 
-public class TopFiveMovieViewer {
+public class TopFiveMovieViewer implements Viewer {
 	public void view() {
 		List<Boolean> sortFlag = SerializeDB.getFlags();
 		List<Movie> movieData = new ArrayList<Movie>(); 

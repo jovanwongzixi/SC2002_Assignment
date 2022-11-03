@@ -2,7 +2,7 @@ package boundary;
 
 import java.util.Scanner;
 import control.customer.*;
-import interfaces.Menu;
+import interfaces.*;
 
 public class CustomerMenu implements Menu{
 	
@@ -31,23 +31,38 @@ public class CustomerMenu implements Menu{
 			
 			switch(choice) {
 				case 1:
-					MovieListViewer movieListViewer = new MovieListViewer();
+					Viewer movieListViewer = new MovieListViewer();
 					movieListViewer.view();
 					break;
 				case 2:
+<<<<<<< Updated upstream
 					TopFiveMovieViewer top5MovieViewer = new TopFiveMovieViewer();
 					top5MovieViewer.view();
 					break;
 				case 3:
 					MovieTimeslotViewer movieTimeslotViewer = new MovieTimeslotViewer();
+=======
+					//searchMovie();
+				case 3:
+					Viewer top5MovieViewer = new TopFiveMovieViewer();
+					top5MovieViewer.view();
+					break;
+				case 4:
+					Viewer movieTimeslotViewer = new MovieTimeslotViewer();
+>>>>>>> Stashed changes
 					movieTimeslotViewer.view();
 					break;
 				case 4:
 					MovieTicketBooker movieTicketBooker = new MovieTicketBooker();
 					movieTicketBooker.start();
 					break;
+<<<<<<< Updated upstream
 				case 5:
 					BookingHistoryViewer bookingHistoryViewer = new BookingHistoryViewer();
+=======
+				case 6:
+					Viewer bookingHistoryViewer = new BookingHistoryViewer();
+>>>>>>> Stashed changes
 					bookingHistoryViewer.view();
 					break;
 				case 6:
