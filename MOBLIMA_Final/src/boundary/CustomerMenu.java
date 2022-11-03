@@ -13,13 +13,12 @@ public class CustomerMenu implements Menu{
 		do {
 			System.out.println("\n------------------ Customer Menu -----------------");
 			System.out.println("(1) ----------------      Show movie list");
-			System.out.println("(2) ----------------      Search movie");
-			System.out.println("(3) ----------------      List top 5 movies");
-			System.out.println("(4) ----------------      View movie timeslots");
-			System.out.println("(5) ----------------      Book tickets");
-			System.out.println("(6) ----------------      View booking history");
-			System.out.println("(7) ----------------      Enter movie review");
-			System.out.println("(8) ----------------      Return to main menu");
+			System.out.println("(2) ----------------      List top 5 movies");
+			System.out.println("(3) ----------------      View movie timeslots");
+			System.out.println("(4) ----------------      Book tickets");
+			System.out.println("(5) ----------------      View booking history");
+			System.out.println("(6) ----------------      Enter movie review");
+			System.out.println("(7) ----------------      Return to main menu");
 			System.out.printf("\nOption: ");
 			
 			while(!sc.hasNextInt()) {
@@ -36,28 +35,26 @@ public class CustomerMenu implements Menu{
 					movieListViewer.view();
 					break;
 				case 2:
-					//searchMovie();
-				case 3:
 					TopFiveMovieViewer top5MovieViewer = new TopFiveMovieViewer();
 					top5MovieViewer.view();
 					break;
-				case 4:
+				case 3:
 					MovieTimeslotViewer movieTimeslotViewer = new MovieTimeslotViewer();
 					movieTimeslotViewer.view();
 					break;
-				case 5:
+				case 4:
 					MovieTicketBooker movieTicketBooker = new MovieTicketBooker();
 					movieTicketBooker.start();
 					break;
-				case 6:
+				case 5:
 					BookingHistoryViewer bookingHistoryViewer = new BookingHistoryViewer();
 					bookingHistoryViewer.view();
 					break;
-				case 7:
+				case 6:
 					MovieReviewer movieReviewer = new MovieReviewer();
 					movieReviewer.start();
 					break;
-				case 8:
+				case 7:
 					System.out.println("Returning to main menu...");
 					return;
 				default:

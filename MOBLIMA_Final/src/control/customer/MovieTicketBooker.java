@@ -241,10 +241,14 @@ public class MovieTicketBooker {
 		for (Seat s : selectedSeats) {
 			boolean toggle = true;
 			do {
+				boolean forChild = false;
 				System.out.printf("Enter age group for seat %c%d:\n", (char)(s.getSeatRow()-1+'A'), s.getSeatCol());
-				System.out.println("(1) ----------------      Child (age 18 and below)");
-				System.out.println("(2) ----------------      Senior Citizen (age 55 and above)");
-				System.out.println("(3) ----------------      Adult");
+				System.out.println("(1) ----------------      Senior Citizen (age 55 and above)");
+				System.out.println("(2) ----------------      Adult");
+				if (movie.getFilmRating() == FilmRating.G || movie.getFilmRating() == FilmRating.PG || movie.getFilmRating() == FilmRating.PG13) {
+					System.out.println("(3) ----------------      Child (age 16 and below)");
+					forChild = true;
+				}
 				System.out.printf("Option: ");
 			
 				while(!sc.hasNextInt()) {
@@ -258,19 +262,22 @@ public class MovieTicketBooker {
 				switch(choice) {
 					case 1:
 						ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
-								AgeGroup.CHILD, s.getIsDouble(), isSpecial));
+								AgeGroup.SENIOR_CITIZEN, s.getIsDouble(), isSpecial));
 						toggle = false;
 						break;
 					case 2:
 						ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
-								AgeGroup.SENIOR_CITIZEN, s.getIsDouble(), isSpecial));
-						toggle = false;
-						break;
-					case 3:
-						ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
 								AgeGroup.ADULT, s.getIsDouble(), isSpecial));
 						toggle = false;
 						break;
+					case 3:
+						if (forChild) {
+							ticketList.add(new Ticket(movie.getIs3D(), movie.getIsBlockbuster(), ts.getCinema().getIsPlatinum(),
+								AgeGroup.CHILD, s.getIsDouble(), isSpecial));
+							toggle = false;
+							break;
+						}
+						System.out.println("Option does not exist. Please key in a valid option!\n");
 					default:
 						System.out.println("Option does not exist. Please key in a valid option!\n");			
 				}

@@ -38,6 +38,10 @@ public class BookingHistoryViewer implements Viewer{
 		
 		if(counter == 0) {
 			System.out.println("No booking history found!");
+		} else {
+			System.out.println("\nPress Enter to return to movie list...");
+			if(sc.nextLine() != null)
+				sc.nextLine();
 		}
 	}
 	
