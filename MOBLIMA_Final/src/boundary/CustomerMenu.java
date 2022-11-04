@@ -50,7 +50,7 @@ public class CustomerMenu implements Menu{
 					movieTimeslotViewer.view();
 					break;
 				case 4:
-					MovieTicketBooker movieTicketBooker = new MovieTicketBooker(customer);
+					Handler movieTicketBooker = new MovieTicketBooker(customer);
 					movieTicketBooker.start();
 					break;
 				case 5:
@@ -58,12 +58,12 @@ public class CustomerMenu implements Menu{
 					bookingHistoryViewer.view();
 					break;
 				case 6:
-					MovieReviewer movieReviewer = new MovieReviewer();
+					Handler movieReviewer = new MovieReviewer();
 					movieReviewer.start();
 					break;
 				case 7:
 					if(customer == null){
-						CustomerAccountManager manager = new CustomerAccountManager();
+						Handler manager = new CustomerAccountManager();
 						customer = manager.start();
 						if(customer==null) System.out.println("Failed to initialise account!");
 						else System.out.println("Account intialised!");

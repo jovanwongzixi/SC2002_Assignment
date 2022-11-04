@@ -2,13 +2,14 @@ package control.customer;
 
 import control.SerializeDB;
 import entity.Customer;
+import interfaces.Handler;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CustomerAccountManager {
+public class CustomerAccountManager implements Handler {
     private Customer currentUser;
     public CustomerAccountManager(){
         currentUser = null;

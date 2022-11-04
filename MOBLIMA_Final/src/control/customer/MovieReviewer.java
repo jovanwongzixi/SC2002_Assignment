@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.*;
 import control.SerializeDB;
 import entity.movie.*;
+import interfaces.Handler;
 
-public class MovieReviewer {
+public class MovieReviewer implements Handler {
 	
-	public void start() {
+	public Boolean start() {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		Scanner sc = new Scanner(System.in);
 		int choice;
@@ -27,12 +28,13 @@ public class MovieReviewer {
 				System.out.println("Option does not exist. Please key in a valid option!\n");
 			} else if (choice == -1) {
 				System.out.println("Returning to customer menu...");
-				return;
+				return true;
 			} else {
 				enterReview(choice-1);
 				break;
 			}
-		} while (true);		
+		} while (true);
+		return true;
 	}
 	
 	private void displayMovieList() {

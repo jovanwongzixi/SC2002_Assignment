@@ -10,13 +10,14 @@ import entity.Customer;
 import entity.Holiday;
 import entity.cinema.*;
 import entity.movie.*;
+import interfaces.Handler;
 
-public class MovieTicketBooker {
+public class MovieTicketBooker implements Handler {
 	private Customer currentUser;
 	public MovieTicketBooker(Customer currentUser){
 		this.currentUser = currentUser;
 	}
-	public void start() {
+	public Boolean start() {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<Movie> bookingList = new ArrayList<Movie>();
 		Scanner sc = new Scanner(System.in);
@@ -38,10 +39,10 @@ public class MovieTicketBooker {
 				System.out.println("Option does not exist. Please key in a valid option!\n");
 			} else if (choice == -1) {
 				System.out.println("Returning to customer menu...");
-				return;
+				return true;
 			} else {
 				selectTimeslot(bookingList, choice-1);
-				return;
+				return true;
 			}	
 		} while (true);
 	}
