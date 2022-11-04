@@ -63,15 +63,15 @@ public class AdminMenu implements Menu{
 							return;
 						}
 					case 2:
-						MovieListEditorMenu movieListEditorMenu = new MovieListEditorMenu();
+						Menu movieListEditorMenu = new MovieListEditorMenu();
 						movieListEditorMenu.start();
 						break;
 					case 3:
-						MovieTimeslotEditorMenu movieTimeslotEditorMenu = new MovieTimeslotEditorMenu();
+						Menu movieTimeslotEditorMenu = new MovieTimeslotEditorMenu();
 						movieTimeslotEditorMenu.start();
 						break;
 					case 4:
-						SystemMenu systemMenu = new SystemMenu();
+						Menu systemMenu = new SystemMenu();
 						systemMenu.start();
 						break;
 					case 5:
