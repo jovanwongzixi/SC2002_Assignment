@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import control.SerializeDB;
 import entity.Booking;
+import entity.Holiday;
 import entity.cinema.*;
 import entity.movie.*;
 
@@ -194,7 +195,8 @@ public class MovieTicketBooker {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
 		List<Cineplex> cineplexData = SerializeDB.getList("Cineplex");
 		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
-		List<LocalDate> holidays = SerializeDB.getHolidays();
+		//List<LocalDate> holidays = SerializeDB.getHolidays();
+		List<Holiday> holidays = SerializeDB.getList("Holiday");
 		List<Booking> bookingData = SerializeDB.getList("Booking");
 		List<Ticket> ticketList = new ArrayList<Ticket>();
 		String name, emailAddress, mobileNum, cineplexCode = null;
@@ -230,10 +232,11 @@ public class MovieTicketBooker {
 			}
 		} while (!mobileMatches(mobileNum));
 		
-		for (LocalDate d : holidays) {
-			if (ts.getShowDate().equals(d) || ts.getShowDate().getDayOfWeek() == DayOfWeek.FRIDAY || ts.getShowDate().getDayOfWeek() == DayOfWeek.SATURDAY ||
-					ts.getShowDate().getDayOfWeek() == DayOfWeek.SUNDAY ) {
+		for (Holiday d : holidays) {
+			if (ts.getShowDate().equals(d.getDate()) || ts.getShowDate().getDayOfWeek() == DayOfWeek.FRIDAY || ts.getShowDate().getDayOfWeek() == DayOfWeek.SATURDAY ||
+					ts.getShowDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
 				isSpecial = true;
+				break;
 			}
 		}
 		
@@ -519,43 +522,44 @@ public class MovieTicketBooker {
 	}
 	
 	private double calculatePrice(Ticket ticket) {
-		List<Double> ticketPrices = SerializeDB.getTicketPrices();
+		//List<Double> ticketPrices = SerializeDB.getTicketPrices();
+		List<TicketPrice> ticketPrices = SerializeDB.getList("TicketPrice");
 		double ticketPrice = 0;
 		
 		if (ticket.getIsSpecial()) {
 			if(ticket.getIsPlatinum()) {
-				ticketPrice += ticketPrices.get(0);
+				ticketPrice += ticketPrices.get(0).getPrice();
 			} else {
 				if(!ticket.getIs3D()) {
-					ticketPrice += ticketPrices.get(1);
+					ticketPrice += ticketPrices.get(1).getPrice();
 				} else {
-					ticketPrice += ticketPrices.get(2);
+					ticketPrice += ticketPrices.get(2).getPrice();
 				}
 			}
 		} else {
 			if(ticket.getIsPlatinum()) {
-				ticketPrice += ticketPrices.get(3);
+				ticketPrice += ticketPrices.get(3).getPrice();
 			} else {
 				if(ticket.getAgeGroup() == AgeGroup.SENIOR_CITIZEN) {
-					ticketPrice += ticketPrices.get(8);
+					ticketPrice += ticketPrices.get(8).getPrice();
 				} else if (ticket.getAgeGroup() == AgeGroup.CHILD) { 
 					if(!ticket.getIs3D()) {
-						ticketPrice += ticketPrices.get(4);
+						ticketPrice += ticketPrices.get(4).getPrice();
 					} else {
-						ticketPrice += ticketPrices.get(5);
+						ticketPrice += ticketPrices.get(5).getPrice();
 					}
 				} else {
 					if(!ticket.getIs3D()) {
-						ticketPrice += ticketPrices.get(6);
+						ticketPrice += ticketPrices.get(6).getPrice();
 					} else {
-						ticketPrice += ticketPrices.get(7);
+						ticketPrice += ticketPrices.get(7).getPrice();
 					}
 				}
 			}
 		}
 		
 		if(ticket.getIsBlockbuster() == true) {
-			ticketPrice += ticketPrices.get(9);
+			ticketPrice += ticketPrices.get(9).getPrice();
 		}
 		
 		if(ticket.getIsDouble()) {

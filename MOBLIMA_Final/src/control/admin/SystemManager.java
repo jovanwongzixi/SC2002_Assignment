@@ -3,13 +3,17 @@ package control.admin;
 import java.time.LocalDate;
 import java.util.*;
 import control.SerializeDB;
+import entity.Flag;
+import entity.Holiday;
 import entity.movie.Movie;
+import entity.movie.TicketPrice;
 
 public class SystemManager {
 	
 	public void editHolidays() {
 		DateTimeManager datetimeManager = new DateTimeManager();
-		List<LocalDate> holidays = SerializeDB.getHolidays();
+		//List<LocalDate> holidays = SerializeDB.getHolidays();
+		List<Holiday> holidays = SerializeDB.getList("Holiday");
 		int choice;
 		Scanner sc = new Scanner(System.in);
 	
@@ -28,8 +32,11 @@ public class SystemManager {
 			switch(choice) {
 				case 1:
 					LocalDate holidayDate = datetimeManager.addDate();
-					holidays.add(holidayDate);
-					SerializeDB.writeToHolidayList(holidays);
+					Holiday holiday = new Holiday();
+					holiday.setDate(holidayDate);
+					holidays.add(holiday);
+					SerializeDB.writeList("Holiday", holidays);
+					//SerializeDB.writeToHolidayList(holidays);
 					System.out.println("Holiday added! Returning to system config...");
 					return;
 				case 2:
@@ -44,20 +51,20 @@ public class SystemManager {
 	public void editPrices() {
 		int choice;
 		Scanner sc = new Scanner(System.in);
-		List<Double> ticketPrices = SerializeDB.getTicketPrices();
-		
+		//List<Double> ticketPrices = SerializeDB.getTicketPrices();
+		List<TicketPrice> ticketPrices=SerializeDB.getList("TicketPrice");
 		do {
 			System.out.println("\n-------------- Edit Ticket Prices --------------");
-			System.out.printf("(1) ----- Group A (Fri-Sun, PH for Platinum Members):\t\t%.2f\n", ticketPrices.get(0));
-			System.out.printf("(2) ----- Group B (Fri-Sun, PH for Regular Movies):\t\t%.2f\n", ticketPrices.get(1));
-			System.out.printf("(3) ----- Group C (Fri-Sun, PH for 3D Movies):\t\t\t%.2f\n", ticketPrices.get(2));
-			System.out.printf("(4) ----- Group D (Mon-Thu for Platinum Members):\t\t%.2f\n", ticketPrices.get(3));
-			System.out.printf("(5) ----- Group E (Mon-Thu for Child - Regular Movies):\t\t%.2f\n", ticketPrices.get(4));
-			System.out.printf("(6) ----- Group F (Mon-Thu for Child - 3D):\t\t\t%.2f\n", ticketPrices.get(5));
-			System.out.printf("(7) ----- Group G (Mon-Thu for Adult - Regular Movies):\t\t%.2f\n", ticketPrices.get(6));
-			System.out.printf("(8) ----- Group H (Mon-Thu for Adult - 3D):\t\t\t%.2f\n", ticketPrices.get(7));
-			System.out.printf("(9) ----- Group I (Mon-Thu for Senior Citizens):\t\t%.2f\n", ticketPrices.get(8));
-			System.out.printf("(10) ----- Blockbuster Quantum:\t\t\t\t\t%.2f\n", ticketPrices.get(9));
+			System.out.printf("(1) ----- Group A (Fri-Sun, PH for Platinum Members):\t\t%.2f\n", ticketPrices.get(0).getPrice());
+			System.out.printf("(2) ----- Group B (Fri-Sun, PH for Regular Movies):\t\t%.2f\n", ticketPrices.get(1).getPrice());
+			System.out.printf("(3) ----- Group C (Fri-Sun, PH for 3D Movies):\t\t\t%.2f\n", ticketPrices.get(2).getPrice());
+			System.out.printf("(4) ----- Group D (Mon-Thu for Platinum Members):\t\t%.2f\n", ticketPrices.get(3).getPrice());
+			System.out.printf("(5) ----- Group E (Mon-Thu for Child - Regular Movies):\t\t%.2f\n", ticketPrices.get(4).getPrice());
+			System.out.printf("(6) ----- Group F (Mon-Thu for Child - 3D):\t\t\t%.2f\n", ticketPrices.get(5).getPrice());
+			System.out.printf("(7) ----- Group G (Mon-Thu for Adult - Regular Movies):\t\t%.2f\n", ticketPrices.get(6).getPrice());
+			System.out.printf("(8) ----- Group H (Mon-Thu for Adult - 3D):\t\t\t%.2f\n", ticketPrices.get(7).getPrice());
+			System.out.printf("(9) ----- Group I (Mon-Thu for Senior Citizens):\t\t%.2f\n", ticketPrices.get(8).getPrice());
+			System.out.printf("(10) ----- Blockbuster Quantum:\t\t\t\t\t%.2f\n", ticketPrices.get(9).getPrice());
 			System.out.printf("(11) ----- Return to system config\n");				
 			System.out.printf("\nOption: ");
 				
@@ -84,9 +91,12 @@ public class SystemManager {
 					sc.next();
 				}
 				double newPrice = sc.nextDouble();
-				ticketPrices.set(choice-1, newPrice);
-				SerializeDB.writeToTicketPrices(ticketPrices);
-				System.out.println("Price updated!");			
+				ticketPrices.get(choice-1).setPrice(newPrice);
+				//ticketPrices.set(choice-1, newPrice);
+				//ticketPrices1
+				//SerializeDB.writeToTicketPrices(ticketPrices);
+				SerializeDB.writeList("TicketPrices",ticketPrices);
+				System.out.println("Price updated!");
 			}			
 		} while (true);
 	}
@@ -95,7 +105,8 @@ public class SystemManager {
 		List<Movie> movieList = SerializeDB.getList("Movie");
 		List<Movie> topRatingList = new ArrayList<Movie>();
 		List<Movie> topTicketSalesList = new ArrayList<Movie>();
-		List<Boolean> sortFlag = SerializeDB.getFlags();
+		//List<Boolean> sortFlag = SerializeDB.getFlags();
+		List<Flag> sortFlag = SerializeDB.getList("Flag");
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		
@@ -109,13 +120,13 @@ public class SystemManager {
 			topTicketSalesList.add(movieList.get(i));
 		}
 		System.out.println("--------------------- Current Top 5 Lists --------------------");
-		if (sortFlag.get(0)) {
+		if (sortFlag.get(0).getFlag()) {
 			System.out.println("\n-------------------- Top 5 Movies by Rating -------------------");
 			for (int index = 1; index <= 5; index++) {
 				System.out.printf("(%d) ----------------	%s (Rating: %.1f)\n", index, topRatingList.get(index-1).getTitle(), topRatingList.get(index-1).getOverallRating());			
 			}
 		}
-		if (sortFlag.get(1)) {
+		if (sortFlag.get(1).getFlag()) {
 			System.out.println("\n-------------------- Top 5 Movies by Ticket Sales -------------------");
 			for(int index = 1; index <= 5; index++) {
 				System.out.printf("(%d) ----------------	%s (Ticket sales: %d)\n", index, topTicketSalesList.get(index-1).getTitle(), topTicketSalesList.get(index-1).getTicketSales());	
@@ -123,12 +134,12 @@ public class SystemManager {
 		}
 
 		do {
-			if (sortFlag.get(0)) {
+			if (sortFlag.get(0).getFlag()) {
 				System.out.println("\n(1) ----------------      Hide top 5 movies by rating");
 			} else {
 				System.out.println("\n(1) ----------------      Show top 5 movies by rating");
 			}
-			if (sortFlag.get(1)) {
+			if (sortFlag.get(1).getFlag()) {
 				System.out.println("(2) ----------------      Hide top 5 movies by ticket sales");
 			} else {
 				System.out.println("(2) ----------------      Show top 5 movies by ticket sales");
@@ -145,13 +156,17 @@ public class SystemManager {
 			
 			switch(choice) {
 				case 1:
-					sortFlag.set(0, !sortFlag.get(0));
-					SerializeDB.writeToFlag(sortFlag);
+					sortFlag.get(0).inverseFlag();
+					//sortFlag.set(0, !sortFlag.get(0));
+					//SerializeDB.writeToFlag(sortFlag);
+					SerializeDB.writeList("Flag", sortFlag);
 					System.out.println("Configured!");
 					break;
 				case 2:
-					sortFlag.set(1, !sortFlag.get(1));
-					SerializeDB.writeToFlag(sortFlag);
+					sortFlag.get(1).inverseFlag();
+					//sortFlag.set(1, !sortFlag.get(1).getFlag());
+					SerializeDB.writeList("Flag", sortFlag);
+					//SerializeDB.writeToFlag(sortFlag);
 					System.out.println("Configured!");
 					break;
 				case 3:

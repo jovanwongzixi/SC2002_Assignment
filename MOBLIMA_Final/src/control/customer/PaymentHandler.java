@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PaymentHandler {
+    public static void main(String[] args) {
+        PaymentHandler h = new PaymentHandler();
+        System.out.println(h.start());
+    }
     public boolean start(){
         Scanner sc = new Scanner(System.in);
         boolean inputPass = false;

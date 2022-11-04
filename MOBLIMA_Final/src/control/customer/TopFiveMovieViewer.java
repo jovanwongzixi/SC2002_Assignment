@@ -8,18 +8,20 @@ import java.util.Scanner;
 import java.util.StringJoiner;
 
 import control.SerializeDB;
+import entity.Flag;
 import entity.movie.Movie;
 import entity.movie.Review;
 import interfaces.Viewer;
 
 public class TopFiveMovieViewer implements Viewer {
 	public void view() {
-		List<Boolean> sortFlag = SerializeDB.getFlags();
-		List<Movie> movieData = new ArrayList<Movie>(); 
+		//List<Boolean> sortFlag = SerializeDB.getFlags();
+		List<Flag> sortFlag = SerializeDB.getList("Flag");
+		List<Movie> movieData = new ArrayList<Movie>();
 		Scanner sc = new Scanner(System.in);
 		int choice, switcher = 0;
 		
-		if(sortFlag.get(0) && sortFlag.get(1)) {
+		if(sortFlag.get(0).getFlag() && sortFlag.get(1).getFlag()) {
 			do {
 				System.out.println("\n(1) ----------------      View top 5 movies by rating");
 				System.out.println("(2) ----------------      View top 5 movies by ticket sales");
@@ -41,9 +43,9 @@ public class TopFiveMovieViewer implements Viewer {
 					return;
 				}		
 			} while (switcher < 1 || switcher > 3);
-		} else if (sortFlag.get(0)) {
+		} else if (sortFlag.get(0).getFlag()) {
 			switcher = 1;
-		} else if (sortFlag.get(1)) {
+		} else if (sortFlag.get(1).getFlag()) {
 			switcher = 2;
 		}
 		

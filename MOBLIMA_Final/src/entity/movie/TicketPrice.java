@@ -1,7 +1,16 @@
 package entity.movie;
 
 import interfaces.Entity;
+import interfaces.SerializedData;
 
-public class TicketPrice implements Entity {
+public class TicketPrice implements SerializedData {
     private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

@@ -2,8 +2,12 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import control.SerializeDB;
 import entity.Admin;
 import entity.Booking;
+import entity.Flag;
+import entity.Holiday;
 import entity.movie.*;
 import entity.cinema.*;
 
@@ -11,13 +15,13 @@ public class DataInitializer {
 	//driver for initializer
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		DataInitializer dataInit = new DataInitializer();
-		dataInit.initializeAdminData();
-        dataInit.initializeMovieData();
-        dataInit.initializeCineplexData();
-        dataInit.initializeMovieTimeslotData();
-        dataInit.initializeTicketPrices();
-        dataInit.initializeHolidays();
-        dataInit.initializeBookingData();
+		//dataInit.initializeAdminData();
+        //dataInit.initializeMovieData();
+        //dataInit.initializeCineplexData();
+        //dataInit.initializeMovieTimeslotData();
+        //dataInit.initializeTicketPrices();
+        //dataInit.initializeHolidays();
+        //dataInit.initializeBookingData();
         dataInit.initializeFlags();
     }
 	//initialize 3 administrative accounts
@@ -153,7 +157,12 @@ public class DataInitializer {
 	//initialize prices for all customer groups
 	private void initializeTicketPrices() {
 		List<Double> priceList = new ArrayList<Double>(Arrays.asList(38.0, 14.5, 17.0, 28.0, 7.0, 9.0, 10.0, 12.0, 5.0, 0.5));
-		
+		List<TicketPrice> priceList1 = new ArrayList<>();
+		for(Double price : priceList){
+			TicketPrice ticketPrice = new TicketPrice();
+			ticketPrice.setPrice(price);
+			priceList1.add(ticketPrice);
+		}
 		try {
 			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/ticket_prices.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -164,6 +173,7 @@ public class DataInitializer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		SerializeDB.writeList("TicketPrice", priceList1);
 	}
 	//initialize X'Mas and New Year holidays and eves
 	private void initializeHolidays() {
@@ -172,7 +182,12 @@ public class DataInitializer {
 		List<LocalDate> holidayList = new ArrayList<LocalDate>(Arrays.asList(LocalDate.parse("24.12.2021", formatDate), 
 				LocalDate.parse("25.12.2021", formatDate), LocalDate.parse("31.12.2021", formatDate), 
 				LocalDate.parse("01.01.2022", formatDate)));
-		
+		List<Holiday> holidayList1 = new ArrayList<>();
+		for(LocalDate d : holidayList){
+			Holiday holiday = new Holiday();
+			holiday.setDate(d);
+			holidayList1.add(holiday);
+		}
 		try {
 			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/holidays.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -183,6 +198,7 @@ public class DataInitializer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		SerializeDB.writeList("Holiday",holidayList1);
 	}
 	//no booking initialized
 	private void initializeBookingData() {
@@ -205,7 +221,13 @@ public class DataInitializer {
 		
 		sortSwitch.add(true);
 		sortSwitch.add(true);
-		
+		List<Flag> sortFlag = new ArrayList<>();
+		for(boolean b : sortSwitch){
+			Flag flag = new Flag();
+			flag.setFlag(true);
+			sortFlag.add(flag);
+		}
+
 		try {
 			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/flags.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -216,5 +238,6 @@ public class DataInitializer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		SerializeDB.writeList("Flag",sortFlag);
 	}
 }
