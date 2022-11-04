@@ -6,12 +6,16 @@ import java.util.*;
 import java.util.regex.Pattern;
 import control.SerializeDB;
 import entity.Booking;
+import entity.Customer;
 import entity.Holiday;
 import entity.cinema.*;
 import entity.movie.*;
 
 public class MovieTicketBooker {
-
+	private Customer currentUser;
+	public MovieTicketBooker(Customer currentUser){
+		this.currentUser = currentUser;
+	}
 	public void start() {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<Movie> bookingList = new ArrayList<Movie>();
@@ -211,7 +215,7 @@ public class MovieTicketBooker {
 		}
 		
 		displaySeatLayoutUnserialized(ts);
-		
+		/*
 		System.out.println("Enter your name: ");
 		name = sc.nextLine();
 		
@@ -230,7 +234,11 @@ public class MovieTicketBooker {
 			if (!mobileMatches(mobileNum)) {
 				System.out.println("Invalid mobile number. Please try again!");
 			}
-		} while (!mobileMatches(mobileNum));
+		} while (!mobileMatches(mobileNum));*/
+		if(currentUser==null){
+			CustomerAccountManager accountManager = new CustomerAccountManager();
+			currentUser = accountManager.start();
+		}
 		
 		for (Holiday d : holidays) {
 			if (ts.getShowDate().equals(d.getDate()) || ts.getShowDate().getDayOfWeek() == DayOfWeek.FRIDAY || ts.getShowDate().getDayOfWeek() == DayOfWeek.SATURDAY ||
@@ -311,7 +319,7 @@ public class MovieTicketBooker {
 					if (handler.start()) {
 						LocalDateTime timeOfPurchase = LocalDateTime.now();
 						String tID = cineplexCode + timeOfPurchase.format(formatter);
-						Booking b = new Booking(name, emailAddress, mobileNum, ticketPrice,
+						Booking b = new Booking(currentUser.getName(), currentUser.getEmailAddress(), currentUser.getMobileNumber(), ticketPrice,
 								ts.getMovieTitle(), ts.getCineplex(), ts.getCinema().getID(), ts.getShowDate(),
 								ts.getShowTime(), timeOfPurchase, tID);
 						bookingData.add(b);

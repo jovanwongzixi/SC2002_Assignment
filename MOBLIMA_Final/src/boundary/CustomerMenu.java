@@ -2,12 +2,14 @@ package boundary;
 
 import java.util.Scanner;
 import control.customer.*;
+import entity.Customer;
 import interfaces.*;
 
 public class CustomerMenu implements Menu{
-	private boolean accountInitialised;
+	//private boolean accountInitialised;
+	private Customer customer;
 	public CustomerMenu(){
-		accountInitialised = false;
+		customer = null;
 	}
 	public void start() {
 		Scanner sc = new Scanner(System.in);
@@ -21,7 +23,7 @@ public class CustomerMenu implements Menu{
 			System.out.println("(4) ----------------      Book tickets");
 			System.out.println("(5) ----------------      View booking history");
 			System.out.println("(6) ----------------      Enter movie review");
-			if(!accountInitialised) System.out.println("(7) ----------------      Login");
+			if(customer==null) System.out.println("(7) ----------------      Login");
 			else System.out.println("(7) ----------------      Logout");
 			System.out.println("(8) ----------------      Return to main menu");
 			System.out.printf("\nOption: ");
@@ -48,7 +50,7 @@ public class CustomerMenu implements Menu{
 					movieTimeslotViewer.view();
 					break;
 				case 4:
-					MovieTicketBooker movieTicketBooker = new MovieTicketBooker();
+					MovieTicketBooker movieTicketBooker = new MovieTicketBooker(customer);
 					movieTicketBooker.start();
 					break;
 				case 5:
@@ -59,7 +61,18 @@ public class CustomerMenu implements Menu{
 					MovieReviewer movieReviewer = new MovieReviewer();
 					movieReviewer.start();
 					break;
-				case 7: break; //login not done yet
+				case 7:
+					if(customer == null){
+						CustomerAccountManager manager = new CustomerAccountManager();
+						customer = manager.start();
+						if(customer==null) System.out.println("Failed to initialise account!");
+						else System.out.println("Account intialised!");
+					}
+					else{
+						System.out.println("Account logged out!");
+						customer = null;
+					}
+					break;
 				case 8:
 					System.out.println("Returning to main menu...");
 					return;

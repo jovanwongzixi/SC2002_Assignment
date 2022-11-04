@@ -262,9 +262,23 @@ public class SerializeDB {
 			ObjectInputStream in = new ObjectInputStream(fis);
 			data = (Map<String, T>)in.readObject();
 			in.close();
-		} catch (IOException | ClassNotFoundException ex) {
-			ex.printStackTrace();
+		} catch(IOException | ClassNotFoundException e){
+			e.printStackTrace();
 		}
 		return data;
+	}
+	public static <T extends SerializedData> void writeMap(String className, Map<String,T> inputMap){
+		try {
+			String fileName = "MOBLIMA_FINAL/bin/data/" + className + ".dat";
+			FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(inputMap);
+			//System.out.println(inputList.get(0).getClass());
+			//System.out.println("Data index 0: " + inputList.get(0));
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

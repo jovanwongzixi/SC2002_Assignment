@@ -4,10 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import control.SerializeDB;
-import entity.Admin;
-import entity.Booking;
-import entity.Flag;
-import entity.Holiday;
+import entity.*;
 import entity.movie.*;
 import entity.cinema.*;
 
@@ -22,7 +19,8 @@ public class DataInitializer {
         //dataInit.initializeTicketPrices();
         //dataInit.initializeHolidays();
         //dataInit.initializeBookingData();
-        dataInit.initializeFlags();
+        //dataInit.initializeFlags();
+		//SerializeDB.writeMap("Customer", new HashMap<String, Customer>());
     }
 	//initialize 3 administrative accounts
 	private void initializeAdminData() {
