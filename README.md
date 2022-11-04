@@ -1,6 +1,6 @@
 # SC2002_Assignment MOBLIMA
 
-###Credit card test links
+### Credit card test links
 https://developer.paypal.com/api/nvp-soap/payflow/integration-guide/test-transactions/#standard-test-cards
 
 ### Working functionalities
