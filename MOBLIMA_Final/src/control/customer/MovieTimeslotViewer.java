@@ -14,7 +14,8 @@ public class MovieTimeslotViewer implements Viewer{
 		int choice;
 		
 		do {
-			displayMovieList();
+			MovieListViewer movieListViewer = new MovieListViewer();
+			movieListViewer.displayMovieList();
 			System.out.printf("\nInput option number to view movie timeslots (-1 to return to customer menu): ");
 			
 			while(!sc.hasNextInt()) {
@@ -76,7 +77,7 @@ public class MovieTimeslotViewer implements Viewer{
 		}
 	}
 	
-	private void displayMovieList() {
+	/*private void displayMovieList() {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		int index = 0;
 		
@@ -85,7 +86,7 @@ public class MovieTimeslotViewer implements Viewer{
 			index++;
 			System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());			
 		}
-	}
+	}*/ //trying to use function from movieListViewer
 	
 	private int displayMovieTimeslots(int index) {
 		List<Movie> movieData = SerializeDB.getList("Movie");

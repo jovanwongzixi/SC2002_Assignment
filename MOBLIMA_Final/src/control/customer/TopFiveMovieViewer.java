@@ -67,7 +67,9 @@ public class TopFiveMovieViewer implements Viewer {
 				System.out.println("Returning to customer menu...");
 				return;
 			} else {
-				displayMovieDetails(movieData, choice-1);
+				MovieListViewer movieListViewer = new MovieListViewer();
+				movieListViewer.displayMovieDetails(choice-1);
+				//displayMovieDetails(movieData, choice-1);
 				System.out.printf("\nPress Enter to return to movie list...");
 				if(sc.nextLine() != null)
 					sc.nextLine();
@@ -103,7 +105,8 @@ public class TopFiveMovieViewer implements Viewer {
 			return topTicketSalesList;
 		}
 	}
-	
+	//trying to call function from movielistviewer instead
+	/*
 	private void displayMovieDetails(List<Movie> movieData, int index) {
 		List<String> castList = movieData.get(index).getCast();
 		List<Review> movieReviews = movieData.get(index).getReviews();
@@ -150,5 +153,5 @@ public class TopFiveMovieViewer implements Viewer {
 				System.out.printf("\t\t\t%s\n", reviewString);
 			}		
 		}		
-	}
+	}*/
 }

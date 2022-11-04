@@ -39,7 +39,7 @@ public class MovieListViewer implements Viewer{
 		} while (true);
 	}
 	
-	private void displayMovieList() {
+	protected void displayMovieList() {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		int index = 0;
 		
@@ -50,7 +50,7 @@ public class MovieListViewer implements Viewer{
 		}
 	}
 	
-	private void displayMovieDetails(int index) {
+	protected void displayMovieDetails(int index) {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<String> castList = movieData.get(index).getCast();
 		List<Review> movieReviews = movieData.get(index).getReviews();
