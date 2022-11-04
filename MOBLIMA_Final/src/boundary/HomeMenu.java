@@ -38,11 +38,11 @@ public class HomeMenu implements Menu{
 			
 			switch(choice) {
 				case 1:
-					AdminMenu staffMenu = new AdminMenu();
+					Menu staffMenu = new AdminMenu();
 					staffMenu.start();
 					break;
 				case 2:
-					CustomerMenu moviegoerMenu = new CustomerMenu();
+					Menu moviegoerMenu = new CustomerMenu();
 					moviegoerMenu.start();
 					break;
 				case 3:

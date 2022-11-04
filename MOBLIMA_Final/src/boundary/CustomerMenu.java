@@ -5,7 +5,10 @@ import control.customer.*;
 import interfaces.*;
 
 public class CustomerMenu implements Menu{
-	
+	private boolean accountInitialised;
+	public CustomerMenu(){
+		accountInitialised = false;
+	}
 	public void start() {
 		Scanner sc = new Scanner(System.in);
 		int choice;
@@ -18,7 +21,9 @@ public class CustomerMenu implements Menu{
 			System.out.println("(4) ----------------      Book tickets");
 			System.out.println("(5) ----------------      View booking history");
 			System.out.println("(6) ----------------      Enter movie review");
-			System.out.println("(7) ----------------      Return to main menu");
+			if(!accountInitialised) System.out.println("(7) ----------------      Login");
+			else System.out.println("(7) ----------------      Logout");
+			System.out.println("(8) ----------------      Return to main menu");
 			System.out.printf("\nOption: ");
 			
 			while(!sc.hasNextInt()) {
@@ -54,7 +59,8 @@ public class CustomerMenu implements Menu{
 					MovieReviewer movieReviewer = new MovieReviewer();
 					movieReviewer.start();
 					break;
-				case 7:
+				case 7: break; //login not done yet
+				case 8:
 					System.out.println("Returning to main menu...");
 					return;
 				default:

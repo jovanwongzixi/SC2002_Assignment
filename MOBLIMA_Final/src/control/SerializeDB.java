@@ -254,4 +254,17 @@ public class SerializeDB {
 			e.printStackTrace();
 		}
 	}
+	public static <T extends SerializedData> Map<String, T> getMap(String className){
+		Map<String, T> data = new HashMap<>();
+		try {
+			String fileName = "MOBLIMA_FINAL/bin/data/" + className + ".dat";
+			FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream in = new ObjectInputStream(fis);
+			data = (Map<String, T>)in.readObject();
+			in.close();
+		} catch (IOException | ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return data;
+	}
 }

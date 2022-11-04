@@ -18,7 +18,7 @@ public class MovieTicketBooker {
 		int choice;
 		
 		do {
-			bookingList = displayMovieList(movieData);				
+			bookingList =  displayMovieList(movieData);
 			System.out.printf("\nInput option number to view book movie ticket (-1 to return to customer menu): ");
 			
 			while(!sc.hasNextInt()) {
@@ -304,25 +304,32 @@ public class MovieTicketBooker {
 				
 			switch(choice) {
 				case 1:
-					LocalDateTime timeOfPurchase = LocalDateTime.now();
-					String tID = cineplexCode + timeOfPurchase.format(formatter);
-					Booking b = new Booking(name, emailAddress, mobileNum, ticketPrice,
-							ts.getMovieTitle(), ts.getCineplex(), ts.getCinema().getID(), ts.getShowDate(),
-							ts.getShowTime(), timeOfPurchase, tID);
-					bookingData.add(b);
-						
-					confirmSeats(ts, selectedSeats);
-					movieTimeslots.set(tsIndex, ts);
-					SerializeDB.writeList("Timeslot",movieTimeslots);
-					SerializeDB.writeList("Booking",bookingData);
-											
-					System.out.printf("The ticket has been successfully purchase. Your transaction ID is %s. Returning to previous menu...\n", tID);
-					return;
+					PaymentHandler handler = new PaymentHandler();
+					if (handler.start()) {
+						LocalDateTime timeOfPurchase = LocalDateTime.now();
+						String tID = cineplexCode + timeOfPurchase.format(formatter);
+						Booking b = new Booking(name, emailAddress, mobileNum, ticketPrice,
+								ts.getMovieTitle(), ts.getCineplex(), ts.getCinema().getID(), ts.getShowDate(),
+								ts.getShowTime(), timeOfPurchase, tID);
+						bookingData.add(b);
+
+						confirmSeats(ts, selectedSeats);
+						movieTimeslots.set(tsIndex, ts);
+						SerializeDB.writeList("Timeslot", movieTimeslots);
+						SerializeDB.writeList("Booking", bookingData);
+
+						System.out.printf("The ticket has been successfully purchase. Your transaction ID is %s. Returning to previous menu...\n", tID);
+						return;
+					}
+					else{
+						System.out.println("Credit card invalid! Please try again!");
+					}
 				case 2:
-					System.out.println("Returning to previous menu...");
-					return;
+						System.out.println("Returning to previous menu...");
+						return;
 				default:
-					System.out.println("Option does not exist. Please key in a valid option!\n");
+						System.out.println("Option does not exist. Please key in a valid option!\n");
+
 			}
 			
 		} while (true);
