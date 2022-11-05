@@ -50,9 +50,9 @@ public class MovieTicketBooker implements Handler {
 	private void selectTimeslot(List<Movie> bookingList,int index) {
 		Scanner sc = new Scanner(System.in);
 		int choice;
-		
+		MovieTimeslotViewer movieTimeslotViewer = new MovieTimeslotViewer();
 		do {
-			int ts_size = displayMovieTimeslots(bookingList, index);
+			int ts_size = movieTimeslotViewer.displayMovieTimeslots(bookingList, index);
 			if (ts_size == 0) {
 				System.out.println("There are no timeslots for the movie!");
 				return;
@@ -361,7 +361,8 @@ public class MovieTicketBooker implements Handler {
 		}
 		return bookingList;
 	}
-	
+	//trying to use displayMovieTimeslots from MovieTimeslotViewer
+	/*
 	private int displayMovieTimeslots(List<Movie> bookingList, int index) {
 		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot");
 		Movie movie = bookingList.get(index);
@@ -387,10 +388,10 @@ public class MovieTicketBooker implements Handler {
 		}	
 		return i;
 	}
-	
+	*/
 	private void displaySeatLayoutUnserialized(Timeslot ts) {
 		
-		Cinema cinemaShown = ts.getCinema();
+			Cinema cinemaShown = ts.getCinema();
 		
 		if (!cinemaShown.getIsPlatinum()){
 			System.out.println("                                              Screen                                             ");
@@ -519,7 +520,7 @@ public class MovieTicketBooker implements Handler {
 		System.out.println("\nX --------- Seat taken");
 		System.out.println("O --------- Seat selected\n");
 	}
-	
+	/*
 	private boolean emailMatches(String emailAddress) {
 	    return Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
 	      .matcher(emailAddress)
@@ -529,7 +530,7 @@ public class MovieTicketBooker implements Handler {
 	private boolean mobileMatches(String mobileNum) {
 		return Pattern.compile("[8-9][0-9]{7}").matcher(mobileNum).matches();
 	}
-	
+	*/ //user input now not in movieticketbooker class
 	private double calculatePrice(Ticket ticket) {
 		//List<Double> ticketPrices = SerializeDB.getTicketPrices();
 		List<TicketPrice> ticketPrices = SerializeDB.getList("TicketPrice");

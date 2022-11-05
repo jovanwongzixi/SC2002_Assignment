@@ -122,7 +122,7 @@ public class MovieListManager{
 		System.out.println("Enter showing status: ");
 		System.out.println("(1) ------ Coming Soon");
 		System.out.println("(2) ------ Preview");
-		System.out.println("(3) ------ Now showing");
+		System.out.println("(3) ------ Now Showing");
 		do {
 			choice = 0;	
 			System.out.printf("Option: ");

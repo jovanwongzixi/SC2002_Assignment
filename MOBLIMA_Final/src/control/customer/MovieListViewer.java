@@ -14,7 +14,7 @@ public class MovieListViewer implements Viewer{
 		int choice;
 			
 		do {
-			displayMovieList();
+			displayMovieList(movieData);
 			System.out.printf("\nInput option number to view movie details (-1 to return to customer menu): ");
 			
 			while(!sc.hasNextInt()) {
@@ -39,8 +39,8 @@ public class MovieListViewer implements Viewer{
 		} while (true);
 	}
 	
-	protected void displayMovieList() {
-		List<Movie> movieData = SerializeDB.getList("Movie");
+	protected void displayMovieList(List<Movie> movieData) {
+		//List<Movie> movieData = SerializeDB.getList("Movie");
 		int index = 0;
 		
 		System.out.println("-------------------- Movie List -------------------");
