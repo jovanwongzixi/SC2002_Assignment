@@ -1,5 +1,6 @@
 package entity.movie;
 
+import control.customer.TicketPriceCalculator;
 import interfaces.SerializedData;
 
 public class Ticket implements SerializedData{

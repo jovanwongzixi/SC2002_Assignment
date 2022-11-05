@@ -24,7 +24,8 @@ public class MovieTicketBooker implements Handler {
 		int choice;
 		
 		do {
-			bookingList =  displayMovieList(movieData);
+			MovieListViewer listViewer = new MovieListViewer();
+			bookingList =  listViewer.displayBookingList(movieData);
 			System.out.printf("\nInput option number to view book movie ticket (-1 to return to customer menu): ");
 			
 			while(!sc.hasNextInt()) {
@@ -298,9 +299,9 @@ public class MovieTicketBooker implements Handler {
 				}
 			} while (toggle);
 		}
-		
+		TicketPriceCalculator calculator = new TicketPriceCalculator();
 		for (Ticket t : ticketList) {
-			ticketPrice += calculatePrice(t);
+			ticketPrice += calculator.use(t);
 		}
 		
 		do {
@@ -349,7 +350,18 @@ public class MovieTicketBooker implements Handler {
 			
 		} while (true);
 	}
-	
+	public static void confirmSeats(Timeslot ts, List<Seat> selectedSeats) {
+		for (Seat s : selectedSeats) {
+			if(s.getSeatRow()+1 < ts.getCinema().getNumOfRows()) {
+				ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get(s.getSeatCol()-1).setSeatState(SeatState.TAKEN);
+			} else {
+				ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get((s.getSeatCol()/2)-1).setSeatState(SeatState.TAKEN);
+			}
+		}
+
+	}
+	//trying to call from movielistviewer
+	/*
 	private List<Movie> displayMovieList(List<Movie> movieData) {
 		List<Movie> bookingList = new ArrayList<Movie>();
 		int index = 0;
@@ -363,7 +375,7 @@ public class MovieTicketBooker implements Handler {
 			}
 		}
 		return bookingList;
-	}
+	}*/
 	//trying to use displayMovieTimeslots from MovieTimeslotViewer
 	/*
 	private int displayMovieTimeslots(List<Movie> bookingList, int index) {
@@ -536,6 +548,8 @@ public class MovieTicketBooker implements Handler {
 		return Pattern.compile("[8-9][0-9]{7}").matcher(mobileNum).matches();
 	}
 	*/ //user input now not in movieticketbooker class
+	//trying to use ticket calculator
+	/*
 	private double calculatePrice(Ticket ticket) {
 		//List<Double> ticketPrices = SerializeDB.getTicketPrices();
 		List<TicketPrice> ticketPrices = SerializeDB.getList("TicketPrice");
@@ -582,15 +596,6 @@ public class MovieTicketBooker implements Handler {
 		}
 		return ticketPrice;
 	}
-	
-	public static void confirmSeats(Timeslot ts, List<Seat> selectedSeats) {
-		for (Seat s : selectedSeats) {
-			if(s.getSeatRow()+1 < ts.getCinema().getNumOfRows()) {
-	    		ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get(s.getSeatCol()-1).setSeatState(SeatState.TAKEN);
-	    	} else {
-	    		ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get((s.getSeatCol()/2)-1).setSeatState(SeatState.TAKEN);
-	    	}
-		}
-		
-	}
+	*/
+
 }

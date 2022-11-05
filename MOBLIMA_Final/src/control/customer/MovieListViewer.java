@@ -49,7 +49,20 @@ public class MovieListViewer implements Viewer{
 			System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());			
 		}
 	}
-	
+	protected List<Movie> displayBookingList(List<Movie> movieData) {
+		List<Movie> bookingList = new ArrayList<Movie>();
+		int index = 0;
+
+		System.out.println("-------------------- Movie List -------------------");
+		for(Movie m: movieData) {
+			if (m.getShowingStatus() == ShowingStatus.PREVIEW || m.getShowingStatus() == ShowingStatus.NOW_SHOWING) {
+				index++;
+				bookingList.add(m);
+				System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());
+			}
+		}
+		return bookingList;
+	}
 	protected void displayMovieDetails(int index) {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<String> castList = movieData.get(index).getCast();
