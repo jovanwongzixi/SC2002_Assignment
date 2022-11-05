@@ -41,6 +41,7 @@ public class MovieTimeslotViewer implements Viewer{
 		Scanner sc = new Scanner(System.in);
 		int choice;
 		List<Movie> movieData = SerializeDB.getList("Movie");
+		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot"), bufferArr = new ArrayList<>();
 		do {
 			int ts_size = displayMovieTimeslots(movieData,index);
 			if (ts_size == 0) {
@@ -62,19 +63,29 @@ public class MovieTimeslotViewer implements Viewer{
 				System.out.println("Returning to previous menu...");
 				return;
 			} else {
-				viewSeats(index, choice-1);
+				Movie movie = movieData.get(index);
+				for (Timeslot ts : movieTimeslots) {
+					if(ts.getMovieTitle().equals(movie.getTitle())) {
+						bufferArr.add(ts);
+					}
+				}
+				Timeslot ts = bufferArr.get(choice-1);
+				viewSeats(ts);
 			}
 		} while (true);	
 	}
 	
-	private void viewSeats(int movieIndex, int showIndex) {
+	private void viewSeats(Timeslot ts) {
 		Scanner sc = new Scanner(System.in);
-		displaySeatLayout(movieIndex, showIndex);
+		SeatLayoutDisplayer seatLayoutDisplayer = new SeatLayoutDisplayer();
+		seatLayoutDisplayer.display(ts);
+		//displaySeatLayout(ts);
 		
 		System.out.println("Press Enter to return to movie timeslots...");
-		if(sc.nextLine()!= null) {
+		/*if(sc.nextLine()!= null) {
 			return;
-		}
+		}*/
+		sc.nextLine();
 	}
 	
 	/*private void displayMovieList() {
@@ -114,8 +125,9 @@ public class MovieTimeslotViewer implements Viewer{
 		}	
 		return i;
 	}
-	
-	private void displaySeatLayout(int movieIndex, int showIndex) {
+	//trying to use seatlayout displayer
+	/*
+	private void displaySeatLayout(Timeslot ts) {
 		List<Movie> movieData = SerializeDB.getList("Movie");
 		List<Timeslot> movieTimeslots = SerializeDB.getList("Timeslot"), bufferArr = new ArrayList<Timeslot>();
 		Movie movie = movieData.get(movieIndex);
@@ -126,8 +138,8 @@ public class MovieTimeslotViewer implements Viewer{
 			}
 		}
 		
-		Cinema cinemaShown = bufferArr.get(showIndex).getCinema();
-		
+		//Cinema cinemaShown = bufferArr.get(showIndex).getCinema();
+		Cinema cinemaShown = ts.getCinema();
 		if (!cinemaShown.getIsPlatinum()){
 			System.out.println("                                              Screen                                             ");
 			System.out.println("                                       --------------------                                      ");
@@ -254,5 +266,5 @@ public class MovieTimeslotViewer implements Viewer{
 		
 		System.out.println("\nX --------- Seat taken");
 		System.out.println("O --------- Seat selected\n");
-	}
+	}*/
 }

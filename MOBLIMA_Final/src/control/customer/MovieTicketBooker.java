@@ -97,7 +97,9 @@ public class MovieTicketBooker implements Handler {
 		ts_index = movieTimeslots.indexOf(timeslot);
 		
 		do {
-			displaySeatLayoutUnserialized(timeslot);
+			SeatLayoutDisplayer seatLayoutDisplayer = new SeatLayoutDisplayer();
+			seatLayoutDisplayer.display(timeslot);
+			//displaySeatLayoutUnserialized(timeslot);
 			System.out.println("(1) ----------------      Select seating");
 			System.out.println("(2) ----------------      Remove selection");
 			System.out.println("(3) ----------------      Proceed to payment");
@@ -214,8 +216,9 @@ public class MovieTicketBooker implements Handler {
 				cineplexCode = c.getCode();
 			}
 		}
-		
-		displaySeatLayoutUnserialized(ts);
+		SeatLayoutDisplayer seatLayoutDisplayer= new SeatLayoutDisplayer();
+		seatLayoutDisplayer.display(ts);
+		//displaySeatLayoutUnserialized(ts);
 		/*
 		System.out.println("Enter your name: ");
 		name = sc.nextLine();
@@ -389,6 +392,8 @@ public class MovieTicketBooker implements Handler {
 		return i;
 	}
 	*/
+	//trying to use seatlayoutdisplayer
+	/*
 	private void displaySeatLayoutUnserialized(Timeslot ts) {
 		
 			Cinema cinemaShown = ts.getCinema();
@@ -519,7 +524,7 @@ public class MovieTicketBooker implements Handler {
 		
 		System.out.println("\nX --------- Seat taken");
 		System.out.println("O --------- Seat selected\n");
-	}
+	}*/
 	/*
 	private boolean emailMatches(String emailAddress) {
 	    return Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
