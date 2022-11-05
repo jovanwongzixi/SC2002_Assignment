@@ -1,0 +1,45 @@
+Admin login
+Edit movie listing
+Add movie listing
+Edit movie showing status
+Edit cinema showtimes
+Add movie timeslot
+Edit movie timeslot
+Configure system settings
+Edit holidays
+Add new holiday
+Edit ticket prices
+Logout
+
+Customer access
+Show movie list
+Choose one movie to list details
+List top 5 movies
+View movie timeslots
+Choose one movie to view timeslots
+Book tickets
+Create account
+Choose movie to book (weekday normal)
+Show that coming soon movie cannot be seen
+Select seating (4 seats, to show child adult and senior citizen price + couple seat)
+Remove selection
+Proceed to payment
+Select age
+Input a invalid credit card number (eg. 378282246310005)
+Input a valid credit card number (eg. 378282246310004)
+Choose a movie to book (weekend)
+Choose a movie to book (weekday holiday)
+Choose a movie to book (Platinum movie suite)
+Enter movie review
+logout
+view movie listing to see the added review
+login again to see booking history
+
+
+Back to admin
+Edit movie listing to end of showing
+configure system setting (turn off one of the options)
+
+Back to customer
+List top 5 movies (see that option is gone)
+View movie to check that end of showing movie is gone

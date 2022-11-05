@@ -17,6 +17,7 @@ public class CustomerAccountManager implements Handler {
     public Customer start(){
         Scanner sc = new Scanner(System.in);
         int options=0;
+        boolean flag = false;
         do {
             System.out.println("""
                     --------- Customer Account Menu ----------
@@ -27,14 +28,13 @@ public class CustomerAccountManager implements Handler {
             System.out.print("Input option (-1 to return to customer menu): ");
             options = sc.nextInt();
             switch (options){
-                case -1 -> {
-                    return currentUser;
-                }
                 case 1 -> getAccount();
                 case 2 -> createAccount();
                 case 3 -> inputDetails();
+                case -1 -> flag = false;
+                default -> flag = true;
             }
-        }while(options>3 || options<1);
+        }while(flag);
         return currentUser;
     }
     public void getAccount(){
@@ -46,6 +46,7 @@ public class CustomerAccountManager implements Handler {
         String number = sc.nextLine();
         try{
             if(Objects.equals(customers.get(email).getMobileNumber(), number)) currentUser = customers.get(email);
+            System.out.println("Welcome " + currentUser.getName() + " !");
         }
         catch (NullPointerException e){
             System.out.println("Invalid account!");

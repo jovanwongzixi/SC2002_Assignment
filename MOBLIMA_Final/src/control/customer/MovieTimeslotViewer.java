@@ -119,7 +119,7 @@ public class MovieTimeslotViewer implements Viewer{
 		for (Timeslot ts : movieTimeslots) {
 			if (ts.getMovieTitle().equals(movie.getTitle())) {
 				i++;
-				System.out.printf("(%d) -------\t Cineplex %s at Cinema %d on %td %<tb %<tY at %tR\n", i, ts.getCineplex(),
+				System.out.printf("(%d) -------\t Cineplex %s at Cinema %d on %td %<tb %<tY "+ts.getShowDate().getDayOfWeek()+" at %tR", i, ts.getCineplex(),
 					ts.getCinema().getID(), ts.getShowDate(), ts.getShowTime());
 			}
 		}	
