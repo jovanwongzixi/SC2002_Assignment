@@ -63,7 +63,7 @@ public class CustomerMenu implements Menu{
 				}
 
 				case 5 ->{
-					Viewer bookingHistoryViewer = new BookingHistoryViewer();
+					Viewer bookingHistoryViewer = new BookingHistoryViewer(customer);
 					bookingHistoryViewer.view();
 				}
 

@@ -40,7 +40,12 @@ public class CustomerAccountManager implements Handler {
         String email = sc.nextLine();
         System.out.println("Enter mobile number:");
         String number = sc.nextLine();
-        if(Objects.equals(customers.get(email).getMobileNumber(), number)) currentUser = customers.get(email);
+        try{
+            if(Objects.equals(customers.get(email).getMobileNumber(), number)) currentUser = customers.get(email);
+        }
+        catch (NullPointerException e){
+            System.out.println("Invalid account!");
+        }
         //return currentUser;
     }
     public void createAccount(){
