@@ -66,7 +66,7 @@ public class MovieListManager{
 		System.out.println("Is it a 3D movie? (Y/N)");
 		do {
 			System.out.printf("Input: ");
-			char bool = sc.next().charAt(0);
+			char bool = Character.toUpperCase(sc.next().charAt(0));
 			if(bool == 'Y') {
 				is3D = true;
 				break;
@@ -81,7 +81,7 @@ public class MovieListManager{
 		System.out.println("Is it a blockbuster movie? (Y/N)");
 		do {
 			System.out.printf("Input: ");
-			char bool = sc.next().charAt(0);
+			char bool = Character.toUpperCase(sc.next().charAt(0));
 			if(bool == 'Y') {
 				isBlockbuster = true;
 				break;
