@@ -37,31 +37,42 @@ public class CustomerMenu implements Menu{
 			choice = sc.nextInt();
 			
 			switch(choice) {
-				case 1:
+				case 1 -> {
 					Viewer movieListViewer = new MovieListViewer();
 					movieListViewer.view();
-					break;
-				case 2:
+				}
+				case 2 -> {
 					Viewer top5MovieViewer = new TopFiveMovieViewer();
 					top5MovieViewer.view();
-					break;
-				case 3:
+				}
+
+				case 3 ->{
 					Viewer movieTimeslotViewer = new MovieTimeslotViewer();
 					movieTimeslotViewer.view();
-					break;
-				case 4:
+				}
+
+				case 4 ->{
+					Handler manager = new CustomerAccountManager();
+					while(customer == null){
+						customer = manager.start();
+						if(customer==null) System.out.println("Failed to initialise account! Try again!");
+						else System.out.println("Account intialised!");
+					}
 					Handler movieTicketBooker = new MovieTicketBooker(customer);
 					movieTicketBooker.start();
-					break;
-				case 5:
+				}
+
+				case 5 ->{
 					Viewer bookingHistoryViewer = new BookingHistoryViewer();
 					bookingHistoryViewer.view();
-					break;
-				case 6:
+				}
+
+				case 6 ->{
 					Handler movieReviewer = new MovieReviewer();
 					movieReviewer.start();
-					break;
-				case 7:
+				}
+
+				case 7 ->{
 					if(customer == null){
 						Handler manager = new CustomerAccountManager();
 						customer = manager.start();
@@ -72,12 +83,13 @@ public class CustomerMenu implements Menu{
 						System.out.println("Account logged out!");
 						customer = null;
 					}
-					break;
-				case 8:
+				}
+
+				case 8 -> {
 					System.out.println("Returning to main menu...");
 					return;
-				default:
-					System.out.println("Option does not exist! Please input a valid choice!");
+				}
+				default -> System.out.println("Option does not exist! Please input a valid choice!");
 			}				
 		} while (true);	
 	}

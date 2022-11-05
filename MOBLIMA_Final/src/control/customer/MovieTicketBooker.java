@@ -240,10 +240,11 @@ public class MovieTicketBooker implements Handler {
 				System.out.println("Invalid mobile number. Please try again!");
 			}
 		} while (!mobileMatches(mobileNum));*/
+		/* removed cos forcing user to initialise account before entering movieticketbooker
 		if(currentUser==null){
 			CustomerAccountManager accountManager = new CustomerAccountManager();
 			currentUser = accountManager.start();
-		}
+		}*/
 		
 		for (Holiday d : holidays) {
 			if (ts.getShowDate().equals(d.getDate()) || ts.getShowDate().getDayOfWeek() == DayOfWeek.FRIDAY || ts.getShowDate().getDayOfWeek() == DayOfWeek.SATURDAY ||
