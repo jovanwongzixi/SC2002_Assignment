@@ -19,13 +19,17 @@ public class CustomerAccountManager implements Handler {
         int options=0;
         do {
             System.out.println("""
-                    ------Customer Account Menu-------
-                    1) Login
-                    2) Create account
-                    3) Guest Account
+                    --------- Customer Account Menu ----------
+                    1) ----------------      Login
+                    2) ----------------      Create account
+                    3) ----------------      Guest Account
                     """);
+            System.out.print("Input option (-1 to return to customer menu): ");
             options = sc.nextInt();
             switch (options){
+                case -1 -> {
+                    return currentUser;
+                }
                 case 1 -> getAccount();
                 case 2 -> createAccount();
                 case 3 -> inputDetails();
