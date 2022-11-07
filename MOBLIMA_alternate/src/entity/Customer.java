@@ -2,10 +2,13 @@ package entity;
 
 import interfaces.User;
 
+import java.io.Serial;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Customer implements User {
+    @Serial
+    private static final long serialVersionUID = -4247603318904719990L;
     private String name;
     private String mobileNumber;
     private String emailAddress;
