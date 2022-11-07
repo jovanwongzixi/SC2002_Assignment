@@ -1,5 +1,5 @@
 package interfaces;
 
 public interface AccountManager {
-    public <T> T start();
+    public <T extends User> T start();
 }
