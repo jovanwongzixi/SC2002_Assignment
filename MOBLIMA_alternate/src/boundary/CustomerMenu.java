@@ -6,7 +6,6 @@ import entity.Customer;
 import interfaces.*;
 
 public class CustomerMenu implements Menu{
-	//private boolean accountInitialised;
 	private Customer customer;
 	public CustomerMenu(){
 		customer = null;

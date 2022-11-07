@@ -35,21 +35,21 @@ public class HomeMenu implements Menu{
 			}
 			
 			choice = sc.nextInt();
-			
-			switch(choice) {
-				case 1:
+
+			switch (choice) {
+				case 1 -> {
 					Menu staffMenu = new AdminMenu();
 					staffMenu.start();
-					break;
-				case 2:
+				}
+				case 2 -> {
 					Menu moviegoerMenu = new CustomerMenu();
 					moviegoerMenu.start();
-					break;
-				case 3:
+				}
+				case 3 -> {
 					System.out.println("Thank you for using MOBLIMA! Have a nice day!");
 					return;
-				default:
-					System.out.println("Option does not exist! Please input a valid choice!");
+				}
+				default -> System.out.println("Option does not exist! Please input a valid choice!");
 			}
 		} while (true);
 	}

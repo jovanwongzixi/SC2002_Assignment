@@ -32,7 +32,7 @@ public class MovieDetailsDisplayer implements Displayer {
         System.out.printf("Synopsis:\t\t%s\n", synopsis);
         System.out.printf("Director:\t\t%s\n", movie.getDirector());
         StringJoiner castJoiner = new StringJoiner(delimiter);
-        castList.forEach(item -> castJoiner.add(item));
+        castList.forEach(castJoiner::add);
         String castString = castJoiner.toString();
         castString += "\n";
         castString = castString.replaceAll("(.{1,50})\\s+", "$1\n\t\t\t");

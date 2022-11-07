@@ -21,7 +21,6 @@ public class MovieListViewer implements Viewer {
         do {
             Displayer movieListDisplayer = new MovieListDisplayer(movieData);
             movieListDisplayer.display();
-            //displayMovieList(movieData);
             System.out.printf("\nInput option number to view movie details (-1 to return to customer menu): ");
 
             while(!sc.hasNextInt()) {

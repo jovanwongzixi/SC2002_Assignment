@@ -2,7 +2,6 @@ package control.customer;
 
 import java.util.*;
 import java.util.regex.Pattern;
-import control.SerializeDB;
 import control.datahandler.BookingDataHandler;
 import entity.Booking;
 import entity.Customer;
@@ -34,11 +33,13 @@ public class BookingHistoryViewer implements Viewer{
 		for (Booking b : bookingData) {
 			if(b.getMobileNum().equals(mobileNum)) {
 				counter++;		
-				System.out.printf("Booking %s for %s:\n"
-						+ "Cineplex / Cinema: %s / %d\n"
-						+ "Movie timeslot: %td %<tb %<tY %tR\n"
-						+ "Price: %.2f\n"
-						+ "-------------------------------------\n",
+				System.out.printf("""
+								Booking %s for %s:
+								Cineplex / Cinema: %s / %d
+								Movie timeslot: %td %<tb %<tY %tR
+								Price: %.2f
+								-------------------------------------
+								""",
 						b.getTID(), b.getMovieTitle(), b.getCineplex(), b.getCinemaID(),
 						b.getDateShow(), b.getTimeShow(), b.getTicketPrice());
 			}

@@ -1,18 +1,14 @@
 package control.customer;
 
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.StringJoiner;
 
-import control.SerializeDB;
 import control.datahandler.FlagDataHandler;
 import control.datahandler.MovieDataHandler;
 import entity.Flag;
 import entity.movie.Movie;
-import entity.movie.Review;
 import interfaces.DataHandler;
 import interfaces.Displayer;
 import interfaces.Viewer;
@@ -56,10 +52,10 @@ public class TopFiveMovieViewer implements Viewer {
 		
 		do {
 			if(switcher == 1){
-				Collections.sort(movieData, (m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
+				movieData.sort((m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
 			}
 			else{
-				Collections.sort(movieData, (m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
+				movieData.sort((m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
 			}
 			Displayer topFiveMovieDisplayer = new TopFiveMovieDisplayer(movieData.subList(0,5),switcher);
 			topFiveMovieDisplayer.display();

@@ -4,7 +4,6 @@ package control.admin;
  */
 import java.time.*;
 import java.util.*;
-import control.SerializeDB;
 import control.datahandler.CineplexDataHandler;
 import control.datahandler.MovieDataHandler;
 import control.datahandler.TimeslotDataHandler;
@@ -36,24 +35,24 @@ public class MovieTimeslotManager implements MovieManager {
 			for (int i = 0; i < movieData.size(); i++) {
 				System.out.printf("(%d) ----------------	  %s\n", i+1, movieData.get(i).getTitle());
 			}
-			
+
 			do {
 				System.out.printf("\nOption: ");
-				
+
 				while(!sc.hasNextInt()) {
 					System.out.println("Invalid input. Please enter an integer!");
 					System.out.printf("Option: ");
 					sc.next();
 				}
-					
+
 				choice = sc.nextInt();
-				
+
 				if (choice >= 1 && choice <= movieData.size()) {
-					index = choice-1; 
+					index = choice-1;
 					break;
 				}
 				System.out.println("Option does not exist. Please key in a valid option!\n");
-				
+
 			} while (true);
 		}
 		
@@ -254,8 +253,6 @@ public class MovieTimeslotManager implements MovieManager {
 								
 		movieTimeslots.get(index).setCineplex(cineplexShown);	
 		movieTimeslots.get(index).setCinema(cinemaShown);
-														
-		//return movieTimeslots;
 	}
 	
 	private void updateTimeslot(List<Timeslot> movieTimeslots, int index) {
@@ -266,6 +263,5 @@ public class MovieTimeslotManager implements MovieManager {
 					
 		movieTimeslots.get(index).setShowDate(showDate);
 		movieTimeslots.get(index).setShowTime(showTime);
-		//return movieTimeslots;
 	}
 }

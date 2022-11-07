@@ -12,20 +12,6 @@ public class Customer implements SerializedData {
     //private AgeGroup ageType;
     public void setDetails(){
         Scanner sc = new Scanner(System.in);
-        /*System.out.println("MovieGoer Details\n"+
-                "-------------------------");
-        System.out.println("Enter name:");
-        name = sc.nextLine();
-        System.out.println("Enter mobile number:");
-        mobileNumber = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Enter email address:");
-        emailAddress = sc.nextLine();
-        System.out.println("Enter age:");
-        int age = sc.nextInt();
-        if (age<21) ageType = AgeGroup.CHILD;
-        else if(age>=60) ageType = AgeGroup.SENIOR_CITIZEN;
-        else ageType = AgeGroup.ADULT;*/
         System.out.println("Enter your name: ");
         name = sc.nextLine();
 

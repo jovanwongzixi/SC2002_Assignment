@@ -3,7 +3,6 @@ package control.admin;
  * No issues.
  */
 import java.util.*;
-import control.SerializeDB;
 import control.datahandler.AdminInfoHandler;
 import entity.Admin;
 import interfaces.UserInfoHandler;

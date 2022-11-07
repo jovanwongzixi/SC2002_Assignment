@@ -101,12 +101,12 @@ public class SystemManager {
 		Scanner sc = new Scanner(System.in);
 		int choice;
 
-		Collections.sort(movieList, (m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
+		movieList.sort((m1, m2) -> (Double.compare(m2.getOverallRating(), m1.getOverallRating())));
 		for (int i = 0; i < 5; i++) {
 			topRatingList.add(movieList.get(i));
 		}
 		
-		Collections.sort(movieList, (m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
+		movieList.sort((m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
 		for (int i = 0; i < 5; i++) {
 			topTicketSalesList.add(movieList.get(i));
 		}

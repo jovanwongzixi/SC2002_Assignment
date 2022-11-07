@@ -1,7 +1,6 @@
 package control.customer;
 
 import control.datahandler.*;
-import control.SerializeDB;
 import entity.Booking;
 import entity.Customer;
 import entity.Holiday;
@@ -90,12 +89,10 @@ public class MovieTicketBooker implements Controller {
         Scanner sc = new Scanner(System.in);
         int choice, selection = 0;
         List<Seat> selectedSeats = new ArrayList<Seat>();
-        //ts_index = movieTimeslots.indexOf(timeslot);
 
         do {
             Displayer seatDisplayer = new SeatDisplayer(timeslot);
             seatDisplayer.display();
-            //displaySeatLayoutUnserialized(timeslot);
             System.out.println("(1) ----------------      Select seating");
             System.out.println("(2) ----------------      Remove selection");
             System.out.println("(3) ----------------      Proceed to payment");
@@ -153,11 +150,6 @@ public class MovieTicketBooker implements Controller {
                             selection--;
                             final int removeSingleCol = removeCol;
                             selectedSeats.removeIf(s->(s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeSingleCol));
-                            /*for (Seat s : selectedSeats) {
-                                if (s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeCol) {
-                                    selectedSeats.remove(s);
-                                }
-                            }*/
                             System.out.println("Successfully removed selected seat.");
                         } else {
                             System.out.println("Seat is unable to be deselected, please choose the correct seat.");
@@ -168,11 +160,6 @@ public class MovieTicketBooker implements Controller {
                             timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).setSeatState(SeatState.AVAILABLE);
                             selection--;
                             selectedSeats.removeIf(s->(s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeDoubleCol*2));
-                            /*for (Seat s : selectedSeats) {
-                                if (s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeCol*2) {
-                                    selectedSeats.remove(s);
-                                }
-                            }*/
                             System.out.println("Successfully removed selected seat.");
                         } else {
                             System.out.println("Seat is unable to be deselected, please choose the correct seat.");

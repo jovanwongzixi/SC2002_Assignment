@@ -3,14 +3,11 @@ package control.admin;
  * No issues.
  */
 import java.util.*;
-import control.SerializeDB;
 import control.datahandler.MovieDataHandler;
 import control.datahandler.TimeslotDataHandler;
 import entity.movie.*;
 import interfaces.DataHandler;
 import interfaces.MovieManager;
-
-import javax.xml.crypto.Data;
 
 public class MovieListManager implements MovieManager {
 	
@@ -35,7 +32,6 @@ public class MovieListManager implements MovieManager {
 		System.out.println("(5) ------ M18");
 		System.out.println("(6) ------ R21");
 		do {
-			choice = 0;
 			System.out.printf("Option: ");
 			
 			while(!sc.hasNextInt()) {
@@ -141,7 +137,6 @@ public class MovieListManager implements MovieManager {
 		movieData.add(m);
 		
 		movieDataHandler.save(movieData);
-		//SerializeDB.writeList("Movie",movieData);
 		System.out.println("Movie added to list! Returning to admin menu...");
 	}
 	
@@ -161,20 +156,20 @@ public class MovieListManager implements MovieManager {
 			for (int i = 0; i < movieData.size(); i++) {
 				System.out.printf("(%d) ----------------	  %s\n", i+1, movieData.get(i).getTitle());
 			}
-			
+
 			do {
 				System.out.printf("\nOption: ");
-				
+
 				while(!sc.hasNextInt()) {
 					System.out.println("Invalid input. Please enter an integer!");
 					System.out.printf("Option: ");
 					sc.next();
 				}
-					
+
 				choice = sc.nextInt();
-					
+
 				if (choice >= 1 && choice <= movieData.size()) {
-					index = choice-1; 
+					index = choice-1;
 					break;
 				}
 				System.out.println("Option does not exist. Please key in a valid option!\n");
@@ -232,9 +227,9 @@ public class MovieListManager implements MovieManager {
 				}
 				default -> System.out.println("Option does not exist. Please key in a valid option!\n");
 			}
-		} while (choice < 1 || choice > 4);		
+		} while (true);
 	}
-	
+
 	public void remove() {
 		DataHandler movieDataHandler = new MovieDataHandler();
 		List<Movie> movieData = movieDataHandler.retrieve();
@@ -251,20 +246,20 @@ public class MovieListManager implements MovieManager {
 			for (int i = 0; i < movieData.size(); i++) {
 				System.out.printf("(%d) ----------------	  %s\n", i+1, movieData.get(i).getTitle());
 			}
-			
+
 			do {
 				System.out.printf("\nOption: ");
-				
+
 				while(!sc.hasNextInt()) {
 					System.out.println("Invalid input. Please enter an integer!");
 					System.out.printf("Option: ");
 					sc.next();
 				}
-					
+
 				choice = sc.nextInt();
-				
+
 				if (choice >= 1 && choice <= movieData.size()) {
-					index = choice-1; 
+					index = choice-1;
 					break;
 				}
 				System.out.println("Option does not exist. Please key in a valid option!\n");

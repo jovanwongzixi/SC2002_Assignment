@@ -1,14 +1,11 @@
 package control.customer;
 
-import entity.movie.Movie;
 import entity.movie.Timeslot;
 import interfaces.Displayer;
 
-import java.sql.Time;
 import java.util.List;
 
 public class TimeslotListDisplayer implements Displayer {
-    //private Movie movie;
     private final List<Timeslot> movieTimeslots;
     public TimeslotListDisplayer(List<Timeslot> movieTimeslots){
         this.movieTimeslots = movieTimeslots;

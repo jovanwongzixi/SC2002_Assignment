@@ -9,7 +9,7 @@ public class PaymentHandler {
     }
     public boolean start(){
         Scanner sc = new Scanner(System.in);
-        boolean inputPass = false;
+        boolean inputPass;
         String cardNumber;
         System.out.println("Only Mastercard, Visa and American Express card excepted!");
         do {
@@ -32,7 +32,7 @@ public class PaymentHandler {
     private boolean isNumeric(String num){
         if (num==null) return false;
         try{
-            Long number = Long.parseLong(num);
+            Long.parseLong(num);
 
         } catch (NumberFormatException e){
             System.out.println("Input is not numeric!");

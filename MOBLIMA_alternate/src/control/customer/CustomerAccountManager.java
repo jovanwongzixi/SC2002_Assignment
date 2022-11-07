@@ -1,13 +1,11 @@
 package control.customer;
 
-import control.SerializeDB;
 import control.datahandler.CustomerInfoHandler;
 import entity.Customer;
 import interfaces.AccountManager;
 import interfaces.UserInfoHandler;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 

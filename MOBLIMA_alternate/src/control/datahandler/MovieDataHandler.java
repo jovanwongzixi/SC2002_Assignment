@@ -30,8 +30,6 @@ public class MovieDataHandler implements DataHandler {
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(movieList);
-            //System.out.println(inputList.get(0).getClass());
-            //System.out.println("Data index 0: " + inputList.get(0));
             oos.close();
             fos.close();
         } catch (IOException e) {

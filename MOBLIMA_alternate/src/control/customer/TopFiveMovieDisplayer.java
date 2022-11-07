@@ -1,11 +1,8 @@
 package control.customer;
 
-import control.SerializeDB;
 import entity.movie.Movie;
 import interfaces.Displayer;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TopFiveMovieDisplayer implements Displayer {
