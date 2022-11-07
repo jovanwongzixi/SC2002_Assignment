@@ -12,7 +12,7 @@ public class TimeslotDataHandler implements DataHandler {
     public List<Timeslot> retrieve(){
         List<Timeslot> data = new ArrayList<>();
         try {
-            String fileName = "bin/data/Timeslot.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Timeslot.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (List<Timeslot>)in.readObject();
@@ -25,7 +25,7 @@ public class TimeslotDataHandler implements DataHandler {
 
     public <T extends SerializedData> void save(List<T> timeslotList){
         try {
-            String fileName = "bin/data/Timeslot.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Timeslot.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(timeslotList);

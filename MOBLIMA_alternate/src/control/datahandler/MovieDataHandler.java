@@ -12,7 +12,7 @@ public class MovieDataHandler implements DataHandler {
     public List<Movie> retrieve(){
         List<Movie> data = new ArrayList<>();
         try {
-            String fileName = "bin/data/Movie.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Movie.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (List<Movie>)in.readObject();
@@ -26,7 +26,7 @@ public class MovieDataHandler implements DataHandler {
     @Override
     public <T extends SerializedData> void save(List<T> movieList){
         try {
-            String fileName = "bin/data/Movie.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Movie.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(movieList);

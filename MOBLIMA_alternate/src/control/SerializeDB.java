@@ -18,7 +18,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/Admin.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/Admin.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Admin>)in.readObject();
 			in.close();
@@ -35,7 +35,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/Movie.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/Movie.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Movie>)in.readObject();
 			in.close();
@@ -52,7 +52,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/Cineplex.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/Cineplex.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Cineplex>)in.readObject();
 			in.close();
@@ -69,7 +69,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/Timeslot.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/Timeslot.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Timeslot>)in.readObject();
 			in.close();
@@ -86,7 +86,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_Final/bin/data/ticket_prices.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/ticket_prices.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Double>)in.readObject();
 			in.close();
@@ -103,7 +103,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_FINAL/bin/data/holidays.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/holidays.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<LocalDate>)in.readObject();
 			in.close();
@@ -120,7 +120,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_FINAL/bin/data/Booking.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/Booking.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Booking>)in.readObject();
 			in.close();
@@ -137,7 +137,7 @@ public class SerializeDB {
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream("MOBLIMA_FINAL/bin/data/flags.dat");
+			fis = new FileInputStream("MOBLIMA_alternate/bin/data/flags.dat");
 			in = new ObjectInputStream(fis);
 			data = (List<Boolean>)in.readObject();
 			in.close();
@@ -151,7 +151,7 @@ public class SerializeDB {
 
 	public static void writeToMovieList(List<Movie> movieList) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/Movie.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/Movie.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(movieList);
@@ -164,7 +164,7 @@ public class SerializeDB {
 
 	public static void writeToMovieTimeslots(List<Timeslot> movieTimeslots) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/Timeslot.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/Timeslot.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(movieTimeslots);
@@ -177,7 +177,7 @@ public class SerializeDB {
 
 	public static void writeToTicketPrices(List<Double> ticketPrices) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/ticket_prices.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/ticket_prices.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(ticketPrices);
@@ -190,7 +190,7 @@ public class SerializeDB {
 
 	public static void writeToBookingData(List<Booking> bookingData) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/Booking.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/Booking.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(bookingData);
@@ -203,7 +203,7 @@ public class SerializeDB {
 
 	public static void writeToHolidayList(List<LocalDate> holidays) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/holidays.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/holidays.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(holidays);
@@ -216,7 +216,7 @@ public class SerializeDB {
 
 	public static void writeToFlag(List<Boolean> sortSwitch) {
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_FINAL/bin/data/flags.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/flags.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 			oos.writeObject(sortSwitch);
@@ -229,7 +229,7 @@ public class SerializeDB {
 	public static <T extends SerializedData> List<T> getList(String className){
 		List<T> data = new ArrayList<>();
 		try {
-			String fileName = "bin/data/" + className + ".dat";
+			String fileName = "MOBLIMA_alternate/bin/data/" + className + ".dat";
 			FileInputStream fis = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(fis);
 			data = (List<T>)in.readObject();
@@ -241,7 +241,7 @@ public class SerializeDB {
 	}
 	public static <T extends SerializedData> void writeList(String className, List<T> inputList){
 		try {
-			String fileName = "bin/data/" + className + ".dat";
+			String fileName = "MOBLIMA_alternate/bin/data/" + className + ".dat";
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(inputList);
@@ -256,7 +256,7 @@ public class SerializeDB {
 	public static <T extends SerializedData> Map<String, T> getMap(String className){
 		Map<String, T> data = new HashMap<>();
 		try {
-			String fileName = "bin/data/" + className + ".dat";
+			String fileName = "MOBLIMA_alternate/bin/data/" + className + ".dat";
 			FileInputStream fis = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(fis);
 			data = (Map<String, T>)in.readObject();
@@ -268,7 +268,7 @@ public class SerializeDB {
 	}
 	public static <T extends SerializedData> void writeMap(String className, Map<String,T> inputMap){
 		try {
-			String fileName = "bin/data/" + className + ".dat";
+			String fileName = "MOBLIMA_alternate/bin/data/" + className + ".dat";
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(inputMap);

@@ -12,7 +12,7 @@ public class CineplexDataHandler implements DataHandler {
     public List<Cineplex> retrieve(){
         List<Cineplex> data = new ArrayList<>();
         try {
-            String fileName = "bin/data/Cineplex.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Cineplex.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (List<Cineplex>)in.readObject();
@@ -26,7 +26,7 @@ public class CineplexDataHandler implements DataHandler {
     @Override
     public <T extends SerializedData> void save(List<T> cineplexList) {
         try {
-            String fileName = "bin/data/Cineplex.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Cineplex.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(cineplexList);

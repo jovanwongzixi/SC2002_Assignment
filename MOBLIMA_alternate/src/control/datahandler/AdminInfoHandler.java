@@ -13,7 +13,7 @@ public class AdminInfoHandler implements UserInfoHandler {
     public HashMap<String, Admin> retrieve() {
         HashMap<String, Admin> data = new HashMap<>();
         try {
-            String fileName = "bin/data/Admin.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Admin.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (HashMap<String, Admin>)in.readObject();
@@ -27,7 +27,7 @@ public class AdminInfoHandler implements UserInfoHandler {
     @Override
     public <T extends SerializedData> void save(HashMap<String, T> inputMap) {
         try {
-            String fileName = "bin/data/Admin.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Admin.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(inputMap);

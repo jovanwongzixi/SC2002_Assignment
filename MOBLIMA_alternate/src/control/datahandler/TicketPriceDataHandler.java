@@ -12,7 +12,7 @@ public class TicketPriceDataHandler implements DataHandler {
     public List<TicketPrice> retrieve(){
         List<TicketPrice> data = new ArrayList<>();
         try {
-            String fileName = "bin/data/TicketPrice.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/TicketPrice.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (List<TicketPrice>)in.readObject();
@@ -26,7 +26,7 @@ public class TicketPriceDataHandler implements DataHandler {
     @Override
     public <T extends SerializedData> void save(List<T> ticketPriceList) {
         try {
-            String fileName = "bin/data/TicketPrice.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/TicketPrice.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(ticketPriceList);

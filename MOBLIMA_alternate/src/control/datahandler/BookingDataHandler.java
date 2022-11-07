@@ -13,7 +13,7 @@ public class BookingDataHandler implements DataHandler {
     public List<Booking> retrieve() {
         List<Booking> data = new ArrayList<>();
         try {
-            String fileName = "bin/data/Booking.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Booking.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (List<Booking>)in.readObject();
@@ -27,7 +27,7 @@ public class BookingDataHandler implements DataHandler {
     @Override
     public <T extends SerializedData> void save(List<T> bookingList) {
         try {
-            String fileName = "bin/data/Booking.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Booking.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(bookingList);

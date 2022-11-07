@@ -13,7 +13,7 @@ public class CustomerInfoHandler implements UserInfoHandler {
     public HashMap<String, Customer> retrieve() {
         HashMap<String, Customer> data = new HashMap<>();
         try {
-            String fileName = "bin/data/Customer.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Customer.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (HashMap<String, Customer>)in.readObject();
@@ -25,7 +25,7 @@ public class CustomerInfoHandler implements UserInfoHandler {
     }
     public <T extends SerializedData> void save(HashMap<String,T> inputMap){
         try {
-            String fileName = "bin/data/Customer.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Customer.dat";
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(inputMap);
