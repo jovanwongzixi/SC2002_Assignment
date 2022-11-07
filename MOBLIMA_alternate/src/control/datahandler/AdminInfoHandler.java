@@ -1,7 +1,7 @@
 package control.datahandler;
 
 import entity.Admin;
-import interfaces.SerializedData;
+import interfaces.User;
 import interfaces.UserInfoHandler;
 
 import java.io.*;
@@ -24,7 +24,7 @@ public class AdminInfoHandler implements UserInfoHandler {
     }
 
     @Override
-    public <T extends SerializedData> void save(HashMap<String, T> inputMap) {
+    public <T extends User> void save(HashMap<String, T> inputMap) {
         try {
             String fileName = "MOBLIMA_alternate/bin/data/Admin.dat";
             FileOutputStream fos = new FileOutputStream(fileName);

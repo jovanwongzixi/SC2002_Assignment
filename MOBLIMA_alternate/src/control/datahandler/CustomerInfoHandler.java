@@ -1,7 +1,7 @@
 package control.datahandler;
 
 import entity.Customer;
-import interfaces.SerializedData;
+import interfaces.User;
 import interfaces.UserInfoHandler;
 
 import java.io.*;
@@ -22,7 +22,7 @@ public class CustomerInfoHandler implements UserInfoHandler {
         }
         return data;
     }
-    public <T extends SerializedData> void save(HashMap<String,T> inputMap){
+    public <T extends User> void save(HashMap<String,T> inputMap){
         try {
             String fileName = "MOBLIMA_alternate/bin/data/Customer.dat";
             FileOutputStream fos = new FileOutputStream(fileName);

@@ -1,10 +1,10 @@
 package entity;
 
-import interfaces.SerializedData;
+import interfaces.User;
 
 import java.io.Serial;
 
-public class Admin implements SerializedData {
+public class Admin implements User {
 	@Serial
 	private static final long serialVersionUID = -6105444634575497638L;
 	private String userid;

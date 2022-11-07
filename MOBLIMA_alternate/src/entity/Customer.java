@@ -1,11 +1,11 @@
 package entity;
 
-import interfaces.SerializedData;
+import interfaces.User;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Customer implements SerializedData {
+public class Customer implements User {
     private String name;
     private String mobileNumber;
     private String emailAddress;
