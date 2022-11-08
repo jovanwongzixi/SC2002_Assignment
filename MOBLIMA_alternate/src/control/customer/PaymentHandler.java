@@ -20,10 +20,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PaymentHandler {
-    /*public static void main(String[] args) {
-        PaymentHandler h = new PaymentHandler();
-        System.out.println(h.start());
-    }*/
     protected boolean ticketPayment(Movie movie, Timeslot ts, List<Seat> selectedSeats, Customer currentUser) {
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
@@ -123,7 +119,7 @@ public class PaymentHandler {
             switch(choice) {
                 case 1:
                     //PaymentHandler handler = new PaymentHandler();
-                    if (start()) {
+                    if (payCreditCard()) {
                         LocalDateTime timeOfPurchase = LocalDateTime.now();
                         String tID = cineplexCode + timeOfPurchase.format(formatter);
                         Booking b = new Booking(currentUser.getName(), currentUser.getEmailAddress(), currentUser.getMobileNumber(), ticketPrice,
@@ -131,7 +127,6 @@ public class PaymentHandler {
                                 ts.getShowTime(), timeOfPurchase, tID);
                         bookingData.add(b);
 
-                        //confirmSeats(ts, tsIndex, selectedSeats);
                         bookingDataHandler.save(bookingData);
 
                         System.out.printf("The ticket has been successfully purchase. Your transaction ID is %s. Returning to previous menu...\n", tID);
@@ -149,7 +144,7 @@ public class PaymentHandler {
 
         } while (true);
     }
-    private boolean start(){
+    private boolean payCreditCard(){
         Scanner sc = new Scanner(System.in);
         boolean inputPass;
         String cardNumber;

@@ -1,9 +1,7 @@
 package control.customer;
 
-import control.datahandler.MovieDataHandler;
 import entity.movie.Movie;
 import entity.movie.ShowingStatus;
-import interfaces.DataHandler;
 import interfaces.Displayer;
 
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class MovieSelector {
-    private List<Movie> bookingList;
+    private final List<Movie> bookingList;
     public MovieSelector(List<Movie> bookingList){
         this.bookingList = bookingList;
     }
@@ -20,8 +18,6 @@ public class MovieSelector {
         int choice;
 
         do {
-            //DataHandler movieDataHandler = new MovieDataHandler();
-            //List<Movie> bookingList = movieDataHandler.retrieve();
             bookingList.removeIf(movie -> Objects.equals(movie.getShowingStatus(), ShowingStatus.COMING_SOON));
             Displayer movieListDisplayer = new MovieListDisplayer(bookingList);
             movieListDisplayer.display();

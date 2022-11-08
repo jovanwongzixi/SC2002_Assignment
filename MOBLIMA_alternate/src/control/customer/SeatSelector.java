@@ -14,7 +14,7 @@ public class SeatSelector {
     protected List<Seat> selectSeats(Timeslot timeslot, Movie movie) {
         Scanner sc = new Scanner(System.in);
         int choice, selection = 0;
-        List<Seat> selectedSeats = new ArrayList<Seat>();
+        List<Seat> selectedSeats = new ArrayList<>();
 
         do {
             Displayer seatDisplayer = new SeatDisplayer(timeslot);
@@ -98,7 +98,6 @@ public class SeatSelector {
                         System.out.println("There are no seats selected! Please select a seat before payment!");
                         break;
                     } else {
-                        //ticketPayment(movie, timeslot, ts_index, selectedSeats);
                         return selectedSeats;
                     }
                 case 4:

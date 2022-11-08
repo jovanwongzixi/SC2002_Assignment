@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class TimeslotSelector {
-    private List<Timeslot> movieTimeslots;
+    private final List<Timeslot> movieTimeslots;
     public TimeslotSelector(List<Timeslot> movieTimeslots){
         this.movieTimeslots = movieTimeslots;
     }
@@ -41,7 +41,6 @@ public class TimeslotSelector {
                 System.out.println("Returning to previous menu...");
                 return null;
             } else {
-                //selectSeats(ts, movieTimeslots.indexOf(ts), movie);
                 return selectedMovieTimeslots.get(choice-1);
             }
         } while (true);
