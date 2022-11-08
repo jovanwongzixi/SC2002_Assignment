@@ -6,6 +6,7 @@ import control.datahandler.BookingDataHandler;
 import entity.Booking;
 import entity.Customer;
 import interfaces.DataHandler;
+import interfaces.Displayer;
 import interfaces.Viewer;
 
 public class BookingHistoryViewer implements Viewer{
@@ -18,7 +19,6 @@ public class BookingHistoryViewer implements Viewer{
 		List<Booking> bookingData = bookingDataHandler.retrieve();
 		Scanner sc = new Scanner(System.in);
 		String mobileNum;
-		int counter = 0;
 		if(customer != null) mobileNum = customer.getMobileNumber();
 		else {
 			do {
@@ -29,28 +29,12 @@ public class BookingHistoryViewer implements Viewer{
 				}
 			} while (!mobileMatches(mobileNum));
 		}
-		System.out.println("\n----------------- Booking History ----------------");
-		for (Booking b : bookingData) {
-			if(b.getMobileNum().equals(mobileNum)) {
-				counter++;		
-				System.out.printf("""
-								Booking %s for %s:
-								Cineplex / Cinema: %s / %d
-								Movie timeslot: %td %<tb %<tY %tR
-								Price: %.2f
-								-------------------------------------
-								""",
-						b.getTID(), b.getMovieTitle(), b.getCineplex(), b.getCinemaID(),
-						b.getDateShow(), b.getTimeShow(), b.getTicketPrice());
-			}
-		}
-		
-		if(counter == 0) {
-			System.out.println("No booking history found!");
-		} else {
-			System.out.println("\nPress Enter to return to movie list...");
-			sc.nextLine();
-		}
+		String finalMobileNum = mobileNum;
+		bookingData.removeIf(b->!b.getMobileNum().equals(finalMobileNum));
+		Displayer bookingHistoryDisplayer = new BookingHistoryDisplayer(bookingData);
+		bookingHistoryDisplayer.display();
+		System.out.println("\nPress Enter to return to movie list...");
+		sc.nextLine();
 	}
 	
 	private boolean mobileMatches(String mobileNum) {
