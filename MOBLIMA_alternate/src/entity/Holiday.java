@@ -7,6 +7,10 @@ import java.time.LocalDate;
 public class Holiday implements SerializedData {
     private LocalDate date;
 
+    public Holiday(LocalDate date) {
+        this.date = date;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -15,3 +19,4 @@ public class Holiday implements SerializedData {
         this.date = date;
     }
 }
+

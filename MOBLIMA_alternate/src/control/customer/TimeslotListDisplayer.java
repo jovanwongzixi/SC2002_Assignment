@@ -18,7 +18,7 @@ public class TimeslotListDisplayer implements Displayer {
             System.out.printf("------------------ %s Timeslots ------------------\n", movieTimeslots.get(0).getMovieTitle());
             int i=0;
             for (Timeslot ts : movieTimeslots) {
-                System.out.printf("(%d) -------\t Cineplex %s at Cinema %d on %td %<tb %<tY "+ts.getShowDate().getDayOfWeek()+" at %tR", ++i, ts.getCineplex(),
+                System.out.printf("(%d) -------\t Cineplex %s at Cinema %d on %td %<tb %<tY "+ts.getShowDate().getDayOfWeek()+" at %tR\n", ++i, ts.getCineplex(),
                         ts.getCinema().getID(), ts.getShowDate(), ts.getShowTime());
             }
         }

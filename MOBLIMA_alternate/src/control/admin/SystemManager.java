@@ -2,8 +2,6 @@ package control.admin;
 
 import java.time.LocalDate;
 import java.util.*;
-import control.SerializeDB;
-import control.customer.TopFiveMovieDisplayer;
 import control.datahandler.*;
 import entity.Flag;
 import entity.Holiday;
@@ -13,31 +11,30 @@ import interfaces.DataHandler;
 import interfaces.Displayer;
 
 public class SystemManager {
-	
+
 	public void editHolidays() {
 		DateTimeManager datetimeManager = new DateTimeManager();
 		DataHandler holidayDataHandler = new HolidayDataHandler();
 		List<Holiday> holidays = holidayDataHandler.retrieve();
 		int choice;
 		Scanner sc = new Scanner(System.in);
-	
+
 		do {
 			System.out.println("\n(1) ----------------      Add new holiday");
 			System.out.println("(2) ----------------      Return to system config");
 			System.out.printf("\nOption: ");
-				
+
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");
 				sc.next();
 			}
-				
+
 			choice = sc.nextInt();
 
 			switch (choice) {
 				case 1 -> {
 					LocalDate holidayDate = datetimeManager.addDate();
-					Holiday holiday = new Holiday();
-					holiday.setDate(holidayDate);
+					Holiday holiday = new Holiday(holidayDate);
 					holidays.add(holiday);
 					holidayDataHandler.save(holidays);
 					System.out.println("Holiday added! Returning to system config...");
@@ -51,7 +48,7 @@ public class SystemManager {
 			}
 		} while (true);
 	}
-	
+
 	public void editPrices() {
 		int choice;
 		Scanner sc = new Scanner(System.in);
@@ -65,11 +62,11 @@ public class SystemManager {
 				System.out.println("Invalid input. Please enter an integer!");
 				sc.next();
 			}
-			
+
 			choice = sc.nextInt();
-				
+
 			if (choice > 11 || choice < 1) {
-				System.out.println("Option does not exist. Please key in a valid option!\n");	
+				System.out.println("Option does not exist. Please key in a valid option!\n");
 			} else if (choice == 11) {
 				System.out.println("Returning to system config...");
 				return;
@@ -87,10 +84,10 @@ public class SystemManager {
 				ticketPrices.get(choice-1).setPrice(newPrice);
 				ticketPriceDataHandler.save(ticketPrices);
 				System.out.println("Price updated!");
-			}			
+			}
 		} while (true);
 	}
-	
+
 	public void configureTopFive() {
 		DataHandler movieDataHandler = new MovieDataHandler();
 		List<Movie> movieList = movieDataHandler.retrieve();
@@ -105,7 +102,7 @@ public class SystemManager {
 		for (int i = 0; i < 5; i++) {
 			topRatingList.add(movieList.get(i));
 		}
-		
+
 		movieList.sort((m1, m2) -> (m2.getTicketSales() - m1.getTicketSales()));
 		for (int i = 0; i < 5; i++) {
 			topTicketSalesList.add(movieList.get(i));
@@ -114,13 +111,13 @@ public class SystemManager {
 		if (sortFlag.get(0).getFlag()) {
 			System.out.println("\n-------------------- Top 5 Movies by Rating -------------------");
 			for (int index = 1; index <= 5; index++) {
-				System.out.printf("(%d) ----------------	%s (Rating: %.1f)\n", index, topRatingList.get(index-1).getTitle(), topRatingList.get(index-1).getOverallRating());			
+				System.out.printf("(%d) ----------------	%s (Rating: %.1f)\n", index, topRatingList.get(index-1).getTitle(), topRatingList.get(index-1).getOverallRating());
 			}
 		}
 		if (sortFlag.get(1).getFlag()) {
 			System.out.println("\n-------------------- Top 5 Movies by Ticket Sales -------------------");
 			for(int index = 1; index <= 5; index++) {
-				System.out.printf("(%d) ----------------	%s (Ticket sales: %d)\n", index, topTicketSalesList.get(index-1).getTitle(), topTicketSalesList.get(index-1).getTicketSales());	
+				System.out.printf("(%d) ----------------	%s (Ticket sales: %d)\n", index, topTicketSalesList.get(index-1).getTitle(), topTicketSalesList.get(index-1).getTicketSales());
 			}
 		}
 
@@ -137,12 +134,12 @@ public class SystemManager {
 			}
 			System.out.println("(3) ----------------      Return to system config");
 			System.out.printf("\nOption: ");
-				
+
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");
 				sc.next();
 			}
-				
+
 			choice = sc.nextInt();
 
 			switch (choice) {
@@ -163,6 +160,6 @@ public class SystemManager {
 				default -> System.out.println("Option does not exist. Please key in a valid option!\n");
 			}
 		} while (true);
-		
+
 	}
 }
