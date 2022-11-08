@@ -119,10 +119,10 @@ public class MovieTicketBooker implements Controller {
                     int addCol = sc.nextInt();
 
                     if(addRow+2-'A' < timeslot.getCinema().getNumOfRows()) {
-                        if (timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).getSeatState() == SeatState.AVAILABLE) {
-                            timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).setSeatState(SeatState.SELECTED);
+                        Seat s = timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1);
+                        if (s.getSeatState() == SeatState.AVAILABLE) {
+                            s.setSeatState(SeatState.SELECTED);
                             selection++;
-                            Seat s = new Seat(addRow+1-'A',addCol,false,SeatState.SELECTED);
                             selectedSeats.add(s);
                             System.out.println("Successfully selected seat.");
                         } else {
@@ -130,10 +130,10 @@ public class MovieTicketBooker implements Controller {
                         }
                     } else {
                         addCol = (addCol + addCol%2)/2;
-                        if (timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).getSeatState() == SeatState.AVAILABLE) {
-                            timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1).setSeatState(SeatState.SELECTED);
+                        Seat s = timeslot.getCinema().getCinemaLayout().get(addRow-'A').get(addCol-1);
+                        if (s.getSeatState() == SeatState.AVAILABLE) {
+                            s.setSeatState(SeatState.SELECTED);
                             selection++;
-                            Seat s = new Seat(addRow+1-'A',addCol*2,true,SeatState.SELECTED);
                             selectedSeats.add(s);
                             System.out.println("Successfully selected seat.");
                         } else {
@@ -149,21 +149,22 @@ public class MovieTicketBooker implements Controller {
                     int removeCol = sc.nextInt();
 
                     if(removeRow+2-'A' < timeslot.getCinema().getNumOfRows()) {
-                        if (timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).getSeatState() == SeatState.SELECTED) {
-                            timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).setSeatState(SeatState.AVAILABLE);
+                        Seat s = timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1);
+                        if (s.getSeatState() == SeatState.SELECTED) {
+                            s.setSeatState(SeatState.AVAILABLE);
                             selection--;
-                            final int removeSingleCol = removeCol;
-                            selectedSeats.removeIf(s->(s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeSingleCol));
+                            selectedSeats.remove(s);
                             System.out.println("Successfully removed selected seat.");
                         } else {
                             System.out.println("Seat is unable to be deselected, please choose the correct seat.");
                         }
                     } else {
                         final int removeDoubleCol = (removeCol + removeCol%2)/2;
-                        if (timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).getSeatState() == SeatState.SELECTED) {
-                            timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeCol-1).setSeatState(SeatState.AVAILABLE);
+                        Seat s = timeslot.getCinema().getCinemaLayout().get(removeRow-'A').get(removeDoubleCol-1);
+                        if (s.getSeatState() == SeatState.SELECTED) {
+                            s.setSeatState(SeatState.AVAILABLE);
                             selection--;
-                            selectedSeats.removeIf(s->(s.getSeatRow() == removeRow+1-'A' && s.getSeatCol() == removeDoubleCol*2));
+                            selectedSeats.remove(s);
                             System.out.println("Successfully removed selected seat.");
                         } else {
                             System.out.println("Seat is unable to be deselected, please choose the correct seat.");
@@ -191,8 +192,6 @@ public class MovieTicketBooker implements Controller {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
         DataHandler cineplexDataHandler = new CineplexDataHandler();
         List<Cineplex> cineplexData = cineplexDataHandler.retrieve();
-        DataHandler timeslotDataHandler = new TimeslotDataHandler();
-        List<Timeslot> movieTimeslots = timeslotDataHandler.retrieve();
         DataHandler holidayDataHandler = new HolidayDataHandler();
         List<Holiday> holidays = holidayDataHandler.retrieve();
         DataHandler bookingDataHandler = new BookingDataHandler();
@@ -319,11 +318,7 @@ public class MovieTicketBooker implements Controller {
         List<Timeslot> movieTimeslots = timeslotDataHandler.retrieve();
         movieTimeslots.set(tsIndex, ts);
         for (Seat s : selectedSeats) {
-            if(s.getSeatRow()+1 < ts.getCinema().getNumOfRows()) {
-                ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get(s.getSeatCol()-1).setSeatState(SeatState.TAKEN);
-            } else {
-                ts.getCinema().getCinemaLayout().get(s.getSeatRow()-1).get((s.getSeatCol()/2)-1).setSeatState(SeatState.TAKEN);
-            }
+            s.setSeatState(SeatState.TAKEN);
         }
         timeslotDataHandler.save(movieTimeslots);
     }
