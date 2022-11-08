@@ -37,7 +37,7 @@ public class CustomerAccountManager implements AccountManager {
         }while(flag);
         return currentUser;
     }
-    public void getAccount(){
+    private void getAccount(){
         Scanner sc = new Scanner(System.in);
         UserInfoHandler customerInfoHandler = new CustomerInfoHandler();
         HashMap<String, Customer> customers = customerInfoHandler.retrieve();
@@ -53,7 +53,7 @@ public class CustomerAccountManager implements AccountManager {
             System.out.println("Invalid account!");
         }
     }
-    public void createAccount(){
+    private void createAccount(){
         inputDetails();
         UserInfoHandler customerInfoHandler = new CustomerInfoHandler();
         HashMap<String, Customer> customers = customerInfoHandler.retrieve();
@@ -61,7 +61,7 @@ public class CustomerAccountManager implements AccountManager {
         customers.put(currentUser.getEmailAddress(),currentUser);
         customerInfoHandler.save(customers);
     }
-    public void inputDetails(){
+    private void inputDetails(){
         currentUser = new Customer();
         currentUser.setDetails();
     }

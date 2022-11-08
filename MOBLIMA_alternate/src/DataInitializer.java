@@ -12,12 +12,12 @@ public class DataInitializer {
 	//driver for initializer
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		DataInitializer dataInit = new DataInitializer();
-		dataInit.initializeAdminData();
+		//dataInit.initializeAdminData();
         //dataInit.initializeMovieData();
         //dataInit.initializeCineplexData();
         //dataInit.initializeMovieTimeslotData();
         //dataInit.initializeTicketPrices();
-        //dataInit.initializeHolidays();
+        dataInit.initializeHolidays();
         //dataInit.initializeBookingData();
         //dataInit.initializeFlags();
 		//SerializeDB.writeMap("Customer", new HashMap<String, Customer>());
@@ -196,7 +196,7 @@ public class DataInitializer {
 			holidayList1.add(holiday);
 		}
 		try {
-			FileOutputStream fos = new FileOutputStream("MOBLIMA_Final/bin/data/holidays.dat");
+			FileOutputStream fos = new FileOutputStream("MOBLIMA_alternate/bin/data/Holidays.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			oos.writeObject(holidayList);
