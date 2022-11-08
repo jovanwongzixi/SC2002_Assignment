@@ -12,7 +12,7 @@ public class HolidayDataHandler implements DataHandler {
     public List<Holiday> retrieve(){
         List<Holiday> data = new ArrayList<>();
         try {
-            String fileName = "MOBLIMA_alternate/bin/data/Movie.dat";
+            String fileName = "MOBLIMA_alternate/bin/data/Holiday.dat";
             FileInputStream fis = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fis);
             data = (List<Holiday>)in.readObject();
