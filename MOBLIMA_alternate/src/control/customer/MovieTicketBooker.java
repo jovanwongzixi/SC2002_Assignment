@@ -1,24 +1,13 @@
 package control.customer;
 
 import control.datahandler.*;
-import entity.Booking;
 import entity.Customer;
-import entity.Holiday;
-import entity.cinema.Cineplex;
 import entity.cinema.Seat;
 import entity.cinema.SeatState;
 import entity.movie.*;
 import interfaces.*;
 
-import javax.xml.crypto.Data;
-import java.sql.Time;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class MovieTicketBooker implements Controller {
     private final Customer currentUser;
@@ -41,7 +30,7 @@ public class MovieTicketBooker implements Controller {
                 case 2:
                     DataHandler timeslotHandler = new TimeslotDataHandler();
                     timeslotList= timeslotHandler.retrieve();
-                    TimeSlotSelector timeSlotSelector = new TimeSlotSelector(timeslotList);
+                    TimeslotSelector timeSlotSelector = new TimeslotSelector(timeslotList);
                     ts = timeSlotSelector.selectTimeslot(movie);
                     if(ts == null){
                         section = 1;

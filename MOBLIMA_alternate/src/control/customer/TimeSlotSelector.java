@@ -1,11 +1,7 @@
 package control.customer;
 
-import control.datahandler.MovieDataHandler;
-import control.datahandler.TimeslotDataHandler;
 import entity.movie.Movie;
-import entity.movie.ShowingStatus;
 import entity.movie.Timeslot;
-import interfaces.DataHandler;
 import interfaces.Displayer;
 
 import java.util.ArrayList;
@@ -13,9 +9,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class TimeSlotSelector {
+public class TimeslotSelector {
     private List<Timeslot> movieTimeslots;
-    public TimeSlotSelector(List<Timeslot> movieTimeslots){
+    public TimeslotSelector(List<Timeslot> movieTimeslots){
         this.movieTimeslots = movieTimeslots;
     }
     protected Timeslot selectTimeslot(Movie movie){
