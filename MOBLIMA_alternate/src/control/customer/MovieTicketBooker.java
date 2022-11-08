@@ -60,8 +60,12 @@ public class MovieTicketBooker implements Controller {
         int choice;
         DataHandler timeslotDataHandler = new TimeslotDataHandler();
         List<Timeslot> movieTimeslots = timeslotDataHandler.retrieve();
-        movieTimeslots.removeIf(ts -> !Objects.equals(ts.getMovieTitle(), movie.getTitle()));
-        Displayer movieTimeslotDisplayer = new TimeslotListDisplayer(movieTimeslots);
+        List<Timeslot> selectedMovieTimeslots = new ArrayList<>();
+        for(Timeslot ts : movieTimeslots){
+            if(Objects.equals(ts.getMovieTitle(), movie.getTitle())) selectedMovieTimeslots.add(ts);
+        }
+        //movieTimeslots.removeIf(ts -> !Objects.equals(ts.getMovieTitle(), movie.getTitle()));
+        Displayer movieTimeslotDisplayer = new TimeslotListDisplayer(selectedMovieTimeslots);
         do {
             movieTimeslotDisplayer.display();
             System.out.printf("\nInput option number to view seats (-1 to return to previous menu): ");
@@ -79,8 +83,8 @@ public class MovieTicketBooker implements Controller {
                 System.out.println("Returning to previous menu...");
                 return;
             } else {
-                Timeslot ts = movieTimeslots.get(choice-1);
-                selectSeats(ts, choice-1, movie);
+                Timeslot ts = selectedMovieTimeslots.get(choice-1);
+                selectSeats(ts, movieTimeslots.indexOf(ts), movie);
                 return;
             }
         } while (true);
@@ -293,7 +297,6 @@ public class MovieTicketBooker implements Controller {
                         bookingData.add(b);
 
                         confirmSeats(ts, tsIndex, selectedSeats);
-                        timeslotDataHandler.save(movieTimeslots);
                         bookingDataHandler.save(bookingData);
 
                         System.out.printf("The ticket has been successfully purchase. Your transaction ID is %s. Returning to previous menu...\n", tID);
