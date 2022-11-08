@@ -10,6 +10,8 @@ import entity.cinema.SeatState;
 import entity.movie.*;
 import interfaces.*;
 
+import javax.xml.crypto.Data;
+import java.sql.Time;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +25,43 @@ public class MovieTicketBooker implements Controller {
     public MovieTicketBooker(Customer currentUser){
         this.currentUser = currentUser;
     }
+    public void start(){
+        int section = 1;
+        Movie movie = null;
+        Timeslot ts = null;
+        List<Seat> selectedSeats = null;
+        List<Timeslot> timeslotList = null;
+        do{
+            switch(section){
+                case 1:
+                    DataHandler movieDataHandler = new MovieDataHandler();
+                    MovieSelector movieSelector = new MovieSelector(movieDataHandler.retrieve());
+                    movie = movieSelector.selectMovie();
+                    if(movie==null) return;
+                case 2:
+                    DataHandler timeslotHandler = new TimeslotDataHandler();
+                    timeslotList= timeslotHandler.retrieve();
+                    TimeSlotSelector timeSlotSelector = new TimeSlotSelector(timeslotList);
+                    ts = timeSlotSelector.selectTimeslot(movie);
+                    if(ts == null){
+                        section = 1;
+                        break;
+                    }
+                case 3:
+                    SeatSelector seatSelector = new SeatSelector();
+                    selectedSeats = seatSelector.selectSeats(ts, movie);
+                    if(selectedSeats == null){
+                        section = 2;
+                        break;
+                    }
+                case 4:
+                    PaymentHandler paymentHandler = new PaymentHandler();
+                    if(paymentHandler.ticketPayment(movie, ts, selectedSeats, currentUser)) confirmSeats(ts,timeslotList.indexOf(ts),selectedSeats);
+                    return;
+            }
+        } while(true);
+    }
+    /*
     public void start(){
 
         Scanner sc = new Scanner(System.in);
@@ -64,7 +103,6 @@ public class MovieTicketBooker implements Controller {
         for(Timeslot ts : movieTimeslots){
             if(Objects.equals(ts.getMovieTitle(), movie.getTitle())) selectedMovieTimeslots.add(ts);
         }
-        //movieTimeslots.removeIf(ts -> !Objects.equals(ts.getMovieTitle(), movie.getTitle()));
         Displayer movieTimeslotDisplayer = new TimeslotListDisplayer(selectedMovieTimeslots);
         do {
             movieTimeslotDisplayer.display();
@@ -312,7 +350,7 @@ public class MovieTicketBooker implements Controller {
             }
 
         } while (true);
-    }
+    }*/
     private void confirmSeats(Timeslot ts, int tsIndex, List<Seat> selectedSeats) {
         DataHandler timeslotDataHandler = new TimeslotDataHandler();
         List<Timeslot> movieTimeslots = timeslotDataHandler.retrieve();
