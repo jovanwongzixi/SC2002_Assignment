@@ -10,3 +10,5 @@
 **/.idea
 **/out
 *.iml
+*.vpp.bak_000f
+*.vpp.lck
