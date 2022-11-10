@@ -60,22 +60,30 @@ public class MovieTimeslotManager implements MovieManager {
 		sc.nextLine();
 		
 		do {
-			index = -1;
 			System.out.println("\nWhich cineplex will the movie be shown?");
-			String cineplexInput = sc.nextLine();
+			int j = 0;
+			for(Cineplex c: cineplexData){
+				System.out.println("("+(++j)+") ----------------	"+c.getName());
+			}
+			index = sc.nextInt();
+			if(index>cineplexData.size()){
+				System.out.println("The cineplex does not exist! Please try again!");
+			}
+			else break;
+			/*String cineplexInput = sc.nextLine();
 			
 			for (int i = 0; i < cineplexData.size(); i++) {
 				if(cineplexData.get(i).getName().equals(cineplexInput)) {
 					index = i;
 					cineplexMatch = true;
 				}
-			}
+			}*/
 			
-			if(!cineplexMatch)
-				System.out.println("The cineplex does not exist! Please try again!");
-		} while (!cineplexMatch);
+			/*if(!cineplexMatch)
+				System.out.println("The cineplex does not exist! Please try again!");*/
+		} while (true);
 		
-		String cineplexShown = cineplexData.get(index).getName();
+		String cineplexShown = cineplexData.get(index-1).getName();
 		
 		do {
 			System.out.println("Which cinema will the movie be shown?");
@@ -87,14 +95,14 @@ public class MovieTimeslotManager implements MovieManager {
 			
 			cinemaInput = sc.nextInt();
 								
-			if(cinemaInput >= 1 && cinemaInput <= cineplexData.get(index).getCinema().size()) {
+			if(cinemaInput >= 1 && cinemaInput <= cineplexData.get(index-1).getCinema().size()) {
 				break;
 			} else {
 				System.out.println("The cinema does not exist! Please try again!");
 			}										
 		} while (true);
 		
-		Cinema cinemaShown = cineplexData.get(index).getCinema().get(cinemaInput-1);
+		Cinema cinemaShown = cineplexData.get(index-1).getCinema().get(cinemaInput-1);
 		LocalDate dateOfShow = datetimeManager.addDate();
 		LocalTime timeOfShow = datetimeManager.addTime();
 		
@@ -215,9 +223,18 @@ public class MovieTimeslotManager implements MovieManager {
 		boolean cineplexMatch = false;
 			
 		do {
-			temp = -1;
+			//temp = -1;
 			System.out.println("\nWhich cineplex will the movie be shown?");
-			String cineplexInput = sc.nextLine();
+			int j=0;
+			for(Cineplex c: cineplexData){
+				System.out.println("("+(++j)+") ----------------	"+c.getName());
+			}
+			temp = sc.nextInt();
+			if(temp>cineplexData.size()){
+				System.out.println("The cineplex does not exist! Please try again!");
+			}
+			else break;
+			/*String cineplexInput = sc.nextLine();
 			
 			for (int i = 0; i < cineplexData.size(); i++) {
 				if(cineplexData.get(i).getName().equals(cineplexInput)) {
@@ -227,10 +244,10 @@ public class MovieTimeslotManager implements MovieManager {
 			}
 			
 			if(!cineplexMatch)
-				System.out.println("The cineplex does not exist! Please try again!");
-		} while (!cineplexMatch);
-		
-		String cineplexShown = cineplexData.get(temp).getName();
+				System.out.println("The cineplex does not exist! Please try again!");*/
+		} while (true);
+
+		String cineplexShown = cineplexData.get(temp-1).getName();
 		
 		do {
 			System.out.println("Which cinema will the movie be shown?");
@@ -242,14 +259,14 @@ public class MovieTimeslotManager implements MovieManager {
 			
 			cinemaInput = sc.nextInt();
 								
-			if(cinemaInput >= 1 && cinemaInput <= cineplexData.get(temp).getCinema().size()) {
+			if(cinemaInput >= 1 && cinemaInput <= cineplexData.get(temp-1).getCinema().size()) {
 				break;
 			} else {
 				System.out.println("The cinema does not exist! Please try again!");
 			}										
 		} while (true);
 		
-		Cinema cinemaShown = cineplexData.get(temp).getCinema().get(cinemaInput-1);
+		Cinema cinemaShown = cineplexData.get(temp-1).getCinema().get(cinemaInput-1);
 								
 		movieTimeslots.get(index).setCineplex(cineplexShown);	
 		movieTimeslots.get(index).setCinema(cinemaShown);
