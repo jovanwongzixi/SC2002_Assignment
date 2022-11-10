@@ -25,7 +25,6 @@ public class MovieTimeslotManager implements MovieManager {
 		DateTimeManager datetimeManager = new DateTimeManager();
 		Scanner sc = new Scanner(System.in);
 		int choice, index = 0, cinemaInput;
-		boolean cineplexMatch = false;
 		
 		if (movieData.size() == 0) {
 			System.out.println("\nThere are no movies available! Returning to admin menu...");
@@ -70,23 +69,12 @@ public class MovieTimeslotManager implements MovieManager {
 				System.out.println("The cineplex does not exist! Please try again!");
 			}
 			else break;
-			/*String cineplexInput = sc.nextLine();
-			
-			for (int i = 0; i < cineplexData.size(); i++) {
-				if(cineplexData.get(i).getName().equals(cineplexInput)) {
-					index = i;
-					cineplexMatch = true;
-				}
-			}*/
-			
-			/*if(!cineplexMatch)
-				System.out.println("The cineplex does not exist! Please try again!");*/
 		} while (true);
 		
 		String cineplexShown = cineplexData.get(index-1).getName();
 		
 		do {
-			System.out.println("Which cinema will the movie be shown?");
+			System.out.println("Which cinema will the movie be shown?"+ "(1-"+cineplexData.get(index-1).getCinema().size()+")");
 			
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");
@@ -220,10 +208,8 @@ public class MovieTimeslotManager implements MovieManager {
 		List<Cineplex> cineplexData = cineplexDataHandler.retrieve();
 		Scanner sc = new Scanner(System.in);
 		int temp, cinemaInput;
-		boolean cineplexMatch = false;
 			
 		do {
-			//temp = -1;
 			System.out.println("\nWhich cineplex will the movie be shown?");
 			int j=0;
 			for(Cineplex c: cineplexData){
@@ -234,23 +220,12 @@ public class MovieTimeslotManager implements MovieManager {
 				System.out.println("The cineplex does not exist! Please try again!");
 			}
 			else break;
-			/*String cineplexInput = sc.nextLine();
-			
-			for (int i = 0; i < cineplexData.size(); i++) {
-				if(cineplexData.get(i).getName().equals(cineplexInput)) {
-					temp = i;
-					cineplexMatch = true;
-				}
-			}
-			
-			if(!cineplexMatch)
-				System.out.println("The cineplex does not exist! Please try again!");*/
 		} while (true);
 
 		String cineplexShown = cineplexData.get(temp-1).getName();
 		
 		do {
-			System.out.println("Which cinema will the movie be shown?");
+			System.out.println("Which cinema will the movie be shown?"+ "(1-"+cineplexData.get(temp-1).getCinema().size()+")");
 			
 			while(!sc.hasNextInt()) {
 				System.out.println("Invalid input. Please enter an integer!");

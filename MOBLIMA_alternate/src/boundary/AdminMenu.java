@@ -2,6 +2,7 @@ package boundary;
 /*
  * No issues.
  */
+import java.io.Console;
 import java.util.Scanner;
 import interfaces.Menu;
 import static control.admin.Authenticator.authenticate;
@@ -44,10 +45,20 @@ public class AdminMenu implements Menu{
 				switch (choice) {
 					case 1:
 						if(!loggedIn) {
-							System.out.printf("Enter user ID: ");
-							String userid = sc.next();
-							System.out.printf("Enter password: ");
-							String password = sc.next();			
+							String userid;
+							String password;
+							Console console = System.console();
+							if(console!=null){
+								userid = console.readLine("Enter user ID: ");
+								char[] pw = console.readPassword("Enter password: ");
+								password = String.valueOf(pw);
+							}
+							else{
+								System.out.printf("Enter user ID: ");
+								userid = sc.next();
+								System.out.printf("Enter password: ");
+								password = sc.next();
+							}
 							loggedIn = authenticate(userid, password);
 							
 							if(loggedIn) {
