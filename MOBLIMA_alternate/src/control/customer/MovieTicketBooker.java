@@ -14,6 +14,10 @@ public class MovieTicketBooker implements Controller {
     public MovieTicketBooker(Customer currentUser){
         this.currentUser = currentUser;
     }
+
+    /**
+     *
+     */
     public void start(){
         int section = 1;
         Movie movie = null;

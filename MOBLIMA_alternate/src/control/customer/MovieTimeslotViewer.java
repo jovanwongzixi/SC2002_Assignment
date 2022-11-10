@@ -3,11 +3,11 @@ package control.customer;
 import control.datahandler.MovieDataHandler;
 import control.datahandler.TimeslotDataHandler;
 import entity.movie.Movie;
+import entity.movie.ShowingStatus;
 import entity.movie.Timeslot;
 import interfaces.Displayer;
 import interfaces.DataHandler;
 import interfaces.Viewer;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -16,9 +16,9 @@ public class MovieTimeslotViewer implements Viewer {
     public void view(){
         DataHandler movieDataHandler = new MovieDataHandler();
         List<Movie> movieData = movieDataHandler.retrieve();
+        movieData.removeIf(m->Objects.equals(m.getShowingStatus(), ShowingStatus.COMING_SOON));
         Scanner sc = new Scanner(System.in);
         int choice;
-
         do {
             Displayer movieListDisplayer = new MovieListDisplayer(movieData);
             movieListDisplayer.display();

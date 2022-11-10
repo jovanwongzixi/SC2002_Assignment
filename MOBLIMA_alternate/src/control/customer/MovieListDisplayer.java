@@ -14,7 +14,7 @@ public class MovieListDisplayer implements Displayer {
     public void display() {
         int index = 0;
 
-        System.out.println("-------------------- Movie List -------------------");
+        System.out.println("\n-------------------- Movie List -------------------");
         for(Movie m: movieData) {
             index++;
             System.out.printf("(%d) ----------------	%s\n",index, m.getTitle());

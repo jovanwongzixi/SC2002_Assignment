@@ -7,7 +7,13 @@ import interfaces.UserInfoHandler;
 import java.io.*;
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class AdminInfoHandler implements UserInfoHandler {
+    /**
+     * @return HashMap (Key: Admin email, Value: Admin Object)
+     */
     @Override
     public HashMap<String, Admin> retrieve() {
         HashMap<String, Admin> data = new HashMap<>();
@@ -23,6 +29,10 @@ public class AdminInfoHandler implements UserInfoHandler {
         return data;
     }
 
+    /**
+     * @param inputMap
+     * @param <T>
+     */
     @Override
     public <T extends User> void save(HashMap<String, T> inputMap) {
         try {
