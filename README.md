@@ -17,8 +17,5 @@
 ### Viewing javadoc
 1. Open index.html in /doc folder
 
-### Viewing demo video
-- [Link to demo video on youtube](https://www.youtube.com/watch?v=lUTCg_Eu7Jc)
-
 ### Viewing UML class diagram
 - Open SS4-grp2-UML_diagram.png in root folder
