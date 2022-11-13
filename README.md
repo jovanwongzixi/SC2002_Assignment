@@ -1,15 +1,24 @@
-# SC2002_Assignment MOBLIMA
+# SC2002_Assignment MOBLIMA SS4 Group 2
 
-### Working functionalities
-- MovieGoer
-  - View movie listing
-  - View movie details
-  - View movie timeslot for selected movie
-  - View seats (in words, data pulled from serialised file)
-  - Select seat (select 1 seat at a time, yet to tag selected seat to user)
-- Admin
+### Test running of program
+1. On command line, change directory to /src folder
+2. Run javac MOBLIMA.java to compile
+3. Run java MOBLIMA to start program
 
-Considering using OpenCSV library to parse csv data and retrieve value through @BindByName to minimise impact of any structural changes to file
+#### Valid admin login credentials
+- User ID: bigchungus
+- Password: qwerty123456
 
-Use Visual Paradigm v16.3 to open .vpp file. License key is 8M66X-C632M-49Q57-G2KLW-75BMY
+#### Valid credit card samples
+- AMEX: 378282246310005
+- Mastercard: 2221000000000009
+- Visa: 4012888888881881
 
+### Viewing javadoc
+1. Open index.html in /doc folder
+
+### Viewing demo video
+- [Link to demo video on youtube](https://www.youtube.com/watch?v=lUTCg_Eu7Jc)
+
+### Viewing UML class diagram
+- Open SS4-grp2-UML_diagram.png in root folder
