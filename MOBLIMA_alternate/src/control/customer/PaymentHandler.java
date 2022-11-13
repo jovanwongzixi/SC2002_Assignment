@@ -118,7 +118,6 @@ public class PaymentHandler {
 
             switch(choice) {
                 case 1:
-                    //PaymentHandler handler = new PaymentHandler();
                     if (payCreditCard()) {
                         LocalDateTime timeOfPurchase = LocalDateTime.now();
                         String tID = cineplexCode + timeOfPurchase.format(formatter);
@@ -134,6 +133,7 @@ public class PaymentHandler {
                     }
                     else{
                         System.out.println("Credit card invalid! Please try again!");
+                        break;
                     }
                 case 2:
                     System.out.println("Returning to previous menu...");

@@ -17,8 +17,6 @@ public class TimeslotSelector {
     protected Timeslot selectTimeslot(Movie movie){
         Scanner sc = new Scanner(System.in);
         int choice;
-        //DataHandler timeslotDataHandler = new TimeslotDataHandler();
-        //List<Timeslot> movieTimeslots = timeslotDataHandler.retrieve();
         List<Timeslot> selectedMovieTimeslots = new ArrayList<>();
         for(Timeslot ts : movieTimeslots){
             if(Objects.equals(ts.getMovieTitle(), movie.getTitle())) selectedMovieTimeslots.add(ts);
