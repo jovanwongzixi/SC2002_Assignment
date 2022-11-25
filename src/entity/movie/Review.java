@@ -1,18 +1,16 @@
 package entity.movie;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import entity.user.Admin;
+import interfaces.SerializedData;
 
-public class Review implements Serializable{
-	private static final long serialVersionUID = 2L;
+public class Review implements SerializedData{
 	private String nickname;
 	private LocalDateTime datetime;
 	private String content;
-	private int rating;
+	private double rating;
 	
-	public Review(String nickname, LocalDateTime datetime, String content, int rating) {
+	public Review(String nickname, LocalDateTime datetime, String content, double rating) {
 		this.nickname = nickname;
 		this.datetime = datetime;
 		this.content = content;
@@ -31,10 +29,12 @@ public class Review implements Serializable{
 		return this.content;
 	}
 	
-	public int rating() {
+	public double getRating() {
 		return this.rating;
 	}
 	
+	/*
+	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Review) {
 			Review re = (Review)o;
@@ -42,5 +42,5 @@ public class Review implements Serializable{
 		}
 		return false;
 	}
-
+	*/
 }

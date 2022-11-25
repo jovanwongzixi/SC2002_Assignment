@@ -1,99 +1,98 @@
 package boundary;
-
-import java.util.InputMismatchException;
+import java.io.Console;
 import java.util.Scanner;
-import static control.AdminCommands.*;
+import interfaces.Menu;
+import static control.admin.Authenticator.authenticate;
 
-public class AdminMenu {	
+public class AdminMenu implements Menu{
+	
 	static boolean loggedIn = false;
-	static Scanner sc;
-		
-	public static void adminMenu() {
+	
+	public void start() {
+		Scanner sc = new Scanner(System.in);
 		int choice;
-		boolean toggle = true;
-		sc = new Scanner(System.in);
 		
 		do {
-			try {
-				System.out.println("\n------------------- Admin Menu -------------------");
-				if(!loggedIn) {
-					System.out.println("(1) ----------------      Login");
-				} else {
-					System.out.println("(1) ----------------      Logout");
-				}
-				System.out.println("(2) ----------------      Edit movie listing");
-				System.out.println("(3) ----------------      Edit cinema showtimes");
-				System.out.println("(4) ----------------      Configure system settings");
-				if(!loggedIn) {
-					System.out.println("(5) ----------------      Return to main menu");
-				}
-				System.out.printf("\nOption: ");
-						
-				choice = sc.nextInt();
+			System.out.println("\n------------------- Staff Menu -------------------");
+			if(!loggedIn) {
+				System.out.println("(1) ----------------      Login");
+			} else {
+				System.out.println("(1) ----------------      Logout");
+			}
+			System.out.println("(2) ----------------      Edit movie listing");
+			System.out.println("(3) ----------------      Edit cinema showtimes");
+			System.out.println("(4) ----------------      Configure system settings");
+			if(!loggedIn) {
+				System.out.println("(5) ----------------      Return to main menu");
+			}
+			System.out.printf("\nOption: ");
 			
+			while(!sc.hasNextInt()) {
+				System.out.println("Invalid input. Please enter an integer!");
+				System.out.printf("\nOption: ");
+				sc.next();
+			}
+			
+			choice = sc.nextInt();
+			
+			if(!loggedIn && choice > 1 && choice < 5) {
+				System.out.println("Unauthorised access detected! Exiting admin menu...");
+				return;
+			} else {
 				switch (choice) {
 					case 1:
 						if(!loggedIn) {
-							System.out.printf("\nEnter user ID: ");
-							String userid = sc.next();
-							System.out.printf("Enter password: ");
-							String password = sc.next();
-						
-							loggedIn = login(userid, password);
+							String userid;
+							String password;
+							Console console = System.console();
+							if(console!=null){
+								userid = console.readLine("Enter user ID: ");
+								char[] pw = console.readPassword("Enter password: ");
+								password = String.valueOf(pw);
+							}
+							else{
+								System.out.printf("Enter user ID: ");
+								userid = sc.next();
+								System.out.printf("Enter password: ");
+								password = sc.next();
+							}			
+							loggedIn = authenticate(userid, password);
+							
+							if(loggedIn) {
+								System.out.println("Successfully logged in! Welcome, " + userid + "!");
+								break;
+							}
+							
+							System.out.println("Invalid username/password! Please try again!");
+							break;
 						} else {
-							System.out.println("Successfully logged out! Returning to main menu...\n");
+							System.out.println("Successfully logged out! Returning to main menu...");
 							loggedIn = false;
-							toggle = false;
-							MainMenu.run();
+							return;
 						}
-						break;
 					case 2:
-						if(!loggedIn) {
-							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
-							toggle = false;
-							MainMenu.run();
-						} else {
-							toggle = false;
-							movieListMenu();
-						}
+						Menu movieListEditorMenu = new MovieListEditorMenu();
+						movieListEditorMenu.start();
 						break;
 					case 3:
-						if(!loggedIn) {
-							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
-							toggle = false;
-							MainMenu.run();
-						} else {
-							toggle = false;
-							editCinemaMovie();
-						}
+						Menu movieTimeslotEditorMenu = new MovieTimeslotEditorMenu();
+						movieTimeslotEditorMenu.start();
 						break;
 					case 4:
-						if(!loggedIn) {
-							System.out.println("Unauthorised access detected! Exiting admin menu...\n");
-							toggle = false;
-							MainMenu.run();
-						} else {
-							toggle = false;
-							systemConfig();
-						}
+						Menu systemMenu = new SystemMenu();
+						systemMenu.start();
 						break;
 					case 5:
-						if(!loggedIn) {
-							System.out.println("Returning to main menu...\n");
-							toggle = false;
-							MainMenu.run();
-						} else {
-							System.out.println("Option does not exist. Please key in a valid option!\n");
+						if(loggedIn) {
+							System.out.println("Option does not exist! Please input a valid choice!");
+							break;
 						}
-						break;
+						System.out.println("Returning to main menu...");
+						return;
 					default:
-						System.out.println("Option does not exist. Please key in a valid option!\n");
-				}
-			} catch (InputMismatchException e) {
-				sc.nextLine();
-				System.out.println("Invalid input. Please make sure to enter an integer value!\n");
-			}
-			
-		} while(toggle);	
+						System.out.println("Option does not exist! Please input a valid choice!");
+				}					
+			}									
+		} while (true);
 	}
 }

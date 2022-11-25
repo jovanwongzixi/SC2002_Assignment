@@ -6,6 +6,5 @@ public enum FilmRating {
 	PG13,
 	NC16,
 	M18,
-	R21
+	R21;
 }
-

@@ -9,10 +9,13 @@
 - User ID: bigchungus
 - Password: qwerty123456
 
-#### Valid credit card samples
+#### [Valid credit card samples](https://developer.paypal.com/api/nvp-soap/payflow/integration-guide/test-transactions/#standard-test-cards)
 - AMEX: 378282246310005
 - Mastercard: 2221000000000009
 - Visa: 4012888888881881
+
+### Viewing video
+- [Link to youtube demo](https://www.youtube.com/watch?v=lUTCg_Eu7Jc)
 
 ### Viewing javadoc
 1. Open index.html in /doc folder

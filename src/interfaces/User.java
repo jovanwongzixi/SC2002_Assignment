@@ -1,5 +1,6 @@
 package interfaces;
 
-public interface User {
-    void start();
+import java.io.Serializable;
+
+public interface User extends Serializable {
 }
