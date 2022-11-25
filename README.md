@@ -14,9 +14,6 @@
 - Mastercard: 2221000000000009
 - Visa: 4012888888881881
 
-### Viewing video
-- [Link to youtube demo](https://www.youtube.com/watch?v=lUTCg_Eu7Jc)
-
 ### Viewing javadoc
 1. Open index.html in /doc folder
 
