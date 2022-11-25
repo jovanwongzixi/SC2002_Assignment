@@ -2,7 +2,6 @@ package control.customer;
 
 import java.time.LocalDateTime;
 import java.util.*;
-import control.SerializeDB;
 import control.datahandler.MovieDataHandler;
 import entity.movie.*;
 import interfaces.Controller;
